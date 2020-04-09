@@ -4,15 +4,16 @@ import axios from 'axios'
 // Note that if we wouldn't set any config here we do not need
 // a named export, as we could just `import axios from 'axios'`
 const axiosInstance = axios.create({
-  baseURL: 'http://127.0.0.1:8000',
-  withCredentials: true
+  baseURL: 'http://localhost:8000',
+  withCredentials: true,
+  headers: {
+    'X-Requested-With': 'XMLHttpRequest'
+  },
 })
 
 
 
-export default ({
-                  Vue
-                }) => {
+export default ({Vue}) => {
   // for use inside Vue files through this.$axios
   Vue.prototype.$axios = axiosInstance
 }

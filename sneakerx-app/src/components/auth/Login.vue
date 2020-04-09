@@ -1,38 +1,40 @@
 <template>
-    <div class="login">
-      <div class="text-h6">Login</div>
-      <q-form
-        @submit="onSubmit"
-        @reset="onReset"
-        class="q-gutter-md"
-      >
-        <q-input
-          filled
-          v-model="email"
-          label="Your email *"
-          lazy-rules
-          :rules="[ val => val && val.length > 0 || 'Please type something']"
-        />
+  <div class="login">
+    <div class="text-h6">Login</div>
+    <q-form
+      @submit="onSubmit"
+      @reset="onReset"
+      class="q-gutter-md"
+    >
+      <q-input
+        filled
+        v-model="email"
+        label="Your email *"
+        lazy-rules
+        :rules="[ val => val && val.length > 0 || 'Please type something']"
+      />
 
-        <q-input
-          filled
-          type="number"
-          v-model="password"
-          label="Your password *"
-          lazy-rules
-          :rules="[
+      <q-input
+        filled
+        type="number"
+        v-model="password"
+        label="Your password *"
+        lazy-rules
+        :rules="[
                 val => val !== null && val !== '' || 'Please type your password',
               ]"
-        />
+      />
 
-        <q-toggle v-model="accept" label="I accept the license and terms"/>
+      <q-toggle v-model="accept" label="I accept the license and terms"/>
 
-        <div>
-          <q-btn label="Submit" type="submit" color="primary"/>
-          <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm"/>
-        </div>
-      </q-form>
-    </div>
+      <div>
+        <q-btn label="Submit" type="submit" color="primary"/>
+        <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm"/>
+      </div>
+    </q-form>
+    <q-btn label="Submit" @click="onSubmit" color="primary"/>
+    <q-btn label="Logout" @click="logout" color="primary"/>
+  </div>
 </template>
 
 <script>
@@ -54,10 +56,24 @@
                     console.log('You need to accept the license and terms first')
                 } else {
                     console.log('submit')
-                    this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                        console.log(response)
-                    });
+                    this.$axios.get('/sanctum/csrf-cookie')
+                        .then(response => {
+                            console.log(response)
+                            this.$axios.post('/api/login', {
+                                email: 'kledner@example.com',
+                                password: 'password'
+                            }).then(res => {
+                                console.log('-----------')
+                                console.log(res)
+                            }).catch(res => {
+                                console.log(res)
+                            })
+
+                        });
                 }
+            },
+            logout() {
+
             },
 
             onReset() {

@@ -14,7 +14,7 @@ const routes = [
         name: 'auth',
         component: () => import('pages/Auth.vue')
       }
-    ]
+    ],
   }
 ]
 
