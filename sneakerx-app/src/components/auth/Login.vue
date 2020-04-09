@@ -54,6 +54,9 @@
                     console.log('You need to accept the license and terms first')
                 } else {
                     console.log('submit')
+                    this.$axios.get('/sanctum/csrf-cookie').then(response => {
+                        console.log(response)
+                    });
                 }
             },
 
