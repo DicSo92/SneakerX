@@ -13,3 +13,5 @@ yarn-error.log
 
 .idea
 /public/*
+# exception to the rule
+!public/.gitkeep
