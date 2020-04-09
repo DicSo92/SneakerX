@@ -2,15 +2,10 @@
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
       <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="leftDrawerOpen = !leftDrawerOpen"
-        />
-
+        <q-btn flat dense round
+               icon="menu"
+               aria-label="Menu"
+               @click="leftDrawerOpen = !leftDrawerOpen"/>
         <q-toolbar-title>
           Quasar App
         </q-toolbar-title>
@@ -19,24 +14,34 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-      content-class="bg-grey-1"
-    >
+    <q-drawer v-model="leftDrawerOpen"
+              show-if-above
+              bordered
+              content-class="bg-grey-1">
       <q-list>
-        <q-item-label
-          header
-          class="text-grey-8"
-        >
+        <q-item-label header
+                      class="text-grey-8">
           Essential Links
         </q-item-label>
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
+        <EssentialLink v-for="link in essentialLinks"
+                       :key="link.title"
+                       v-bind="link"/>
+
+        <q-item clickable
+                tag="a"
+                :to="{name: 'auth'}">
+          <q-item-section avatar>
+            <q-icon name="code"/>
+          </q-item-section>
+
+          <q-item-section>
+            <q-item-label>Login / Register</q-item-label>
+            <q-item-label caption>
+              login.register
+            </q-item-label>
+          </q-item-section>
+        </q-item>
+
       </q-list>
     </q-drawer>
 
