@@ -16,7 +16,7 @@
 
       <q-input
         filled
-        type="number"
+        type="password"
         v-model="password"
         label="Your password *"
         lazy-rules
@@ -32,7 +32,9 @@
         <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm"/>
       </div>
     </q-form>
-    <q-btn label="Submit" @click="onSubmit" color="primary"/>
+    <h6 v-if="loading">Loading</h6>
+    <h5 class="text-positive" v-if="isLoggedIn">Logged In</h5>
+    <h5 class="text-negative" v-else>Logged Out</h5>
     <q-btn label="Logout" @click="logout" color="primary"/>
   </div>
 </template>
@@ -46,8 +48,10 @@
 
                 email: null,
                 password: null,
+                accept: false,
 
-                accept: false
+                loading: false,
+                isLoggedIn: false
             }
         },
         methods: {
@@ -55,17 +59,20 @@
                 if (this.accept !== true) {
                     console.log('You need to accept the license and terms first')
                 } else {
-                    console.log('submit')
+                    this.loading = true
                     this.$axios.get('/sanctum/csrf-cookie')
                         .then(response => {
                             console.log(response)
                             this.$axios.post('/api/login', {
-                                email: 'kledner@example.com',
-                                password: 'password'
+                                email: this.email,
+                                password: this.password
                             }).then(res => {
                                 console.log('-----------')
                                 console.log(res)
+                                this.loading = false
+                                this.isLoggedIn = true
                             }).catch(res => {
+                                console.log('error ----')
                                 console.log(res)
                             })
 
