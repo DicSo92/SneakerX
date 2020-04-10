@@ -60,6 +60,7 @@
                     console.log('You need to accept the license and terms first')
                 } else {
                     this.loading = true
+
                     this.$axios.get('/sanctum/csrf-cookie')
                         .then(response => {
                             console.log(response)
@@ -69,13 +70,17 @@
                             }).then(res => {
                                 console.log('-----------')
                                 console.log(res)
+
                                 this.loading = false
                                 this.isLoggedIn = true
+
+                                localStorage.setItem('isLoggedIn', true)
+                                this.$store.dispatch('auth/loadUser')
+                                // this.$router.push({name: 'home'})
                             }).catch(res => {
                                 console.log('error ----')
                                 console.log(res)
                             })
-
                         });
                 }
             },
