@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes();
+//Auth::routes();
 
 Route::get('/{any}', function () {
     return view('app');
