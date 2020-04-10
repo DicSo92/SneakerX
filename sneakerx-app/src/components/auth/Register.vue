@@ -61,6 +61,8 @@
 </template>
 
 <script>
+    import {logIn} from '../../utils/auth'
+
     export default {
         name: "Register",
         data() {
@@ -82,7 +84,19 @@
                 if (this.accept !== true) {
                     console.log('You need to accept the license and terms first')
                 } else {
-                    console.log('user create')
+                    this.$axios.get('/sanctum/csrf-cookie')
+                        .then(res => {
+                            console.log(res)
+                            this.$axios.post('/api/register', this.user).then(response => {
+                                console.log(response)
+                                logIn()
+                                this.$store.dispatch('auth/loadUser')
+                                this.loading = false
+                                // this.$router.push({name: 'home'})
+                            }).catch(res => {
+                                console.log(res)
+                            })
+                        })
                 }
             },
 
