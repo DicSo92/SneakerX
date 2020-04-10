@@ -22,7 +22,7 @@
         v-model="user.email"
         label="Enter your email *"
         lazy-rules
-        :rules="[ val => val && val.length > 0 || 'Please type something']"
+        :rules="[val => val && val.length > 0 || 'Please type something']"
       />
 
       <q-input
@@ -52,8 +52,13 @@
 
       <q-toggle v-model="accept" label="I accept the license and terms"/>
 
+      <p class="text-negative"
+         v-if="errors.email">
+        {{errors.email[0]}}
+      </p>
+
       <div>
-        <q-btn label="Register" type="submit" color="primary"/>
+        <q-btn label="Register" type="submit" color="primary" icon="lock"/>
         <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm"/>
       </div>
     </q-form>
@@ -76,7 +81,8 @@
                     password_confirmation: null,
                 },
 
-                accept: false
+                accept: false,
+                errors: {}
             }
         },
         methods: {
@@ -93,8 +99,11 @@
                                 this.$store.dispatch('auth/loadUser')
                                 this.loading = false
                                 this.$router.push({name: 'home'})
-                            }).catch(res => {
-                                console.log(res)
+                            }).catch(error => {
+                                console.log(error)
+                                if (422 === error.response.status) {
+                                    this.errors = error.response.data.errors
+                                }
                             })
                         })
                 }

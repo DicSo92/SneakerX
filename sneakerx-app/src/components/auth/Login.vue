@@ -29,7 +29,7 @@
       <q-toggle v-model="accept" label="I accept the license and terms"/>
 
       <div>
-        <q-btn label="LogIn" type="submit" color="primary"/>
+        <q-btn label="LogIn" type="submit" color="primary" icon="lock"/>
         <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm"/>
       </div>
     </q-form>
