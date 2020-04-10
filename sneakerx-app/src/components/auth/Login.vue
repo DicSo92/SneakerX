@@ -52,13 +52,24 @@
                 loading: false,
             }
         },
+        watch: {
+            loading(isLoading) {
+                if (isLoading) {
+                    this.$q.loading.show()
+                } else {
+                    this.$q.loading.hide()
+                }
+            }
+        },
+        beforeDestroy () {
+            this.$q.loading.hide()
+        },
         methods: {
             login() {
                 if (this.accept !== true) {
                     console.log('You need to accept the license and terms first')
                 } else {
                     this.loading = true
-
                     this.$axios.get('/sanctum/csrf-cookie')
                         .then(response => {
                             console.log(response)
@@ -75,6 +86,7 @@
                             }).catch(res => {
                                 console.log('error ----')
                                 console.log(res)
+                                this.loading = false
                             })
                         });
                 }

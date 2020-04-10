@@ -82,14 +82,28 @@
                 },
 
                 accept: false,
-                errors: {}
+                errors: {},
+                loading: false
             }
+        },
+        watch: {
+            loading(isLoading) {
+                if (isLoading) {
+                    this.$q.loading.show()
+                } else {
+                    this.$q.loading.hide()
+                }
+            }
+        },
+        beforeDestroy () {
+            this.$q.loading.hide()
         },
         methods: {
             onSubmit() {
                 if (this.accept !== true) {
                     console.log('You need to accept the license and terms first')
                 } else {
+                    this.loading = true
                     this.$axios.get('/sanctum/csrf-cookie')
                         .then(res => {
                             console.log(res)
@@ -104,6 +118,7 @@
                                 if (422 === error.response.status) {
                                     this.errors = error.response.data.errors
                                 }
+                                this.loading = false
                             })
                         })
                 }
