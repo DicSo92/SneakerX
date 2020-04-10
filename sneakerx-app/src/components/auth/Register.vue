@@ -92,7 +92,7 @@
                                 logIn()
                                 this.$store.dispatch('auth/loadUser')
                                 this.loading = false
-                                // this.$router.push({name: 'home'})
+                                this.$router.push({name: 'home'})
                             }).catch(res => {
                                 console.log(res)
                             })

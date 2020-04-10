@@ -7,12 +7,14 @@ const routes = [
       {
         path: '',
         name: 'home',
-        component: () => import('pages/Index.vue')
+        component: () => import('pages/Index.vue'),
+        meta: { requiresAuth: true }
       },
       {
         path: '/auth',
         name: 'auth',
-        component: () => import('pages/Auth.vue')
+        component: () => import('pages/Auth.vue'),
+        meta: { requiresVisitor: true }
       }
     ],
   }
