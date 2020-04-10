@@ -2,102 +2,120 @@
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
       <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="leftDrawerOpen = !leftDrawerOpen"
-        />
-
+        <q-btn flat dense round
+               icon="menu"
+               aria-label="Menu"
+               @click="leftDrawerOpen = !leftDrawerOpen"/>
         <q-toolbar-title>
           Quasar App
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <q-btn dense flat no-wrap v-if="this.isLoggedIn">
+          <q-avatar rounded size="20px">
+            <img src="https://cdn.quasar.dev/img/avatar3.jpg">
+          </q-avatar>
+          <q-icon name="arrow_drop_down" size="16px"/>
+
+          <q-menu auto-close>
+            <q-list dense>
+              <q-item class="GL__menu-link-signed-in">
+                <q-item-section>
+                  <div>Signed in as <strong>Mary</strong></div>
+                </q-item-section>
+              </q-item>
+              <q-separator/>
+              <q-item clickable class="GL__menu-link">
+                <q-item-section>Your profile</q-item-section>
+              </q-item>
+              <q-item clickable class="GL__menu-link">
+                <q-item-section>Your stars</q-item-section>
+              </q-item>
+              <q-separator/>
+              <q-item clickable class="GL__menu-link">
+                <q-item-section>Help</q-item-section>
+              </q-item>
+              <q-item clickable class="GL__menu-link">
+                <q-item-section>Settings</q-item-section>
+              </q-item>
+              <q-item clickable class="GL__menu-link" @click="logout">
+                <q-item-section>Sign out</q-item-section>
+              </q-item>
+            </q-list>
+          </q-menu>
+
+        </q-btn>
       </q-toolbar>
     </q-header>
 
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-      content-class="bg-grey-1"
-    >
+    <q-drawer v-model="leftDrawerOpen"
+              show-if-above
+              bordered
+              content-class="bg-grey-1">
+
       <q-list>
-        <q-item-label
-          header
-          class="text-grey-8"
-        >
+        <q-item-label header
+                      class="text-grey-8">
           Essential Links
         </q-item-label>
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
+
+        <EssentialLink v-for="link in essentialLinks"
+                       :key="link.title"
+                       v-bind="link"/>
       </q-list>
     </q-drawer>
 
     <q-page-container>
-      <router-view />
+      <router-view/>
     </q-page-container>
+
   </q-layout>
 </template>
 
 <script>
-import EssentialLink from 'components/EssentialLink'
+    import EssentialLink from 'components/EssentialLink'
 
-export default {
-  name: 'MainLayout',
+    export default {
+        name: 'MainLayout',
 
-  components: {
-    EssentialLink
-  },
+        components: {
+            EssentialLink
+        },
 
-  data () {
-    return {
-      leftDrawerOpen: false,
-      essentialLinks: [
-        {
-          title: 'Docs',
-          caption: 'quasar.dev',
-          icon: 'school',
-          link: 'https://quasar.dev'
+        data() {
+            return {
+                leftDrawerOpen: false,
+                essentialLinks: [
+                    {
+                        title: 'Home',
+                        caption: 'Home',
+                        icon: 'home',
+                        link: 'home'
+                    },
+                    {
+                        title: 'Login / Register',
+                        caption: 'login.register',
+                        icon: 'code',
+                        link: 'auth'
+                    },
+                ]
+            }
         },
-        {
-          title: 'Github',
-          caption: 'github.com/quasarframework',
-          icon: 'code',
-          link: 'https://github.com/quasarframework'
+        computed: {
+            isLoggedIn() {
+                return this.$store.state.auth.isLoggedIn
+            }
         },
-        {
-          title: 'Discord Chat Channel',
-          caption: 'chat.quasar.dev',
-          icon: 'chat',
-          link: 'https://chat.quasar.dev'
-        },
-        {
-          title: 'Forum',
-          caption: 'forum.quasar.dev',
-          icon: 'record_voice_over',
-          link: 'https://forum.quasar.dev'
-        },
-        {
-          title: 'Twitter',
-          caption: '@quasarframework',
-          icon: 'rss_feed',
-          link: 'https://twitter.quasar.dev'
-        },
-        {
-          title: 'Facebook',
-          caption: '@QuasarFramework',
-          icon: 'public',
-          link: 'https://facebook.quasar.dev'
+        methods: {
+            logout() {
+                this.$axios.post('/api/logout').then(response => {
+                    console.log(response)
+                    this.$store.dispatch('auth/logout')
+                    this.$router.push({name: 'auth'})
+                }).catch(error => {
+                    console.log(error)
+                    this.$store.dispatch('auth/logout')
+                })
+            }
         }
-      ]
     }
-  }
-}
 </script>

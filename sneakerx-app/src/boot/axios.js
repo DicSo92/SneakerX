@@ -4,17 +4,33 @@ import axios from 'axios'
 // Note that if we wouldn't set any config here we do not need
 // a named export, as we could just `import axios from 'axios'`
 const axiosInstance = axios.create({
-  baseURL: 'http://127.0.0.1:8000',
-
+  baseURL: 'http://localhost:8000',
+  withCredentials: true,
+  headers: {
+    'X-Requested-With': 'XMLHttpRequest'
+  },
 })
 
 
+export default ({Vue, store}) => {
 
-export default ({
-                  Vue
-                }) => {
+  axiosInstance.interceptors.response.use(
+    response => {
+      return response
+    },
+    error => {
+      console.log('reject')
+      if (401 === error.response.status) {
+        console.log('**Unauthorized**')
+        store.dispatch('auth/logout')
+      }
+      return Promise.reject(error)
+    }
+  )
+
   // for use inside Vue files through this.$axios
   Vue.prototype.$axios = axiosInstance
+
 }
 
 
