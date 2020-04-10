@@ -31,14 +31,11 @@
       <q-toggle v-model="accept" label="I accept the license and terms"/>
 
       <div>
-        <q-btn label="Submit" type="submit" color="primary"/>
+        <q-btn label="LogIn" type="submit" color="primary"/>
         <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm"/>
       </div>
     </q-form>
     <h6 v-if="loading">Loading</h6>
-    <h5 class="text-positive" v-if="isLoggedIn">Logged In</h5>
-    <h5 class="text-negative" v-else>Logged Out</h5>
-    <q-btn label="Logout" @click="logout" color="primary"/>
   </div>
 </template>
 
@@ -55,7 +52,6 @@
                 accept: false,
 
                 loading: false,
-                isLoggedIn: false
             }
         },
         methods: {
@@ -74,13 +70,11 @@
                             }).then(res => {
                                 console.log('-----------')
                                 console.log(res)
-
-                                this.loading = false
-                                this.isLoggedIn = true
-
                                 logIn()
                                 this.$store.dispatch('auth/loadUser')
+                                this.loading = false
                                 // this.$router.push({name: 'home'})
+
                             }).catch(res => {
                                 console.log('error ----')
                                 console.log(res)

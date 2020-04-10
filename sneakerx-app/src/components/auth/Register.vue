@@ -9,8 +9,8 @@
     >
       <q-input
         filled
-        v-model="name"
-        label="Your name *"
+        v-model="user.name"
+        label="Enter your name *"
         hint="Name and surname"
         lazy-rules
         :rules="[ val => val && val.length > 0 || 'Please type something']"
@@ -19,8 +19,8 @@
         filled
         type="email"
         autocomplete="email"
-        v-model="email"
-        label="Your email *"
+        v-model="user.email"
+        label="Enter your email *"
         lazy-rules
         :rules="[ val => val && val.length > 0 || 'Please type something']"
       />
@@ -29,18 +29,31 @@
         filled
         type="password"
         autocomplete="new-password"
-        v-model="password"
-        label="Your password *"
+        v-model="user.password"
+        label="Enter your password *"
         lazy-rules
         :rules="[
           val => val !== null && val !== '' || 'Please type your password',
         ]"
       />
 
+      <q-input
+        filled
+        type="password"
+        autocomplete="new-password"
+        v-model="user.password_confirmation"
+        label="Confirm your password *"
+        lazy-rules
+        :rules="[
+          val => val !== null && val !== '' || 'Please confirm your password',
+          val => val !== null && val !== '' && val === user.password || 'Wrong Password'
+        ]"
+      />
+
       <q-toggle v-model="accept" label="I accept the license and terms"/>
 
       <div>
-        <q-btn label="Submit" type="submit" color="primary"/>
+        <q-btn label="Register" type="submit" color="primary"/>
         <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm"/>
       </div>
     </q-form>
@@ -54,9 +67,12 @@
             return {
                 tab: 'login',
 
-                name: null,
-                email: null,
-                password: null,
+                user: {
+                    name: null,
+                    email: null,
+                    password: null,
+                    password_confirmation: null,
+                },
 
                 accept: false
             }
@@ -73,6 +89,7 @@
             onReset() {
                 this.email = null
                 this.password = null
+                this.confirmPassword = null
                 this.accept = false
             }
         }
