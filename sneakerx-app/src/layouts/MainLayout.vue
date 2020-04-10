@@ -86,6 +86,12 @@
                 leftDrawerOpen: false,
                 essentialLinks: [
                     {
+                        title: 'Home',
+                        caption: 'Home',
+                        icon: 'home',
+                        link: 'home'
+                    },
+                    {
                         title: 'Login / Register',
                         caption: 'login.register',
                         icon: 'code',
