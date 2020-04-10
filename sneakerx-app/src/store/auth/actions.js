@@ -1,10 +1,9 @@
+import {isLoggedIn, logOut} from '../../utils/auth.js'
+
 export function someAction(/* context */) {
 }
-
 export function loadUser({commit, dispatch}) {
-  console.log('action loaduser : ' + localStorage.getItem('isLoggedIn') )
-  if (localStorage.getItem('isLoggedIn')) {
-    console.log('isLoggedIn')
+  if (isLoggedIn) {
     this._vm.$axios.get('/api/user')
       .then(response => {
         console.log(response)
@@ -18,7 +17,8 @@ export function loadUser({commit, dispatch}) {
   }
 }
 export function logout({commit}) {
+  console.log('action logout')
   commit("setIsLoggedIn", false);
   commit("setUser", {});
-  localStorage.removeItem('isLoggedIn')
+  logOut()
 }

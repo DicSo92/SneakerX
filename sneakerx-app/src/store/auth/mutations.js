@@ -6,6 +6,5 @@ export const setIsLoggedIn = (state, status) => {
 }
 export const setUser = (state, user) => {
   console.log('set user')
-
   state.user = user
 }

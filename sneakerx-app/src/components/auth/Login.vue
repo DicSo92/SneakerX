@@ -8,6 +8,8 @@
     >
       <q-input
         filled
+        type="email"
+        autocomplete="email"
         v-model="email"
         label="Your email *"
         lazy-rules
@@ -17,6 +19,7 @@
       <q-input
         filled
         type="password"
+        autocomplete="current-password"
         v-model="password"
         label="Your password *"
         lazy-rules
@@ -40,6 +43,7 @@
 </template>
 
 <script>
+  import {logIn} from '../../utils/auth'
     export default {
         name: "Login",
         data() {
@@ -74,7 +78,7 @@
                                 this.loading = false
                                 this.isLoggedIn = true
 
-                                localStorage.setItem('isLoggedIn', true)
+                                logIn()
                                 this.$store.dispatch('auth/loadUser')
                                 // this.$router.push({name: 'home'})
                             }).catch(res => {

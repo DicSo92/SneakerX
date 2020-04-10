@@ -18,6 +18,7 @@
       <q-input
         filled
         type="email"
+        autocomplete="email"
         v-model="email"
         label="Your email *"
         lazy-rules
@@ -27,6 +28,7 @@
       <q-input
         filled
         type="password"
+        autocomplete="new-password"
         v-model="password"
         label="Your password *"
         lazy-rules

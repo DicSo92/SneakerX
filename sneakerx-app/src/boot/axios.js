@@ -12,22 +12,25 @@ const axiosInstance = axios.create({
 })
 
 
+export default ({Vue, store}) => {
 
-
-export default ({Vue}) => {
-  // for use inside Vue files through this.$axios
   axiosInstance.interceptors.response.use(
     response => {
       return response
     },
     error => {
+      console.log('reject')
       if (401 === error.response.status) {
-        this.store.dispatch('logout')
+        console.log('Store isLoggedIn : ' + store.state.auth.isLoggedIn)
+        store.dispatch('logout')
       }
       return Promise.reject(error)
     }
   )
+
+  // for use inside Vue files through this.$axios
   Vue.prototype.$axios = axiosInstance
+
 }
 
 
