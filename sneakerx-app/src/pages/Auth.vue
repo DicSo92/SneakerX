@@ -1,7 +1,7 @@
 <template>
   <q-page class="flex flex-center">
     <div class="containerCard row flex-center">
-      <q-card class="authCard col-6">
+      <q-card class="authCard col-xs-11 col-sm-9 col-md-6 col-lg-4">
         <q-tabs
           v-model="tab"
           dense
@@ -22,7 +22,6 @@
           <q-tab-panel name="login">
             <Login></Login>
           </q-tab-panel>
-
           <q-tab-panel name="register">
             <Register></Register>
           </q-tab-panel>
