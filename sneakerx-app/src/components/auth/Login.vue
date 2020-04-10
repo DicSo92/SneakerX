@@ -2,8 +2,8 @@
   <div class="login">
     <div class="text-h6">Login</div>
     <q-form
-      @submit="onSubmit"
-      @reset="onReset"
+      @submit="login"
+      @reset="reset"
       class="q-gutter-md"
     >
       <q-input
@@ -23,9 +23,7 @@
         v-model="password"
         label="Your password *"
         lazy-rules
-        :rules="[
-                val => val !== null && val !== '' || 'Please type your password',
-              ]"
+        :rules="[val => val !== null && val !== '' || 'Please type your password']"
       />
 
       <q-toggle v-model="accept" label="I accept the license and terms"/>
@@ -55,7 +53,7 @@
             }
         },
         methods: {
-            onSubmit() {
+            login() {
                 if (this.accept !== true) {
                     console.log('You need to accept the license and terms first')
                 } else {
@@ -74,7 +72,6 @@
                                 this.$store.dispatch('auth/loadUser')
                                 this.loading = false
                                 // this.$router.push({name: 'home'})
-
                             }).catch(res => {
                                 console.log('error ----')
                                 console.log(res)
@@ -82,11 +79,7 @@
                         });
                 }
             },
-            logout() {
-
-            },
-
-            onReset() {
+            reset() {
                 this.name = null
                 this.age = null
                 this.accept = false
