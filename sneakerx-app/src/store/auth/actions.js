@@ -11,7 +11,7 @@ export function loadUser({commit, dispatch}) {
         commit("setUser", response.data);
       })
       .catch(error => {
-        console.log(error)
+        console.log(error.message)
         dispatch('logout')
       })
   }

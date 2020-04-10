@@ -110,10 +110,10 @@
                 this.$axios.post('/api/logout').then(response => {
                     console.log(response)
                     this.$store.dispatch('auth/logout')
+                    this.$router.push({name: 'auth'})
                 }).catch(error => {
                     console.log(error)
                     this.$store.dispatch('auth/logout')
-
                 })
             }
         }

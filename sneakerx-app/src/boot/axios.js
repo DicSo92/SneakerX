@@ -21,8 +21,8 @@ export default ({Vue, store}) => {
     error => {
       console.log('reject')
       if (401 === error.response.status) {
-        console.log('Store isLoggedIn : ' + store.state.auth.isLoggedIn)
-        store.dispatch('logout')
+        console.log('**Unauthorized**')
+        store.dispatch('auth/logout')
       }
       return Promise.reject(error)
     }
