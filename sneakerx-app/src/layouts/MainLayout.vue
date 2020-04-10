@@ -10,7 +10,40 @@
           Quasar App
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <q-btn dense flat no-wrap v-if="this.isLoggedIn">
+          <q-avatar rounded size="20px">
+            <img src="https://cdn.quasar.dev/img/avatar3.jpg">
+          </q-avatar>
+          <q-icon name="arrow_drop_down" size="16px"/>
+
+          <q-menu auto-close>
+            <q-list dense>
+              <q-item class="GL__menu-link-signed-in">
+                <q-item-section>
+                  <div>Signed in as <strong>Mary</strong></div>
+                </q-item-section>
+              </q-item>
+              <q-separator/>
+              <q-item clickable class="GL__menu-link">
+                <q-item-section>Your profile</q-item-section>
+              </q-item>
+              <q-item clickable class="GL__menu-link">
+                <q-item-section>Your stars</q-item-section>
+              </q-item>
+              <q-separator/>
+              <q-item clickable class="GL__menu-link">
+                <q-item-section>Help</q-item-section>
+              </q-item>
+              <q-item clickable class="GL__menu-link">
+                <q-item-section>Settings</q-item-section>
+              </q-item>
+              <q-item clickable class="GL__menu-link" @click="logout">
+                <q-item-section>Sign out</q-item-section>
+              </q-item>
+            </q-list>
+          </q-menu>
+
+        </q-btn>
       </q-toolbar>
     </q-header>
 
@@ -59,6 +92,23 @@
                         link: 'auth'
                     },
                 ]
+            }
+        },
+        computed: {
+            isLoggedIn() {
+                return this.$store.state.auth.isLoggedIn
+            }
+        },
+        methods: {
+            logout() {
+                this.$axios.post('/api/logout').then(response => {
+                    console.log(response)
+                    this.$store.dispatch('auth/logout')
+                }).catch(error => {
+                    console.log(error)
+                    this.$store.dispatch('auth/logout')
+
+                })
             }
         }
     }

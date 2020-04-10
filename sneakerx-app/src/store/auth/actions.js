@@ -1,7 +1,7 @@
 export function someAction(/* context */) {
 }
 
-export function loadUser({axios, commit, dispatch}) {
+export function loadUser({commit, dispatch}) {
   console.log('action loaduser : ' + localStorage.getItem('isLoggedIn') )
   if (localStorage.getItem('isLoggedIn')) {
     console.log('isLoggedIn')
@@ -20,5 +20,5 @@ export function loadUser({axios, commit, dispatch}) {
 export function logout({commit}) {
   commit("setIsLoggedIn", false);
   commit("setUser", {});
-  localStorage.setItem('isLoggedIn', false)
+  localStorage.removeItem('isLoggedIn')
 }

@@ -13,8 +13,20 @@ const axiosInstance = axios.create({
 
 
 
+
 export default ({Vue}) => {
   // for use inside Vue files through this.$axios
+  axiosInstance.interceptors.response.use(
+    response => {
+      return response
+    },
+    error => {
+      if (401 === error.response.status) {
+        this.store.dispatch('logout')
+      }
+      return Promise.reject(error)
+    }
+  )
   Vue.prototype.$axios = axiosInstance
 }
 

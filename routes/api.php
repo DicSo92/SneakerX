@@ -30,3 +30,8 @@ Route::post('/login', function (Request $request) {
     auth()->attempt($request->only('email', 'password'));
     return auth()->user();
 });
+
+Route::post('/logout', function () {
+    auth()->logout();
+    return response('logout');
+});
