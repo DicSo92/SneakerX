@@ -9,6 +9,7 @@
       :selected.sync="selected"
       :visible-columns="visibleColumns"
       :loading="loading"
+      :pagination.sync="pagination"
     >
 
       <template v-slot:top>
@@ -58,8 +59,15 @@
             return {
                 users: [],
                 loading: false,
-
                 search: '',
+
+                pagination: {
+                    sortBy: 'id',
+                    descending: false,
+                    // page: 2,
+                    rowsPerPage: 6
+                    // rowsNumber: xx if getting data from a server
+                },
                 selected: [],
                 visibleColumns: ['id', 'name', 'email', 'is_admin', 'created_at'],
                 columns: [
