@@ -61,6 +61,20 @@
         <EssentialLink v-for="link in essentialLinks"
                        :key="link.title"
                        v-bind="link"/>
+
+        <q-item clickable tag="a" @click="dashboard">
+          <q-item-section avatar>
+            <q-icon name="home" />
+          </q-item-section>
+
+          <q-item-section>
+            <q-item-label>Dashboard</q-item-label>
+            <q-item-label caption>
+              admin.dashboard
+            </q-item-label>
+          </q-item-section>
+        </q-item>
+
       </q-list>
     </q-drawer>
 
@@ -115,6 +129,17 @@
                     console.log(error)
                     this.$store.dispatch('auth/logout')
                 })
+            },
+            dashboard() {
+                console.log('dashboard')
+                this.$axios.post('/api/admin')
+                    .then(response => {
+                        console.log('success')
+                        console.log(response)
+                    }).catch(error => {
+                        console.log('error')
+                        console.log(error)
+                    })
             }
         }
     }

@@ -37,3 +37,11 @@ Route::post('/logout', function () {
     auth()->logout();
     return response('logout');
 });
+
+Route::middleware('auth:sanctum')->post('/admin', function () {
+    if (auth()->user()->is_admin) {
+        return response(true);
+    } else {
+        return response('Not admin', 401);
+    }
+});
