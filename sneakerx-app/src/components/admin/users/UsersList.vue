@@ -5,7 +5,7 @@
       :data="users"
       :columns="columns"
       row-key="name"
-      selection="single"
+      selection="multiple"
       :selected.sync="selected"
       :visible-columns="visibleColumns"
     >
@@ -17,6 +17,10 @@
         >
 
         <q-space />
+
+        <q-input borderless dense debounce="300" v-model="search" placeholder="Search" class="q-mr-md">
+          <q-icon slot="append" name="search" />
+        </q-input>
 
         <q-select
           v-model="visibleColumns"
@@ -33,6 +37,15 @@
           style="min-width: 150px"
         />
       </template>
+      <template v-slot:no-data="{ icon, message, filter }">
+        <div class="full-width row flex-center text-accent q-gutter-sm">
+          <q-icon size="2em" name="sentiment_dissatisfied" />
+          <span>
+            Well this is sad... {{ message }}
+          </span>
+          <q-icon size="2em" :name="search ? 'filter_b_and_w' : icon" />
+        </div>
+      </template>
     </q-table>
   </div>
 </template>
@@ -45,6 +58,7 @@
         ],
         data() {
             return {
+                search: '',
                 selected: [],
                 visibleColumns: ['id', 'name', 'email', 'is_admin', 'created_at'],
                 columns: [
