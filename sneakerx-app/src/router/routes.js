@@ -17,6 +17,18 @@ const routes = [
         meta: { requiresVisitor: true }
       }
     ],
+  },
+  {
+    path: '/dashboard',
+    component: () => import('layouts/DashboardLayout.vue'),
+    children: [
+      {
+        path: '/home',
+        name: 'home_admin',
+        component: () => import('pages/dashboard/Home.vue'),
+        meta: { requiresAdmin: true }
+      }
+    ],
   }
 ]
 
