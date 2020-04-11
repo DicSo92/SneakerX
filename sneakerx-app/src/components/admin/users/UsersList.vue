@@ -8,6 +8,7 @@
       selection="multiple"
       :selected.sync="selected"
       :visible-columns="visibleColumns"
+      :loading="loading"
     >
 
       <template v-slot:top>
@@ -53,11 +54,11 @@
 <script>
     export default {
         name: "UsersList",
-        props: [
-            'users'
-        ],
         data() {
             return {
+                users: [],
+                loading: false,
+
                 search: '',
                 selected: [],
                 visibleColumns: ['id', 'name', 'email', 'is_admin', 'created_at'],
@@ -70,11 +71,35 @@
                     },
                     {name: 'name', align: 'left', label: 'Name', field: 'name', sortable: true},
                     {name: 'email', label: 'Email', field: 'email', sortable: true},
-                    {name: 'email_verified_at', label: 'Verified At', field: 'email_verified_at'},
-                    {name: 'is_admin', label: 'Admin', field: 'is_admin'},
-                    {name: 'created_at', label: 'Created At', field: 'created_at'},
+                    {name: 'email_verified_at', label: 'Verified At', field: 'email_verified_at', sortable: true},
+                    {name: 'is_admin', label: 'Admin', field: 'is_admin', sortable: true},
+                    {name: 'created_at', label: 'Created At', field: 'created_at', sortable: true},
                     {name: 'updated_at', label: 'Updated At', field: 'updated_at', sortable: true},
                 ],
+            }
+        },
+        created() {
+            this.getUsers()
+        },
+        mounted() {
+        },
+        computed: {
+
+        },
+        methods: {
+            getUsers () {
+                this.loading = true
+                this.$axios.get('/api/admin/users')
+                    .then(response => {
+                        console.log(response)
+                        this.users = response.data
+                        this.loading = false
+                    })
+                    .catch(error => {
+                        console.log('error')
+                        console.log(error)
+                        this.loading = false
+                    })
             }
         }
     }
