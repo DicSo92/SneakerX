@@ -62,7 +62,7 @@
                        :key="link.title"
                        v-bind="link"/>
 
-        <q-item clickable tag="a" @click="dashboard">
+        <q-item clickable tag="a" :to="{name: 'home_admin'}">
           <q-item-section avatar>
             <q-icon name="home" />
           </q-item-section>
@@ -130,17 +130,6 @@
                     this.$store.dispatch('auth/logout')
                 })
             },
-            dashboard() {
-                console.log('dashboard')
-                this.$axios.post('/api/admin')
-                    .then(response => {
-                        console.log('success')
-                        console.log(response)
-                    }).catch(error => {
-                        console.log('error')
-                        console.log(error)
-                    })
-            }
         }
     }
 </script>
