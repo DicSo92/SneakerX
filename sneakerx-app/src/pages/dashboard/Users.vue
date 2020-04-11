@@ -1,12 +1,18 @@
 <template>
-  <q-page class="flex flex-center">
+  <q-page class="column flex-center">
     <h3>Users</h3>
+    <UsersList v-if="users" :users="users"></UsersList>
   </q-page>
 </template>
 
 <script>
+    import UsersList from 'components/admin/users/UsersList.vue'
+
     export default {
         name: "Users",
+        components: {
+            UsersList
+        },
         data () {
             return {
                 users: [],
