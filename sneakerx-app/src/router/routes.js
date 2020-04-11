@@ -21,12 +21,12 @@ const routes = [
   {
     path: '/dashboard',
     component: () => import('layouts/DashboardLayout.vue'),
+    meta: { requiresAdmin: true },
     children: [
       {
-        path: '/dashboard/home',
+        path: '/',
         name: 'home_admin',
         component: () => import('pages/dashboard/Home.vue'),
-        meta: { requiresAdmin: true }
       }
     ],
   }
