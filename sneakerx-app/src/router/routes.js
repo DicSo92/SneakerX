@@ -27,6 +27,11 @@ const routes = [
         path: '/',
         name: 'home_admin',
         component: () => import('pages/dashboard/Home.vue'),
+      },
+      {
+        path: '/users',
+        name: 'users_admin',
+        component: () => import('pages/dashboard/Users.vue'),
       }
     ],
   }
