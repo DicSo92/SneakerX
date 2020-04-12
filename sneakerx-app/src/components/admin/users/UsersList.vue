@@ -25,7 +25,7 @@
       :selected.sync="selected"
       :visible-columns="visibleColumns"
       :loading="loading"
-      :pagination.sync="pagination"
+      :pagination.sync="pagination" v-if="showTable"
     >
 
       <template v-slot:top>
@@ -79,9 +79,9 @@
               <q-input type="number" v-model="props.row.is_admin" dense autofocus hint="Use buttons to close" />
             </q-popup-edit>
           </q-td>
-          <q-td key="created_at" :props="props">{{ date.formatDate(props.row.created_at, 'YYYY-MM-DD') }}</q-td>
-          <q-td key="email_verified_at" :props="props">{{ props.row.email_verified_at }}</q-td>
-          <q-td key="updated_at" :props="props">{{ props.row.updated_at }}</q-td>
+          <q-td key="created_at" :props="props">{{ cFormatDate(props.row.created_at) }}</q-td>
+          <q-td key="email_verified_at" :props="props">{{ cFormatDate(props.row.email_verified_at) }}</q-td>
+          <q-td key="updated_at" :props="props">{{ cFormatDate(props.row.updated_at) }}</q-td>
         </q-tr>
       </template>
 
@@ -99,12 +99,14 @@
 </template>
 
 <script>
-    import { QSpinnerFacebook, QSpinnerGears } from 'quasar'
+    import { QSpinnerFacebook, QSpinnerGears, date } from 'quasar'
 
     export default {
         name: "UsersList",
         data() {
             return {
+                showTable: false,
+
                 users: [],
                 loading: false,
                 search: '',
@@ -138,6 +140,7 @@
             this.getUsers()
         },
         mounted() {
+            this.showTable = true
         },
         watch: {
             selected (val) {
@@ -151,6 +154,9 @@
             }
         },
         methods: {
+            cFormatDate (Date) {
+                return date.formatDate(Date, 'DD/MM/YY HH:mm')
+            },
             getUsers () {
                 this.loading = true
                 this.$axios.get('/api/admin/users')
