@@ -17,9 +17,7 @@
           style="height: 50px; width: 50px"
           src="https://cdn.quasar.dev/logo/svg/quasar-logo.svg"
         >
-
         <q-space />
-
         <q-input borderless dense debounce="300" v-model="search" placeholder="Search" class="q-mr-md">
           <q-icon slot="append" name="search" />
         </q-input>
@@ -39,6 +37,37 @@
           style="min-width: 150px"
         />
       </template>
+
+      <template v-slot:body="props">
+        <q-tr :props="props">
+          <q-td auto-width>
+            <q-checkbox v-model="props.selected" />
+          </q-td>
+          <q-td key="id" :props="props">{{ props.row.id }}</q-td>
+          <q-td key="name" :props="props">
+            {{ props.row.name }}
+            <q-popup-edit v-model="props.row.name">
+              <q-input v-model="props.row.name" dense autofocus counter />
+            </q-popup-edit>
+          </q-td>
+          <q-td key="email" :props="props">
+            <div class="text-pre-wrap">{{ props.row.email }}</div>
+            <q-popup-edit v-model="props.row.email">
+              <q-input v-model="props.row.email" dense autofocus counter />
+            </q-popup-edit>
+          </q-td>
+          <q-td key="is_admin" :props="props">
+            {{ props.row.is_admin }}
+            <q-popup-edit v-model="props.row.is_admin" title="Update is_admin" buttons persistent>
+              <q-input type="number" v-model="props.row.is_admin" dense autofocus hint="Use buttons to close" />
+            </q-popup-edit>
+          </q-td>
+          <q-td key="created_at" :props="props">{{ props.row.created_at }}</q-td>
+          <q-td key="email_verified_at" :props="props">{{ props.row.email_verified_at }}</q-td>
+          <q-td key="updated_at" :props="props">{{ props.row.updated_at }}</q-td>
+        </q-tr>
+      </template>
+
       <template v-slot:no-data="{ icon, message, filter }">
         <div class="full-width row flex-center text-accent q-gutter-sm">
           <q-icon size="2em" name="sentiment_dissatisfied" />
@@ -79,9 +108,9 @@
                     },
                     {name: 'name', align: 'left', label: 'Name', field: 'name', sortable: true},
                     {name: 'email', label: 'Email', field: 'email', sortable: true},
-                    {name: 'email_verified_at', label: 'Verified At', field: 'email_verified_at', sortable: true},
                     {name: 'is_admin', label: 'Admin', field: 'is_admin', sortable: true},
                     {name: 'created_at', label: 'Created At', field: 'created_at', sortable: true},
+                    {name: 'email_verified_at', label: 'Verified At', field: 'email_verified_at', sortable: true},
                     {name: 'updated_at', label: 'Updated At', field: 'updated_at', sortable: true},
                 ],
             }
