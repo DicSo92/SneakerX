@@ -1,10 +1,14 @@
 <template>
-  <div class="q-pa-md">
+  <div class="q-pa-md" id="userList">
+    <div class="row full-width q-mb-sm">
+      <q-space />
+      <q-btn color="negative" icon="delete" label="Delete Selection" />
+    </div>
     <q-table
       title="Treats"
       :data="users"
       :columns="columns"
-      row-key="name"
+      row-key="id"
       selection="multiple"
       :selected.sync="selected"
       :visible-columns="visibleColumns"
@@ -13,11 +17,10 @@
     >
 
       <template v-slot:top>
-        <img
-          style="height: 50px; width: 50px"
-          src="https://cdn.quasar.dev/logo/svg/quasar-logo.svg"
-        >
+        <q-icon name="group" size="lg"/>
+
         <q-space />
+
         <q-input borderless dense debounce="300" v-model="search" placeholder="Search" class="q-mr-md">
           <q-icon slot="append" name="search" />
         </q-input>
@@ -142,6 +145,8 @@
     }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+  #userList {
+    max-width: 100%;
+  }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <q-page class="column flex-center">
+  <q-page class="column items-center">
     <h3>Users</h3>
     <UsersList></UsersList>
   </q-page>

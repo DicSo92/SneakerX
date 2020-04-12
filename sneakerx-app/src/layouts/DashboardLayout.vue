@@ -67,7 +67,7 @@
                     {
                         title: 'Users',
                         caption: 'list.users',
-                        icon: 'user',
+                        icon: 'group',
                         link: 'users_admin'
                     },
                 ]
