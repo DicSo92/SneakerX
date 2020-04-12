@@ -60,7 +60,7 @@
                         :disable="props.row.id === getUserId"
             />
           </q-td>
-          <q-td key="id" :props="props">{{ props.row.id }}</q-td>
+          <q-td key="id" :props="props">{{ props.row.id }} #</q-td>
           <q-td key="name" :props="props">
             {{ props.row.name }}
             <q-popup-edit v-model="props.row.name">
@@ -74,12 +74,12 @@
             </q-popup-edit>
           </q-td>
           <q-td key="is_admin" :props="props">
-            {{ props.row.is_admin }}
+            {{ props.row.is_admin ? 'YES' : 'NO' }}
             <q-popup-edit v-model="props.row.is_admin" title="Update is_admin" buttons persistent>
               <q-input type="number" v-model="props.row.is_admin" dense autofocus hint="Use buttons to close" />
             </q-popup-edit>
           </q-td>
-          <q-td key="created_at" :props="props">{{ props.row.created_at }}</q-td>
+          <q-td key="created_at" :props="props">{{ date.formatDate(props.row.created_at, 'YYYY-MM-DD') }}</q-td>
           <q-td key="email_verified_at" :props="props">{{ props.row.email_verified_at }}</q-td>
           <q-td key="updated_at" :props="props">{{ props.row.updated_at }}</q-td>
         </q-tr>
@@ -122,7 +122,7 @@
                     {
                         name: 'id', required: true, label: 'ID',
                         field: row => row.id,
-                        format: val => `${val}`,
+                        format: val => `#${val}`,
                         sortable: true
                     },
                     {name: 'name', align: 'left', label: 'Name', field: 'name', sortable: true},
