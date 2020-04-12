@@ -7,7 +7,7 @@ const routes = [
       {
         path: '',
         name: 'home',
-        component: () => import('pages/Index.vue'),
+        component: () => import('pages/Home.vue'),
         meta: { requiresAuth: true }
       },
       {
@@ -15,6 +15,23 @@ const routes = [
         name: 'auth',
         component: () => import('pages/Auth.vue'),
         meta: { requiresVisitor: true }
+      }
+    ],
+  },
+  {
+    path: '/dashboard',
+    component: () => import('layouts/DashboardLayout.vue'),
+    meta: { requiresAdmin: true },
+    children: [
+      {
+        path: '/',
+        name: 'home_admin',
+        component: () => import('pages/dashboard/Home.vue'),
+      },
+      {
+        path: '/users',
+        name: 'users_admin',
+        component: () => import('pages/dashboard/Users.vue'),
       }
     ],
   }
