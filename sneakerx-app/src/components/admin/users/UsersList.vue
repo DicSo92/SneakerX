@@ -2,11 +2,18 @@
   <div class="q-pa-md" id="userList">
     <div class="row full-width q-mb-sm">
       <q-space />
+      <q-btn class="q-mr-sm"
+             color="positive"
+             icon="add"
+             label="Add User"
+             @click="addUser"
+      />
       <q-btn color="negative"
              icon="delete"
              label="Delete Selection"
              :disable="!selected.length"
-             @click="deleteUsers" />
+             @click="deleteUsers"
+      />
     </div>
 
     <q-table
@@ -157,6 +164,9 @@
                         console.log(error)
                         this.loading = false
                     })
+            },
+            addUser() {
+
             },
             deleteUsers () {
                 let selectedLength = this.selected.length
