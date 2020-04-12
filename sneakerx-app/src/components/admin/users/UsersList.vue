@@ -2,8 +2,11 @@
   <div class="q-pa-md" id="userList">
     <div class="row full-width q-mb-sm">
       <q-space />
-      <q-btn color="negative" icon="delete" label="Delete Selection" />
+      <q-btn color="negative"
+             icon="delete"
+             label="Delete Selection" @click="deleteUsers" />
     </div>
+
     <q-table
       title="Treats"
       :data="users"
@@ -140,7 +143,19 @@
                         console.log(error)
                         this.loading = false
                     })
-            }
+            },
+            deleteUsers () {
+                this.selected.forEach(userSelect => {
+                    console.log(userSelect)
+                    this.$axios.delete(`/api/admin/users/${userSelect.id}`)
+                        .then(response => {
+                            console.log(response)
+                        })
+                        .catch(error => {
+                            console.log(error)
+                        })
+                })
+            },
         }
     }
 </script>
