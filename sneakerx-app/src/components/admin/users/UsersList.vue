@@ -2,8 +2,13 @@
   <div class="q-pa-md" id="userList">
     <div class="row full-width q-mb-sm">
       <q-space />
-      <q-btn color="negative" icon="delete" label="Delete Selection" />
+      <q-btn color="negative"
+             icon="delete"
+             label="Delete Selection"
+             :disable="!selected.length"
+             @click="deleteUsers" />
     </div>
+
     <q-table
       title="Treats"
       :data="users"
@@ -44,7 +49,9 @@
       <template v-slot:body="props">
         <q-tr :props="props">
           <q-td auto-width>
-            <q-checkbox v-model="props.selected" />
+            <q-checkbox v-model="props.selected"
+                        :disable="props.row.id === getUserId"
+            />
           </q-td>
           <q-td key="id" :props="props">{{ props.row.id }}</q-td>
           <q-td key="name" :props="props">
@@ -85,6 +92,8 @@
 </template>
 
 <script>
+    import { QSpinnerFacebook, QSpinnerGears } from 'quasar'
+
     export default {
         name: "UsersList",
         data() {
@@ -123,8 +132,16 @@
         },
         mounted() {
         },
+        watch: {
+            selected (val) {
+                let authIndex = this.selected.findIndex(user => user.id === this.getUserId)
+                if (authIndex !== -1) this.selected.splice(authIndex, 1)
+            }
+        },
         computed: {
-
+            getUserId() {
+                return this.$store.state.auth.user.id
+            }
         },
         methods: {
             getUsers () {
@@ -140,8 +157,46 @@
                         console.log(error)
                         this.loading = false
                     })
+            },
+            deleteUsers () {
+                let selectedLength = this.selected.length
+                let count = 0
+                this.$q.loading.show({
+                    message: `Deleting Users... (${selectedLength})`
+                })
+                this.selected.forEach(userSelect => {
+                    this.$axios.delete(`/api/admin/users/${userSelect.id}`)
+                        .then(response => {
+                            console.log(response)
+                            count++
+                            this.users.splice(this.users.findIndex(user => user.id === userSelect.id), 1)
+                            this.selected.splice(this.selected.findIndex(user => user.id === userSelect.id), 1)
+                            if (count === selectedLength) this.hideLoading('User(s) Deleted')
+                        })
+                        .catch(error => {
+                            console.log(error)
+                            this.hideLoading('An error occurred : ' + error.message)
+                        })
+                })
+            },
+            hideLoading (message) {
+                this.$q.loading.show({
+                    spinner: QSpinnerGears,
+                    spinnerColor: 'red',
+                    messageColor: 'black',
+                    backgroundColor: 'yellow',
+                    message: message
+                })
+
+                this.timer = setTimeout(() => {
+                    this.$q.loading.hide()
+                    this.timer = void 0
+                }, 2000)
             }
-        }
+        },
+        beforeDestroy () {
+            this.$q.loading.hide()
+        },
     }
 </script>
 
