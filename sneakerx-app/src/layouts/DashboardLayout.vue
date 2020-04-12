@@ -64,6 +64,12 @@
                         icon: 'code',
                         link: 'auth'
                     },
+                    {
+                        title: 'Users',
+                        caption: 'list.users',
+                        icon: 'group',
+                        link: 'users_admin'
+                    },
                 ]
             }
         },

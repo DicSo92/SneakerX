@@ -15,9 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::middleware('auth:api')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
 Auth::routes();
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -38,6 +35,8 @@ Route::post('/logout', function () {
     return response('logout');
 });
 
+
+
 Route::middleware('auth:sanctum')->post('/admin', function () {
     if (auth()->user()->is_admin) {
         return response(true);
@@ -45,3 +44,5 @@ Route::middleware('auth:sanctum')->post('/admin', function () {
         return response('Not admin', 401);
     }
 });
+
+Route::middleware('auth:sanctum', 'admin')->apiResource('admin/users', 'Admin\UsersController');
