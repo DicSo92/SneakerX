@@ -88,6 +88,7 @@
 </template>
 
 <script>
+    import { QSpinnerFacebook, QSpinnerGears } from 'quasar'
     export default {
         name: "UsersList",
         data() {
@@ -145,18 +146,41 @@
                     })
             },
             deleteUsers () {
+                let count = 0
+                this.$q.loading.show({
+                    message: `Deleting ${this.selected.length} users`
+                })
                 this.selected.forEach(userSelect => {
                     console.log(userSelect)
                     this.$axios.delete(`/api/admin/users/${userSelect.id}`)
                         .then(response => {
                             console.log(response)
+                            count++
+                            if (count === this.selected.length) this.hideLoading()
                         })
                         .catch(error => {
                             console.log(error)
                         })
                 })
             },
-        }
+            hideLoading () {
+                this.$q.loading.show({
+                    spinner: QSpinnerGears,
+                    spinnerColor: 'red',
+                    messageColor: 'black',
+                    backgroundColor: 'yellow',
+                    message: 'User(s) Deleted'
+                })
+
+                this.timer = setTimeout(() => {
+                    this.$q.loading.hide()
+                    this.timer = void 0
+                }, 2000)
+            }
+        },
+        beforeDestroy () {
+            this.$q.loading.hide()
+        },
     }
 </script>
 
