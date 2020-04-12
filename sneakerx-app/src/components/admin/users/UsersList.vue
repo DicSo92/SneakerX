@@ -146,30 +146,33 @@
                     })
             },
             deleteUsers () {
+                let selectedLength = this.selected.length
                 let count = 0
                 this.$q.loading.show({
-                    message: `Deleting ${this.selected.length} users`
+                    message: `Deleting Users... (${selectedLength})`
                 })
                 this.selected.forEach(userSelect => {
-                    console.log(userSelect)
                     this.$axios.delete(`/api/admin/users/${userSelect.id}`)
                         .then(response => {
                             console.log(response)
                             count++
-                            if (count === this.selected.length) this.hideLoading()
+                            this.users.splice(this.users.findIndex(user => user.id === userSelect.id), 1)
+                            this.selected.splice(this.selected.findIndex(user => user.id === userSelect.id), 1)
+                            if (count === selectedLength) this.hideLoading('User(s) Deleted')
                         })
                         .catch(error => {
                             console.log(error)
+                            this.hideLoading('An error occurred : ' + error.message)
                         })
                 })
             },
-            hideLoading () {
+            hideLoading (message) {
                 this.$q.loading.show({
                     spinner: QSpinnerGears,
                     spinnerColor: 'red',
                     messageColor: 'black',
                     backgroundColor: 'yellow',
-                    message: 'User(s) Deleted'
+                    message: message
                 })
 
                 this.timer = setTimeout(() => {
