@@ -4,7 +4,9 @@
       <q-space />
       <q-btn color="negative"
              icon="delete"
-             label="Delete Selection" @click="deleteUsers" />
+             label="Delete Selection"
+             :disable="!selected.length"
+             @click="deleteUsers" />
     </div>
 
     <q-table
@@ -47,7 +49,9 @@
       <template v-slot:body="props">
         <q-tr :props="props">
           <q-td auto-width>
-            <q-checkbox v-model="props.selected" />
+            <q-checkbox v-model="props.selected"
+                        :disable="props.row.id === getUserId"
+            />
           </q-td>
           <q-td key="id" :props="props">{{ props.row.id }}</q-td>
           <q-td key="name" :props="props">
@@ -89,6 +93,7 @@
 
 <script>
     import { QSpinnerFacebook, QSpinnerGears } from 'quasar'
+
     export default {
         name: "UsersList",
         data() {
@@ -127,8 +132,16 @@
         },
         mounted() {
         },
+        watch: {
+            selected (val) {
+                let authIndex = this.selected.findIndex(user => user.id === this.getUserId)
+                if (authIndex !== -1) this.selected.splice(authIndex, 1)
+            }
+        },
         computed: {
-
+            getUserId() {
+                return this.$store.state.auth.user.id
+            }
         },
         methods: {
             getUsers () {
