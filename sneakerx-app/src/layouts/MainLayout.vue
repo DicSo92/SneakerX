@@ -61,6 +61,20 @@
         <EssentialLink v-for="link in essentialLinks"
                        :key="link.title"
                        v-bind="link"/>
+
+        <q-item clickable tag="a" :to="{name: 'home_admin'}">
+          <q-item-section avatar>
+            <q-icon name="home" />
+          </q-item-section>
+
+          <q-item-section>
+            <q-item-label>Dashboard</q-item-label>
+            <q-item-label caption>
+              admin.dashboard
+            </q-item-label>
+          </q-item-section>
+        </q-item>
+
       </q-list>
     </q-drawer>
 
@@ -115,7 +129,7 @@
                     console.log(error)
                     this.$store.dispatch('auth/logout')
                 })
-            }
+            },
         }
     }
 </script>

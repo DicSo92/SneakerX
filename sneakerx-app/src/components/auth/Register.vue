@@ -104,22 +104,25 @@
                     console.log('You need to accept the license and terms first')
                 } else {
                     this.loading = true
-                    this.$axios.get('/sanctum/csrf-cookie')
-                        .then(res => {
-                            console.log(res)
-                            this.$axios.post('/api/register', this.user).then(response => {
-                                console.log(response)
-                                logIn()
-                                this.$store.dispatch('auth/loadUser')
-                                this.loading = false
-                                this.$router.push({name: 'home'})
-                            }).catch(error => {
-                                console.log(error)
-                                if (422 === error.response.status) {
-                                    this.errors = error.response.data.errors
-                                }
-                                this.loading = false
-                            })
+                    this.$axios.post('/api/register', this.user)
+                        .then(response => {
+                            console.log(response)
+                            this.$axios.get('/sanctum/csrf-cookie')
+                                .then(res => {
+                                    console.log(res)
+                                    logIn()
+                                    this.$store.dispatch('auth/loadUser')
+                                    this.loading = false
+                                    this.$router.push({name: 'home'})
+                                }).catch(er => {
+                                    console.log(er)
+                                })
+                        }).catch(error => {
+                            console.log(error)
+                            if (422 === error.response.status) {
+                                this.errors = error.response.data.errors
+                            }
+                            this.loading = false
                         })
                 }
             },
