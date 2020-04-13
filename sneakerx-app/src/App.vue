@@ -12,8 +12,10 @@
         beforeCreate: function () {
             console.log('beforeCreate')
             this.$q.loading.show()
-            this.$store.dispatch('auth/loadUser')
-            bus.$on('hideLoading', () => {
+
+            this.$store.dispatch('auth/loadUser', 'firstLoad')
+
+            bus.$on('hideFirstLoading', () => {
                 this.$q.loading.hide()
             })
         },

@@ -97,13 +97,14 @@
             }
         },
         created() {
-            bus.$on('hideLoading', (redirect) => {
+            bus.$on('hideRegisterLoading', (redirect) => {
                 this.loading = false
                 if (redirect) this.$router.push({name: 'home'})
             })
         },
         beforeDestroy() {
             this.$q.loading.hide()
+            bus.$off('hideRegisterLoading')
         },
         methods: {
             onSubmit() {
@@ -118,7 +119,7 @@
                                 .then(res => {
                                     console.log(res)
                                     logIn()
-                                    this.$store.dispatch('auth/loadUser')
+                                    this.$store.dispatch('auth/loadUser', 'register')
                                     // ^^^^^^ bus emit hideLoading ^^^^^^ //
                                 })
                                 .catch(er => {
