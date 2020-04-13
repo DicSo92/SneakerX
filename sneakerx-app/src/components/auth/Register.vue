@@ -96,13 +96,13 @@
                 }
             }
         },
-        created (){
+        created() {
             bus.$on('hideLoading', (redirect) => {
                 this.loading = false
                 if (redirect) this.$router.push({name: 'home'})
             })
         },
-        beforeDestroy () {
+        beforeDestroy() {
             this.$q.loading.hide()
         },
         methods: {
@@ -120,17 +120,18 @@
                                     logIn()
                                     this.$store.dispatch('auth/loadUser')
                                     // ^^^^^^ bus emit hideLoading ^^^^^^ //
-                                }).catch(er => {
+                                })
+                                .catch(er => {
                                     console.log(er)
-                                this.loading = false
-                            })
+                                    this.loading = false
+                                })
                         }).catch(error => {
-                            console.log(error)
-                            if (422 === error.response.status) {
-                                this.errors = error.response.data.errors
-                            }
-                            this.loading = false
-                        })
+                        console.log(error)
+                        if (422 === error.response.status) {
+                            this.errors = error.response.data.errors
+                        }
+                        this.loading = false
+                    })
                 }
             },
 
