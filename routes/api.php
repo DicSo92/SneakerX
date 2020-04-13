@@ -45,4 +45,6 @@ Route::middleware('auth:sanctum')->post('/admin', function () {
     }
 });
 
-Route::middleware('auth:sanctum', 'admin')->apiResource('admin/users', 'Admin\UsersController');
+Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('auth:sanctum', 'admin')->group(function () {
+    Route::apiResource('users', 'UsersController');
+});
