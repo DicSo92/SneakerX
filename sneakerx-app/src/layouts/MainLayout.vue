@@ -58,22 +58,9 @@
           Essential Links
         </q-item-label>
 
-        <EssentialLink v-for="link in essentialLinks"
+        <EssentialLink v-for="link in links"
                        :key="link.title"
                        v-bind="link"/>
-
-        <q-item clickable tag="a" :to="{name: 'home_admin'}">
-          <q-item-section avatar>
-            <q-icon name="dashboard" />
-          </q-item-section>
-
-          <q-item-section>
-            <q-item-label>Dashboard</q-item-label>
-            <q-item-label caption>
-              admin.dashboard
-            </q-item-label>
-          </q-item-section>
-        </q-item>
 
       </q-list>
     </q-drawer>
@@ -98,25 +85,42 @@
         data() {
             return {
                 leftDrawerOpen: false,
-                essentialLinks: [
-                    {
-                        title: 'Home',
-                        caption: 'Home',
-                        icon: 'home',
-                        link: 'home'
-                    },
-                    {
-                        title: 'Login / Register',
-                        caption: 'login.register',
-                        icon: 'code',
-                        link: 'auth'
-                    },
-                ]
             }
         },
         computed: {
             isLoggedIn() {
                 return this.$store.state.auth.isLoggedIn
+            },
+            userState() {
+                return this.$store.state.auth.user
+            },
+            links() {
+                const home = {
+                    title: 'Home',
+                    caption: 'Home',
+                    icon: 'home',
+                    link: 'home'
+                }
+                const auth = {
+                    title: 'Login / Register',
+                    caption: 'login.register',
+                    icon: 'code',
+                    link: 'auth'
+                }
+                const dashboard = {
+                    title: 'Dashboard',
+                    caption: 'admin.dashboard',
+                    icon: 'dashboard',
+                    link: 'home_admin'
+                }
+                if (this.isLoggedIn && this.userState.is_admin === 1) {
+                    return [home, dashboard]
+                } else if (this.isLoggedIn && this.userState.is_admin === 0) {
+                    return [home]
+                } else {
+                    return [home, auth]
+                }
+
             }
         },
         methods: {
