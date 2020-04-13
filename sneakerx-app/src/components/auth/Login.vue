@@ -33,13 +33,14 @@
         <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm"/>
       </div>
     </q-form>
-    <h6 v-if="loading">Loading</h6>
   </div>
 </template>
 
 <script>
   import {logIn} from '../../utils/auth'
-    export default {
+  import bus from '../../utils/bus.js'
+
+  export default {
         name: "Login",
         data() {
             return {
@@ -61,6 +62,12 @@
                 }
             }
         },
+        created (){
+            bus.$on('hideLoading', (redirect) => {
+                this.loading = false
+                if (redirect) this.$router.push({name: 'home'})
+            })
+        },
         beforeDestroy () {
             this.$q.loading.hide()
         },
@@ -81,8 +88,7 @@
                                 console.log(res)
                                 logIn()
                                 this.$store.dispatch('auth/loadUser')
-                                this.loading = false
-                                this.$router.push({name: 'home'})
+                                // ^^^^^^ bus emit hideLoading ^^^^^^ //
                             }).catch(res => {
                                 console.log('error ----')
                                 console.log(res)

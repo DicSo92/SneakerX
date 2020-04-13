@@ -1,4 +1,6 @@
 import {isLoggedIn, logOut} from '../../utils/auth.js'
+import bus from '../../utils/bus.js'
+
 
 export function someAction(/* context */) {
 }
@@ -9,10 +11,12 @@ export function loadUser({commit, dispatch}) {
         console.log(response)
         commit("setIsLoggedIn", true);
         commit("setUser", response.data);
+        bus.$emit('hideLoading', true)
       })
       .catch(error => {
         console.log(error.message)
         dispatch('logout')
+        bus.$emit('hideLoading', false)
       })
   }
 }
