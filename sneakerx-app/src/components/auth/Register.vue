@@ -67,6 +67,7 @@
 
 <script>
     import {logIn} from '../../utils/auth'
+    import bus from '../../utils/bus.js'
 
     export default {
         name: "Register",
@@ -95,6 +96,12 @@
                 }
             }
         },
+        created (){
+            bus.$on('hideLoading', (redirect) => {
+                this.loading = false
+                if (redirect) this.$router.push({name: 'home'})
+            })
+        },
         beforeDestroy () {
             this.$q.loading.hide()
         },
@@ -112,11 +119,11 @@
                                     console.log(res)
                                     logIn()
                                     this.$store.dispatch('auth/loadUser')
-                                    this.loading = false
-                                    this.$router.push({name: 'home'})
+                                    // ^^^^^^ bus emit hideLoading ^^^^^^ //
                                 }).catch(er => {
                                     console.log(er)
-                                })
+                                this.loading = false
+                            })
                         }).catch(error => {
                             console.log(error)
                             if (422 === error.response.status) {
