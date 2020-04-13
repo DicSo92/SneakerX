@@ -24,27 +24,27 @@ const routes = [
     meta: { requiresAdmin: true },
     children: [
       {
-        path: '/',
+        path: '',
         name: 'home_admin',
         component: () => import('pages/dashboard/Home.vue'),
       },
       {
-        path: '/users',
+        path: 'users',
         name: 'users_admin',
         component: () => import('pages/dashboard/Users.vue'),
       },
       {
-        path: '/categories',
+        path: 'categories',
         name: 'categories_admin',
         component: () => import('pages/dashboard/Categories.vue'),
       },
       {
-        path: '/brands',
+        path: 'brands',
         name: 'brands_admin',
         component: () => import('pages/dashboard/Brands.vue'),
       },
       {
-        path: '/articles',
+        path: 'articles',
         name: 'articles_admin',
         component: () => import('pages/dashboard/Articles.vue'),
       },
