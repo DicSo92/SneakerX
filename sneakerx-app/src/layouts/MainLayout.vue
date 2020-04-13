@@ -64,7 +64,7 @@
 
         <q-item clickable tag="a" :to="{name: 'home_admin'}">
           <q-item-section avatar>
-            <q-icon name="home" />
+            <q-icon name="dashboard" />
           </q-item-section>
 
           <q-item-section>

@@ -70,6 +70,24 @@
                         icon: 'group',
                         link: 'users_admin'
                     },
+                    {
+                        title: 'Categories',
+                        caption: 'list.categories',
+                        icon: 'category',
+                        link: 'categories_admin'
+                    },
+                    {
+                        title: 'Brands',
+                        caption: 'list.brands',
+                        icon: 'local_offer',
+                        link: 'brands_admin'
+                    },
+                    {
+                        title: 'Articles',
+                        caption: 'list.articles',
+                        icon: 'widgets',
+                        link: 'articles_admin'
+                    },
                 ]
             }
         },
