@@ -47,4 +47,5 @@ Route::middleware('auth:sanctum')->post('/admin', function () {
 
 Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('auth:sanctum', 'admin')->group(function () {
     Route::apiResource('users', 'UserController');
+    Route::apiResource('brands', 'BrandController');
 });
