@@ -9,7 +9,6 @@
         <q-toolbar-title>
           DashBoard
         </q-toolbar-title>
-
       </q-toolbar>
     </q-header>
 
@@ -17,14 +16,13 @@
               show-if-above
               bordered
               content-class="bg-grey-1">
-
       <q-list>
         <q-item-label header
                       class="text-grey-8">
           Essential Links
         </q-item-label>
 
-        <EssentialLink v-for="link in essentialLinks"
+        <EssentialLink v-for="link in links"
                        :key="link.title"
                        v-bind="link"/>
 
@@ -51,48 +49,42 @@
         data() {
             return {
                 leftDrawerOpen: false,
-                essentialLinks: [
-                    {
-                        title: 'Home',
-                        caption: 'Home',
-                        icon: 'home',
-                        link: 'home'
-                    },
-                    {
-                        title: 'Login / Register',
-                        caption: 'login.register',
-                        icon: 'code',
-                        link: 'auth'
-                    },
-                    {
-                        title: 'Users',
-                        caption: 'list.users',
-                        icon: 'group',
-                        link: 'users_admin'
-                    },
-                    {
-                        title: 'Categories',
-                        caption: 'list.categories',
-                        icon: 'category',
-                        link: 'categories_admin'
-                    },
-                    {
-                        title: 'Brands',
-                        caption: 'list.brands',
-                        icon: 'local_offer',
-                        link: 'brands_admin'
-                    },
-                    {
-                        title: 'Articles',
-                        caption: 'list.articles',
-                        icon: 'widgets',
-                        link: 'articles_admin'
-                    },
-                ]
             }
         },
         computed: {
-
+            links() {
+                const home = {
+                    title: 'Home',
+                    caption: 'Home',
+                    icon: 'home',
+                    link: 'home'
+                }
+                const articles = {
+                    title: 'Articles',
+                    caption: 'list.articles',
+                    icon: 'widgets',
+                    link: 'articles_admin'
+                }
+                const users = {
+                    title: 'Users',
+                    caption: 'list.users',
+                    icon: 'group',
+                    link: 'users_admin'
+                }
+                const categories = {
+                    title: 'Categories',
+                    caption: 'list.categories',
+                    icon: 'category',
+                    link: 'categories_admin'
+                }
+                const brands = {
+                    title: 'Brands',
+                    caption: 'list.brands',
+                    icon: 'local_offer',
+                    link: 'brands_admin'
+                }
+                return [home, articles, users, categories, brands]
+            }
         },
         methods: {
 
