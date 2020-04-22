@@ -15,6 +15,10 @@ class CreateBrandsTable extends Migration
     {
         Schema::create('brands', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->unique();
+            $table->string('description');
+            $table->string('banner');
+            $table->string('image');
             $table->timestamps();
         });
     }
