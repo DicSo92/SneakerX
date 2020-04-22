@@ -1,16 +1,34 @@
 <template>
-  <q-page class="column flex-center">
-    <img
-      alt="Quasar logo"
-      src="~assets/quasar-logo-full.svg"
-    >
+  <q-page class="column items-center">
     <h3>Brands</h3>
+    <AddBrand></AddBrand>
   </q-page>
 </template>
 
 <script>
+    import AddBrand from 'components/admin/brands/AddBrand.vue'
+
     export default {
-        name: "Brands"
+        name: "Brands",
+        components: {
+            AddBrand
+        },
+        data () {
+            return {
+
+            }
+        },
+        created() {
+
+        },
+        mounted() {
+        },
+        computed: {
+
+        },
+        methods: {
+
+        }
     }
 </script>
 
