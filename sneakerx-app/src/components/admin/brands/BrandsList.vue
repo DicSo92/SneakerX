@@ -1,4 +1,9 @@
 <template>
+  <div class="brandList column flex-center">
+    <q-spinner color="primary"
+               size="3em"
+               v-if="loading"
+    />
     <q-list bordered>
       <q-item clickable v-ripple v-for="brand in brands">
         <q-item-section avatar>
@@ -21,6 +26,7 @@
         </q-item-section>
       </q-item>
     </q-list>
+  </div>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-    <div class="addBrand q-my-md">
+    <div class="addBrand q-mb-md">
       <q-btn label="New Brand" @click="addBrand" color="primary"/>
     </div>
 </template>
