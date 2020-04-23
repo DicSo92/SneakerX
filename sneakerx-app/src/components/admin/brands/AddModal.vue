@@ -22,11 +22,7 @@
             autogrow
           />
 
-          <!--
-        Due to browser security policy,
-        we can only read the value, but not
-        write to it, so we only have an @input listener
-      -->
+          <!-- Due to browser security policy, we can only read the value, but not write to it, so we only have an @input listener -->
           <q-input
             @input="val => { bannerFile = val[0] }"
             filled

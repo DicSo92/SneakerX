@@ -1,18 +1,7 @@
 <template>
-  <q-form @submit="addBrand" class="q-gutter-md flex flex-center">
-    <q-input
-      name="name"
-      v-model="newBrand"
-      color="primary"
-      label="New Brand..."
-      filled
-      clearable
-    />
-
-    <div>
-      <q-btn label="Submit" type="submit" color="primary"/>
+    <div class="addBrand q-my-md">
+      <q-btn label="New Brand" @click="addBrand" color="primary"/>
     </div>
-  </q-form>
 </template>
 
 <script>
@@ -22,7 +11,7 @@
         name: "AddBrand",
         data () {
             return {
-                newBrand: ''
+
             }
         },
         created() {
@@ -34,7 +23,6 @@
         },
         methods: {
             addBrand () {
-                console.log(this.newBrand)
                 bus.$emit('showAddModalBrand', true)
             }
         }
