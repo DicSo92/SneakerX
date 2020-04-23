@@ -16,6 +16,8 @@
 </template>
 
 <script>
+    import bus from '../../../utils/bus.js'
+
     export default {
         name: "AddBrand",
         data () {
@@ -33,6 +35,7 @@
         methods: {
             addBrand () {
                 console.log(this.newBrand)
+                bus.$emit('showAddModalBrand', true)
             }
         }
     }

@@ -1,5 +1,5 @@
 <template>
-    <q-list bordered class="full-width">
+    <q-list bordered>
       <q-item clickable v-ripple v-for="brand in brands">
         <q-item-section avatar>
           <q-avatar rounded>
