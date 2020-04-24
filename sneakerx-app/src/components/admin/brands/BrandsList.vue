@@ -22,7 +22,7 @@
         </q-item-section>
 
         <q-item-section avatar>
-          <q-icon color="negative" name="delete" />
+          <q-icon color="negative" name="delete" @click="deleteBrand(brand.id)"/>
         </q-item-section>
       </q-item>
     </q-list>
@@ -30,6 +30,8 @@
 </template>
 
 <script>
+    import { QSpinnerGears } from 'quasar'
+
     export default {
         name: "BrandsList",
         data () {
@@ -55,6 +57,35 @@
                          console.log(error)
                          this.loading = false
                      })
+             },
+             deleteBrand (id) {
+                 this.$q.loading.show({
+                     message: `Deleting Brand...`
+                 })
+                 this.$axios.delete(`/api/admin/brands/${id}`)
+                     .then(response => {
+                         console.log(response)
+                         this.brands.splice(this.brands.findIndex(brand => brand.id === id), 1)
+                         this.hideLoading('Brand Deleted')
+                     })
+                     .catch(error => {
+                         console.log(error)
+                         this.hideLoading('An error occurred : ' + error.message)
+                     })
+             },
+             hideLoading (message) {
+                 this.$q.loading.show({
+                     spinner: QSpinnerGears,
+                     spinnerColor: 'red',
+                     messageColor: 'black',
+                     backgroundColor: 'yellow',
+                     message: message
+                 })
+
+                 this.timer = setTimeout(() => {
+                     this.$q.loading.hide()
+                     this.timer = void 0
+                 }, 2000)
              }
          }
     }
