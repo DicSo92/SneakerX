@@ -32,20 +32,20 @@ class BrandController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'=>'required|unique:brands|max:80',
-            'description'=>'required|unique:brands|max:255',
-            'banner'=>'mimes:jpeg,bmp,jpg,png|between:1, 6000',
-            'image'=>'mimes:jpeg,bmp,jpg,png|between:1, 6000',
+            'name' => 'required|unique:brands|max:80',
+            'description' => 'required|unique:brands|max:255',
+            'banner' => 'mimes:jpeg,bmp,jpg,png|between:1, 6000',
+            'image' => 'mimes:jpeg,bmp,jpg,png|between:1, 6000',
         ]);
 
         $cloundary_upload_banner = null;
         if ($request->hasFile('banner')) {
-            Cloudder::upload($request->file('banner'), null, array("folder" => "SneakerX/Brands/") );
+            Cloudder::upload($request->file('banner'), null, array("folder" => "SneakerX/Brands/"));
             $cloundary_upload_banner = Cloudder::getResult();
         }
         $cloundary_upload_image = null;
         if ($request->hasFile('image')) {
-            Cloudder::upload($request->file('image'), null, array("folder" => "SneakerX/Brands/") );
+            Cloudder::upload($request->file('image'), null, array("folder" => "SneakerX/Brands/"));
             $cloundary_upload_image = Cloudder::getResult();
         }
 
@@ -69,7 +69,8 @@ class BrandController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Brand  $brand
+     * @param \App\Brand $brand
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Brand $brand)
@@ -80,8 +81,9 @@ class BrandController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Brand  $brand
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Brand               $brand
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Brand $brand)
@@ -92,7 +94,8 @@ class BrandController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Brand  $brand
+     * @param \App\Brand $brand
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -100,16 +103,25 @@ class BrandController extends Controller
         $brand = Brand::findOrFail($id);
 
         $imagesPath = "SneakerX/Brands/";
-        $bannerId = pathinfo($brand->banner)['filename'];
-        Cloudder::destroyImage($imagesPath . $bannerId);
-        Cloudder::delete($imagesPath . $bannerId);
+        $imagesArrayId = array();
 
-        $imageId = pathinfo($brand->image)['filename'];
-        Cloudder::destroyImage($imagesPath . $imageId);
-        Cloudder::delete($imagesPath . $imageId);
+        if (!is_null($brand->banner)) {
+            $bannerId = pathinfo($brand->banner)['filename'];
+            array_push($imagesArrayId, $imagesPath . $bannerId);
+        }
+        if (!is_null($brand->image)) {
+            $imageId = pathinfo($brand->image)['filename'];
+            array_push($imagesArrayId, $imagesPath . $imageId);
+        }
 
         $brand->delete();
 
-        return response()->json($brand);
+        if (!empty($imagesArrayId)) {
+            $delete = Cloudder::destroyImages($imagesArrayId);
+
+            return response()->json(array('images' => $delete, 'brand' => $brand));
+        } else {
+            return response()->json($brand);
+        }
     }
 }

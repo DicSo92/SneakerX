@@ -17,8 +17,8 @@ class CreateBrandsTable extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('description');
-            $table->string('banner')->default('no-banner.png');
-            $table->string('image')->default('no-image.png');
+            $table->string('banner')->nullable()->default(null);
+            $table->string('image')->nullable()->default(null);
             $table->timestamps();
         });
     }
