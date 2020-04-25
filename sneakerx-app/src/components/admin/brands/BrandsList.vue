@@ -1,9 +1,13 @@
 <template>
   <div class="brandList column flex-center">
-    <q-spinner color="primary"
-               size="3em"
-               v-if="loading"
-    />
+    <div class="full-width flex justify-between q-mb-sm">
+      <div class="spinnerContainer">
+        <q-spinner color="primary"
+                   size="3em"
+                   v-if="loading"/>
+      </div>
+      <q-btn label="New Brand" @click="addBrand" color="primary"/>
+    </div>
     <q-list bordered>
       <q-item clickable v-ripple v-for="brand in brands">
         <q-item-section avatar>
@@ -92,11 +96,16 @@
                      this.$q.loading.hide()
                      this.timer = void 0
                  }, 2000)
+             },
+             addBrand () {
+                 bus.$emit('showAddModalBrand', true)
              }
          }
     }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+    .spinnerContainer {
+        min-width: 10px;
+    }
 </style>
