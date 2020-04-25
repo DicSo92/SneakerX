@@ -33,18 +33,33 @@ class BrandController extends Controller
         $request->validate([
             'name'=>'required|unique:brands|max:80',
             'description'=>'required|unique:brands|max:255',
-            'banner'=>'required|mimes:jpeg,bmp,jpg,png|between:1, 6000',
+            'banner'=>'mimes:jpeg,bmp,jpg,png|between:1, 6000',
+            'image'=>'mimes:jpeg,bmp,jpg,png|between:1, 6000',
         ]);
 
-        Cloudder::upload($request->file('banner'), null, array("folder" => "SneakerX/Brands/") );
-        $cloundary_upload_banner = Cloudder::getResult();
+        $cloundary_upload_banner = null;
+        if ($request->hasFile('banner')) {
+            Cloudder::upload($request->file('banner'), null, array("folder" => "SneakerX/Brands/") );
+            $cloundary_upload_banner = Cloudder::getResult();
+        }
+        $cloundary_upload_image = null;
+        if ($request->hasFile('image')) {
+            Cloudder::upload($request->file('image'), null, array("folder" => "SneakerX/Brands/") );
+            $cloundary_upload_image = Cloudder::getResult();
+        }
 
-        $brand = new Brand([
-            'name' => $request->get('name'),
-            'description' => $request->get('description'),
-            'banner' => $cloundary_upload_banner['url'],
-//            'image' => $request->get('image'),
-        ]);
+        $brand = new Brand();
+
+        $brand->name = $request->get('name');
+        $brand->description = $request->get('description');
+
+        if ($cloundary_upload_banner) {
+            $brand->banner = $cloundary_upload_banner['url'];
+        }
+        if ($cloundary_upload_image) {
+            $brand->image = $cloundary_upload_image['url'];
+        }
+
         $brand->save();
 
         return response()->json($brand);
