@@ -86,13 +86,13 @@
         },
         methods: {
             addBrand() {
-                const config = { headers: { 'content-type': 'multipart/form-data' } }
+                const config = { headers: {'content-type': 'multipart/form-data'} }
 
                 let formData = new FormData()
                 formData.append('name', this.name)
                 formData.append('description', this.description)
-                if (this.banner) formData.append('banner', this.banner)
-                if (this.image) formData.append('image', this.image)
+                if (this.bannerFile) formData.append('banner', this.bannerFile)
+                if (this.imageFile) formData.append('image', this.imageFile)
 
                 this.$axios.post('/api/admin/brands', formData, config)
                     .then(response => {
