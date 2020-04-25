@@ -57,7 +57,12 @@
 
 
           <div>
-            <q-btn label="Submit" type="submit" color="primary"/>
+            <q-btn :loading="loading" color="primary" label="Submit" type="submit" icon-right="send">
+              <template v-slot:loading>
+                <q-spinner-hourglass class="on-left" />
+                Loading...
+              </template>
+            </q-btn>
             <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
           </div>
         </q-form>
@@ -78,6 +83,8 @@
                 description: '',
                 bannerFile: null,
                 imageFile: null,
+
+                loading: false
             }
         },
         mounted() {
@@ -87,6 +94,7 @@
         },
         methods: {
             addBrand() {
+                this.loading = true
                 const config = { headers: {'content-type': 'multipart/form-data'} }
 
                 let formData = new FormData()
@@ -104,9 +112,11 @@
                         this.bannerFile = null
                         this.imageFile = null
                         bus.$emit('addBrandSuccess')
+                        this.loading = false
                     })
                     .catch(error => {
                         console.log(error);
+                        this.loading = false
                     })
             },
             toggleImagesData (files, added, qFor) {

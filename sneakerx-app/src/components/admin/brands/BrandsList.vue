@@ -14,9 +14,7 @@
       <q-item clickable v-ripple v-for="brand in brands">
         <q-item-section avatar>
           <q-avatar rounded>
-            <img v-if="brand.banner"
-                 :src="brand.banner">
-            <q-icon name="add_to_photos" v-else />
+            <img :src="brand.banner ? brand.banner : 'statics/no-image.jpg'">
           </q-avatar>
         </q-item-section>
 
