@@ -22,32 +22,35 @@
             autogrow
           />
 
-          <!-- Due to browser security policy, we can only read the value, but not write to it, so we only have an @input listener -->
-          <q-input
-            @input="val => { bannerFile = val[0] }"
-            filled
-            type="file"
-            hint="Native file, .png, .jpg, .gif, 200x300"
-          />
-          <q-input
-            @input="val => { imageFile = val[0] }"
-            filled
-            type="file"
-            hint="Native file, .png, .jpg, .gif, 200x300"
-          />
+<!--          &lt;!&ndash; Due to browser security policy, we can only read the value, but not write to it, so we only have an @input listener &ndash;&gt;-->
+<!--          <q-input-->
+<!--            @input="val => { bannerFile = val[0] }"-->
+<!--            filled-->
+<!--            type="file"-->
+<!--            hint="Native file, .png, .jpg, .gif, 200x300"-->
+<!--          />-->
+<!--          <q-input-->
+<!--            @input="val => { imageFile = val[0] }"-->
+<!--            filled-->
+<!--            type="file"-->
+<!--            hint="Native file, .png, .jpg, .gif, 200x300"-->
+<!--          />-->
 
           <div class="flex justify-between">
             <q-uploader
-              url="http://localhost:8080/upload"
-              label="Restricted to images"
-              multiple
+              label="Banner (Restricted to images)"
               accept=".jpg, image/*"
+              hide-upload-btn
+              @added="toggleImagesData($event, true, 'banner')"
+              @removed="toggleImagesData($event, false, 'banner')"
+
             />
             <q-uploader
-              url="http://localhost:8080/upload"
-              label="Restricted to images"
-              multiple
+              label="Image (Restricted to images)"
               accept=".jpg, image/*"
+              hide-upload-btn
+              @added="toggleImagesData($event, true, 'image')"
+              @removed="toggleImagesData($event, false, 'image')"
             />
           </div>
 
@@ -83,10 +86,15 @@
         },
         methods: {
             addBrand() {
-                this.$axios.post('/api/admin/brands',{
-                    'name': this.name,
-                    'description': this.description,
-                })
+                const config = { headers: { 'content-type': 'multipart/form-data' } }
+
+                let formData = new FormData()
+                formData.append('name', this.name)
+                formData.append('description', this.description)
+                if (this.banner) formData.append('banner', this.banner)
+                if (this.image) formData.append('image', this.image)
+
+                this.$axios.post('/api/admin/brands', formData, config)
                     .then(response => {
                         console.log(response);
                         this.showEdit = false
@@ -99,6 +107,13 @@
                     .catch(error => {
                         console.log(error);
                     })
+            },
+            toggleImagesData (files, added, qFor) {
+                if (qFor === 'banner') {
+                    this.bannerFile = added ? files[0] : null
+                } else if (qFor === 'image') {
+                    this.imageFile = added ? files[0] : null
+                }
             }
         },
     }
