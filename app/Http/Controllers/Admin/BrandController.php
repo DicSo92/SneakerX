@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Brand;
 use Illuminate\Http\Request;
 use JD\Cloudder\Facades\Cloudder;
+use function GuzzleHttp\Psr7\copy_to_string;
 
 class BrandController extends Controller
 {
@@ -97,6 +98,16 @@ class BrandController extends Controller
     public function destroy($id)
     {
         $brand = Brand::findOrFail($id);
+
+        $imagesPath = "SneakerX/Brands/";
+        $bannerId = pathinfo($brand->banner)['filename'];
+        Cloudder::destroyImage($imagesPath . $bannerId);
+        Cloudder::delete($imagesPath . $bannerId);
+
+        $imageId = pathinfo($brand->image)['filename'];
+        Cloudder::destroyImage($imagesPath . $imageId);
+        Cloudder::delete($imagesPath . $imageId);
+
         $brand->delete();
 
         return response()->json($brand);
