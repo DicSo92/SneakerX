@@ -18,6 +18,7 @@
 
           <q-input
             v-model="description"
+            label="Brand Description *"
             filled
             autogrow
           />
