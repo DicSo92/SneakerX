@@ -27,7 +27,20 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'=>'required|unique:brands|max:80',
+            'description'=>'required|unique:brands|max:255',
+        ]);
+
+        $brand = new Brand([
+            'name' => $request->get('name'),
+            'description' => $request->get('description'),
+//            'banner' => $request->get('banner'),
+//            'image' => $request->get('image'),
+        ]);
+        $brand->save();
+
+        return response()->json($brand);
     }
 
     /**

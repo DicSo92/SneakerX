@@ -30,6 +30,7 @@
 </template>
 
 <script>
+    import bus from '../../../utils/bus.js'
     import { QSpinnerGears } from 'quasar'
 
     export default {
@@ -42,6 +43,11 @@
         },
         created () {
             this.getBrands()
+        },
+        mounted() {
+            bus.$on('addBrandSuccess', () => {
+                this.getBrands()
+            })
         },
          methods: {
              getBrands () {

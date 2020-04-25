@@ -3,7 +3,7 @@
     <q-card style="width: 700px; max-width: 80vw;">
       <q-card-section>
         <q-form
-          @submit=""
+          @submit="addBrand"
           @reset=""
           class="q-gutter-md"
         >
@@ -71,16 +71,36 @@
             return {
                 showEdit: false,
                 name: '',
+                description: '',
                 bannerFile: null,
                 imageFile: null,
-                description: ''
             }
         },
         mounted() {
             bus.$on('showAddModalBrand', show => {
                 this.showEdit = !!show
             })
-        }
+        },
+        methods: {
+            addBrand() {
+                this.$axios.post('/api/admin/brands',{
+                    'name': this.name,
+                    'description': this.description,
+                })
+                    .then(response => {
+                        console.log(response);
+                        this.showEdit = false
+                        this.name = ''
+                        this.description = ''
+                        this.bannerFile = null
+                        this.imageFile = null
+                        bus.$emit('addBrandSuccess')
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
+            }
+        },
     }
 </script>
 
