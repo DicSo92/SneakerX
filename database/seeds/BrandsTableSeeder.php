@@ -15,14 +15,14 @@ class BrandsTableSeeder extends Seeder
         Brand::create([
             'name' => 'Adidas',
             'description' => 'This is the Adidas brand',
-            'banner' => 'adidas_banner.png',
-            'image' => 'adidas_image.png',
+            'banner' => null,
+            'image' => null,
         ]);
         Brand::create([
             'name' => 'Puma',
             'description' => 'This is the Puma brand',
-            'banner' => 'puma_banner.png',
-            'image' => 'puma_image.png',
+            'banner' => null,
+            'image' => null,
         ]);
     }
 }

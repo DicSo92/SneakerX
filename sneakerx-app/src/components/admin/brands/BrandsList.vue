@@ -14,17 +14,19 @@
       <q-item clickable v-ripple v-for="brand in brands">
         <q-item-section avatar>
           <q-avatar rounded>
-            <img src="https://cdn.quasar.dev/img/mountains.jpg">
+            <img v-if="brand.banner"
+                 :src="brand.banner">
+            <q-icon name="add_to_photos" v-else />
           </q-avatar>
         </q-item-section>
 
         <q-item-section>
           <q-item-label>{{brand.name}}</q-item-label>
-          <q-item-label caption lines="2">{{brand.description}}</q-item-label>
+          <q-item-label caption lines="2" :class="!brand.description ? 'text-red-5' : ''">{{brand.description ? brand.description : 'No description'}}</q-item-label>
         </q-item-section>
 
         <q-item-section top thumbnail class="q-ml-none">
-          <img src="https://cdn.quasar.dev/img/mountains.jpg">
+          <img :src="brand.image ? brand.image : 'statics/no-image.jpg'">
         </q-item-section>
 
         <q-item-section avatar>
