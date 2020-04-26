@@ -26,7 +26,7 @@
             <div class="col">
               <p>Current Banner : <span v-if="!currentBanner" class="text-red-8">Nothing</span></p>
               <div class="flex flex-center relative-position" v-if="currentBanner">
-                <q-btn round :loading="loadingBanner" color="red-8" size='md' icon="delete" class="deleteBtn" >
+                <q-btn round :loading="loadingBanner" color="red-8" size='md' icon="delete" class="deleteBtn" @click="removeImage('banner')">
                   <template v-slot:loading>
                     <q-spinner-facebook />
                   </template>
@@ -37,7 +37,7 @@
             <div class="col">
               <p>Current Image : <span v-if="!currentImage" class="text-red-8">Nothing</span></p>
               <div class="flex flex-center relative-position" v-if="currentImage">
-                <q-btn round :loading="loadingImage" color="red-8" size='md' icon="delete" class="deleteBtn" >
+                <q-btn round :loading="loadingImage" color="red-8" size='md' icon="delete" class="deleteBtn" @click="removeImage('image')">
                   <template v-slot:loading>
                     <q-spinner-facebook />
                   </template>
@@ -137,6 +137,15 @@
                     .catch(error => {
                         console.log(error);
                         this.loading = false
+                    })
+            },
+            removeImage(type) {
+                this.$axios.delete(`/api/admin/brands/${this.brandToEdit.id}?type=${type}`)
+                    .then(response => {
+                        console.log(response);
+                    })
+                    .catch(error => {
+                        console.log(error);
                     })
             },
             toggleImagesData(files, added, qFor) {
