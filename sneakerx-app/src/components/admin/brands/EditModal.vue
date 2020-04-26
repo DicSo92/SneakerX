@@ -25,14 +25,16 @@
           <div class="row">
             <div class="col">
               <p>Current Banner : <span v-if="!currentBanner" class="text-red-8">Nothing</span></p>
-              <div class="flex flex-center">
-                <q-img v-if="currentBanner" :src="currentBanner" alt="" class="currentImages"/>
+              <div class="flex flex-center relative-position" v-if="currentBanner">
+                <q-btn round color="red-8" size='sm' icon="delete" class="deleteBtn" />
+                <q-img :src="currentBanner" alt="" class="currentImages"/>
               </div>
             </div>
             <div class="col">
               <p>Current Image : <span v-if="!currentImage" class="text-red-8">Nothing</span></p>
-              <div class="flex flex-center">
-                <q-img v-if="currentImage" :src="currentImage" alt="" class="currentImages"/>
+              <div class="flex flex-center relative-position" v-if="currentImage">
+                <q-btn round color="red-8" size='sm' icon="delete" class="deleteBtn" />
+                <q-img :src="currentImage" alt="" class="currentImages"/>
               </div>
             </div>
           </div>
@@ -96,6 +98,8 @@
                 this.brandToEdit = brand
                 this.name = brand.name
                 this.description = brand.description
+                this.bannerFile = null
+                this.imageFile = null
                 this.currentBanner = brand.banner
                 this.currentImage = brand.image
                 this.showEdit = !!show
@@ -139,5 +143,11 @@
 <style scoped lang="scss">
   .currentImages {
     width: 75%;
+  }
+  .deleteBtn {
+    position: absolute;
+    z-index: 10;
+    top: -3%;
+    right: 8%;
   }
 </style>
