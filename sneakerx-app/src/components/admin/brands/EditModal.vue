@@ -26,14 +26,22 @@
             <div class="col">
               <p>Current Banner : <span v-if="!currentBanner" class="text-red-8">Nothing</span></p>
               <div class="flex flex-center relative-position" v-if="currentBanner">
-                <q-btn round color="red-8" size='sm' icon="delete" class="deleteBtn" />
+                <q-btn round :loading="loadingBanner" color="red-8" size='md' icon="delete" class="deleteBtn" >
+                  <template v-slot:loading>
+                    <q-spinner-facebook />
+                  </template>
+                </q-btn>
                 <q-img :src="currentBanner" alt="" class="currentImages"/>
               </div>
             </div>
             <div class="col">
               <p>Current Image : <span v-if="!currentImage" class="text-red-8">Nothing</span></p>
               <div class="flex flex-center relative-position" v-if="currentImage">
-                <q-btn round color="red-8" size='sm' icon="delete" class="deleteBtn" />
+                <q-btn round :loading="loadingImage" color="red-8" size='md' icon="delete" class="deleteBtn" >
+                  <template v-slot:loading>
+                    <q-spinner-facebook />
+                  </template>
+                </q-btn>
                 <q-img :src="currentImage" alt="" class="currentImages"/>
               </div>
             </div>
@@ -90,6 +98,8 @@
                 currentBanner: null,
                 currentImage: null,
 
+                loadingBanner: false,
+                loadingImage: false,
                 loading: false
             }
         },
