@@ -178,7 +178,7 @@
   .deleteBtn {
     position: absolute;
     z-index: 10;
-    top: -3%;
+    top: -8%;
     right: 8%;
   }
 </style>
