@@ -15,12 +15,7 @@
             :rules="[ val => val && val.length > 0 || 'Please type something']"
           />
 
-          <q-input
-            v-model="description"
-            label="Brand Description *"
-            filled
-            autogrow
-          />
+          <q-editor v-model="description" min-height="5rem" />
 
           <div class="flex justify-between">
             <q-uploader
