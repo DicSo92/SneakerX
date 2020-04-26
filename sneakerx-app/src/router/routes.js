@@ -44,9 +44,9 @@ const routes = [
         component: () => import('pages/dashboard/Brands.vue'),
       },
       {
-        path: 'articles',
-        name: 'articles_admin',
-        component: () => import('pages/dashboard/Articles.vue'),
+        path: 'products',
+        name: 'products_admin',
+        component: () => import('pages/dashboard/Products.vue'),
       },
     ],
   }

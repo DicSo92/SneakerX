@@ -59,11 +59,11 @@
                     icon: 'home',
                     link: 'home'
                 }
-                const articles = {
-                    title: 'Articles',
-                    caption: 'list.articles',
+                const products = {
+                    title: 'Products',
+                    caption: 'list.products',
                     icon: 'widgets',
-                    link: 'articles_admin'
+                    link: 'products_admin'
                 }
                 const users = {
                     title: 'Users',
@@ -83,7 +83,7 @@
                     icon: 'local_offer',
                     link: 'brands_admin'
                 }
-                return [home, articles, users, categories, brands]
+                return [home, products, users, categories, brands]
             }
         },
         methods: {
