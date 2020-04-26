@@ -78,6 +78,8 @@
         data() {
             return {
                 showEdit: false,
+                brandToEdit: null,
+
                 name: '',
                 description: '',
                 bannerFile: null,
@@ -91,6 +93,7 @@
         },
         mounted() {
             bus.$on('showEditModalBrand', (show, brand) => {
+                this.brandToEdit = brand
                 this.name = brand.name
                 this.description = brand.description
                 this.currentBanner = brand.banner

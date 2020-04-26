@@ -86,9 +86,27 @@ class BrandController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Brand $brand)
+    public function update(Request $request, $id)
     {
-        //
+        $brand = Brand::findOrFail($id);
+
+        $request->validate([
+            'name' => 'unique:brands|min:1|max:80',
+            'description' => 'max:255',
+            'banner' => 'mimes:jpeg,bmp,jpg,png|between:1, 6000',
+            'image' => 'mimes:jpeg,bmp,jpg,png|between:1, 6000',
+        ]);
+
+        if ($request->get('description')) {
+            $brand->name = $request->get('name');
+        }
+        if ($request->get('description')) {
+            $brand->description = $request->get('description');
+        }
+
+        $brand->save();
+
+        return response()->json($brand);
     }
 
     /**
