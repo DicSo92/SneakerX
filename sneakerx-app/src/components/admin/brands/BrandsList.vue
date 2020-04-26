@@ -14,7 +14,7 @@
       <q-item clickable v-ripple v-for="brand in brands">
         <q-item-section avatar>
           <q-avatar rounded>
-            <img :src="brand.banner ? brand.banner : 'statics/no-image.jpg'">
+            <img :src="brand.image ? brand.image : 'statics/no-image.jpg'">
           </q-avatar>
         </q-item-section>
 
@@ -24,7 +24,7 @@
         </q-item-section>
 
         <q-item-section top thumbnail class="q-ml-none">
-          <img :src="brand.image ? brand.image : 'statics/no-image.jpg'">
+          <img :src="brand.banner ? brand.banner : 'statics/no-image.jpg'">
         </q-item-section>
 
         <q-item-section avatar>
