@@ -121,8 +121,25 @@ class BrandController extends Controller
             Cloudder::upload($request->file('banner'), null, array("folder" => "SneakerX/Brands/"));
             $cloundary_upload_banner = Cloudder::getResult();
         }
+        $cloundary_upload_image = null;
+        if ($request->hasFile('image')) {
+            if (!is_null($brand->image)) {
+                $imageId = pathinfo($brand->image)['filename'];
+                $imagePathId = $imagesPath . $imageId;
+                Cloudder::destroyImage($imagePathId);
+                Cloudder::delete($imagePathId);
+            }
+
+            Cloudder::upload($request->file('image'), null, array("folder" => "SneakerX/Brands/"));
+            $cloundary_upload_image = Cloudder::getResult();
+        }
+
+
         if ($cloundary_upload_banner) {
             $brand->banner = $cloundary_upload_banner['url'];
+        }
+        if ($cloundary_upload_image) {
+            $brand->image = $cloundary_upload_image['url'];
         }
 
         $brand->save();
