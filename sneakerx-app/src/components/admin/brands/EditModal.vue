@@ -132,7 +132,7 @@
                         console.log(response);
                         this.loading = false
                         this.showEdit = false
-                        bus.$emit('addBrandSuccess')
+                        bus.$emit('refreshBrands')
                     })
                     .catch(error => {
                         console.log(error);
@@ -140,12 +140,24 @@
                     })
             },
             removeImage(type) {
-                this.$axios.delete(`/api/admin/brands/${this.brandToEdit.id}?type=${type}`)
+                if (type === 'banner') this.loadingBanner = true
+                if (type === 'image') this.loadingImage = true
+                this.$axios.delete(`/api/admin/brands/imageDelete/${this.brandToEdit.id}?type=${type}`)
                     .then(response => {
                         console.log(response);
+                        if (type === 'banner') {
+                            this.loadingBanner = false
+                            this.currentBanner = null
+                        } else if (type === 'image') {
+                            this.loadingImage = false
+                            this.currentImage = null
+                        }
+                        bus.$emit('refreshBrands')
                     })
                     .catch(error => {
                         console.log(error);
+                        if (type === 'banner') this.loadingBanner = false
+                        if (type === 'image') this.loadingImage = false
                     })
             },
             toggleImagesData(files, added, qFor) {

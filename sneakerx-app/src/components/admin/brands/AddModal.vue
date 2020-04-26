@@ -97,7 +97,7 @@
                         this.description = ''
                         this.bannerFile = null
                         this.imageFile = null
-                        bus.$emit('addBrandSuccess')
+                        bus.$emit('refreshBrands')
                         this.loading = false
                     })
                     .catch(error => {

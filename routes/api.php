@@ -50,4 +50,5 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('auth:san
     Route::apiResource('brands', 'BrandController');
 
     Route::post('brands/{id}', 'BrandController@updateBrand')->name('brands.update');
+    Route::delete('brands/imageDelete/{id}', 'BrandController@removeImage')->name('brands.imageDelete');
 });

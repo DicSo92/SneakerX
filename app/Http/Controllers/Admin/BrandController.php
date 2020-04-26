@@ -180,4 +180,30 @@ class BrandController extends Controller
             return response()->json($brand);
         }
     }
+
+    public function removeImage(Request $request, $id)
+    {
+        $brand = Brand::findOrFail($id);
+
+        $imagesPath = "SneakerX/Brands/";
+
+        if (!is_null($brand->banner) AND $request->query('type') === 'banner') {
+            $bannerId = pathinfo($brand->banner)['filename'];
+            $bannerPathId = $imagesPath . $bannerId;
+            Cloudder::destroyImage($bannerPathId);
+            Cloudder::delete($bannerPathId);
+            $brand->banner = null;
+        }
+        if (!is_null($brand->image) AND $request->query('type') === 'image') {
+            $imageId = pathinfo($brand->image)['filename'];
+            $imagePathId = $imagesPath . $imageId;
+            Cloudder::destroyImage($imagePathId);
+            Cloudder::delete($imagePathId);
+            $brand->image = null;
+        }
+
+        $brand->save();
+
+        return response()->json($brand);
+    }
 }

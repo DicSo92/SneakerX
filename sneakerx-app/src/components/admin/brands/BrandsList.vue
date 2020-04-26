@@ -55,7 +55,7 @@
             this.getBrands()
         },
         mounted() {
-            bus.$on('addBrandSuccess', () => {
+            bus.$on('refreshBrands', () => {
                 this.getBrands()
             })
         },
