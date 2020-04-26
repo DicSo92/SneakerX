@@ -28,7 +28,10 @@
         </q-item-section>
 
         <q-item-section avatar>
-          <q-icon color="negative" name="delete" @click="deleteBrand(brand.id)"/>
+          <q-btn outline round color="indigo-12" size='sm' icon="edit" @click="editBrand(brand)" />
+        </q-item-section>
+        <q-item-section avatar>
+          <q-btn outline round color="red-8" size='sm' icon="delete" @click="deleteBrand(brand.id)" />
         </q-item-section>
       </q-item>
     </q-list>
@@ -86,6 +89,12 @@
                         this.hideLoading('An error occurred : ' + error.message)
                     })
             },
+            addBrand() {
+                bus.$emit('showAddModalBrand', true)
+            },
+            editBrand(brand) {
+                bus.$emit('showEditModalBrand', true, brand)
+            },
             hideLoading(message) {
                 this.$q.loading.show({
                     spinner: QSpinnerGears,
@@ -100,9 +109,6 @@
                     this.timer = void 0
                 }, 2000)
             },
-            addBrand() {
-                bus.$emit('showAddModalBrand', true)
-            }
         }
     }
 </script>
