@@ -3,7 +3,7 @@
     <q-card style="width: 700px; max-width: 80vw;">
       <q-card-section>
         <q-form
-          @submit="addBrand"
+          @submit="editBrand"
           class="q-gutter-md"
         >
           <q-input
@@ -102,8 +102,28 @@
             })
         },
         methods: {
-            addBrand() {
+            editBrand() {
+                this.loading = true
+                const config = { headers: {'content-type': 'multipart/form-data'} }
 
+                let formData = new FormData()
+                if (this.name !== this.brandToEdit.name) formData.append('name', this.name)
+                if (this.description !== this.brandToEdit.description) formData.append('description', this.description)
+
+                if (this.bannerFile) formData.append('banner', this.bannerFile)
+                if (this.imageFile) formData.append('image', this.imageFile)
+
+                this.$axios.post(`/api/admin/brands/${this.brandToEdit.id}`, formData, config )
+                    .then(response => {
+                        console.log(response);
+                        this.loading = false
+                        this.showEdit = false
+                        bus.$emit('addBrandSuccess')
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        this.loading = false
+                    })
             },
             toggleImagesData(files, added, qFor) {
                 if (qFor === 'banner') {

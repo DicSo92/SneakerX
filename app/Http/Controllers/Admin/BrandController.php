@@ -88,6 +88,10 @@ class BrandController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+    }
+    public function updateBrand(Request $request, $id)
+    {
         $brand = Brand::findOrFail($id);
 
         $request->validate([
@@ -97,7 +101,7 @@ class BrandController extends Controller
             'image' => 'mimes:jpeg,bmp,jpg,png|between:1, 6000',
         ]);
 
-        if ($request->get('description')) {
+        if ($request->get('name')) {
             $brand->name = $request->get('name');
         }
         if ($request->get('description')) {
