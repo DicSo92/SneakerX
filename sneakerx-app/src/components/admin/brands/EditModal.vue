@@ -4,7 +4,6 @@
       <q-card-section>
         <q-form
           @submit="addBrand"
-          @reset=""
           class="q-gutter-md"
         >
           <q-input
@@ -63,7 +62,7 @@
                 Loading...
               </template>
             </q-btn>
-            <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm"/>
+            <q-btn label="Cancel" @click="showEdit = false" color="primary" flat class="q-ml-sm"/>
           </div>
         </q-form>
       </q-card-section>

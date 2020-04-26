@@ -4,7 +4,6 @@
       <q-card-section>
         <q-form
           @submit="addBrand"
-          @reset=""
           class="q-gutter-md"
         >
           <q-input
@@ -22,20 +21,6 @@
             filled
             autogrow
           />
-
-<!--          &lt;!&ndash; Due to browser security policy, we can only read the value, but not write to it, so we only have an @input listener &ndash;&gt;-->
-<!--          <q-input-->
-<!--            @input="val => { bannerFile = val[0] }"-->
-<!--            filled-->
-<!--            type="file"-->
-<!--            hint="Native file, .png, .jpg, .gif, 200x300"-->
-<!--          />-->
-<!--          <q-input-->
-<!--            @input="val => { imageFile = val[0] }"-->
-<!--            filled-->
-<!--            type="file"-->
-<!--            hint="Native file, .png, .jpg, .gif, 200x300"-->
-<!--          />-->
 
           <div class="flex justify-between">
             <q-uploader
@@ -63,7 +48,8 @@
                 Loading...
               </template>
             </q-btn>
-            <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
+            <q-btn label="Cancel" @click="showEdit = false" color="primary" flat class="q-ml-sm"/>
+
           </div>
         </q-form>
       </q-card-section>
