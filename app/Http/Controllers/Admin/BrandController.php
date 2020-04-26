@@ -86,9 +86,65 @@ class BrandController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Brand $brand)
+    public function update(Request $request, $id)
     {
-        //
+
+    }
+    public function updateBrand(Request $request, $id)
+    {
+        $brand = Brand::findOrFail($id);
+
+        $request->validate([
+            'name' => 'unique:brands|min:1|max:80',
+            'description' => 'max:255',
+            'banner' => 'mimes:jpeg,bmp,jpg,png|between:1, 6000',
+            'image' => 'mimes:jpeg,bmp,jpg,png|between:1, 6000',
+        ]);
+
+        if ($request->get('name')) {
+            $brand->name = $request->get('name');
+        }
+        if ($request->get('description')) {
+            $brand->description = $request->get('description');
+        }
+
+        $imagesPath = "SneakerX/Brands/";
+        $cloundary_upload_banner = null;
+        if ($request->hasFile('banner')) {
+            if (!is_null($brand->banner)) {
+                $bannerId = pathinfo($brand->banner)['filename'];
+                $bannerPathId = $imagesPath . $bannerId;
+                Cloudder::destroyImage($bannerPathId);
+                Cloudder::delete($bannerPathId);
+            }
+
+            Cloudder::upload($request->file('banner'), null, array("folder" => "SneakerX/Brands/"));
+            $cloundary_upload_banner = Cloudder::getResult();
+        }
+        $cloundary_upload_image = null;
+        if ($request->hasFile('image')) {
+            if (!is_null($brand->image)) {
+                $imageId = pathinfo($brand->image)['filename'];
+                $imagePathId = $imagesPath . $imageId;
+                Cloudder::destroyImage($imagePathId);
+                Cloudder::delete($imagePathId);
+            }
+
+            Cloudder::upload($request->file('image'), null, array("folder" => "SneakerX/Brands/"));
+            $cloundary_upload_image = Cloudder::getResult();
+        }
+
+
+        if ($cloundary_upload_banner) {
+            $brand->banner = $cloundary_upload_banner['url'];
+        }
+        if ($cloundary_upload_image) {
+            $brand->image = $cloundary_upload_image['url'];
+        }
+
+        $brand->save();
+
+        return response()->json($brand);
     }
 
     /**
@@ -123,5 +179,31 @@ class BrandController extends Controller
         } else {
             return response()->json($brand);
         }
+    }
+
+    public function removeImage(Request $request, $id)
+    {
+        $brand = Brand::findOrFail($id);
+
+        $imagesPath = "SneakerX/Brands/";
+
+        if (!is_null($brand->banner) AND $request->query('type') === 'banner') {
+            $bannerId = pathinfo($brand->banner)['filename'];
+            $bannerPathId = $imagesPath . $bannerId;
+            Cloudder::destroyImage($bannerPathId);
+            Cloudder::delete($bannerPathId);
+            $brand->banner = null;
+        }
+        if (!is_null($brand->image) AND $request->query('type') === 'image') {
+            $imageId = pathinfo($brand->image)['filename'];
+            $imagePathId = $imagesPath . $imageId;
+            Cloudder::destroyImage($imagePathId);
+            Cloudder::delete($imagePathId);
+            $brand->image = null;
+        }
+
+        $brand->save();
+
+        return response()->json($brand);
     }
 }
