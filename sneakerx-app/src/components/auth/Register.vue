@@ -67,6 +67,7 @@
 
 <script>
     import {logIn} from '../../utils/auth'
+    import bus from '../../utils/bus.js'
 
     export default {
         name: "Register",
@@ -95,8 +96,15 @@
                 }
             }
         },
-        beforeDestroy () {
+        created() {
+            bus.$on('hideRegisterLoading', (redirect) => {
+                this.loading = false
+                if (redirect) this.$router.push({name: 'home'})
+            })
+        },
+        beforeDestroy() {
             this.$q.loading.hide()
+            bus.$off('hideRegisterLoading')
         },
         methods: {
             onSubmit() {
@@ -111,19 +119,20 @@
                                 .then(res => {
                                     console.log(res)
                                     logIn()
-                                    this.$store.dispatch('auth/loadUser')
-                                    this.loading = false
-                                    this.$router.push({name: 'home'})
-                                }).catch(er => {
+                                    this.$store.dispatch('auth/loadUser', 'register')
+                                    // ^^^^^^ bus emit hideLoading ^^^^^^ //
+                                })
+                                .catch(er => {
                                     console.log(er)
+                                    this.loading = false
                                 })
                         }).catch(error => {
-                            console.log(error)
-                            if (422 === error.response.status) {
-                                this.errors = error.response.data.errors
-                            }
-                            this.loading = false
-                        })
+                        console.log(error)
+                        if (422 === error.response.status) {
+                            this.errors = error.response.data.errors
+                        }
+                        this.loading = false
+                    })
                 }
             },
 

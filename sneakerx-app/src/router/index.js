@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import routes from './routes'
 
 import axios from "axios";
+
 const axiosRoute = axios.create({
   baseURL: 'http://localhost:8000',
   withCredentials: true,
@@ -11,6 +12,7 @@ const axiosRoute = axios.create({
     'X-Requested-With': 'XMLHttpRequest'
   },
 })
+import {Loading, QSpinnerGears} from 'quasar'
 
 import {isLoggedIn} from '../utils/auth'
 
@@ -25,7 +27,7 @@ Vue.use(VueRouter)
  * with the Router instance.
  */
 
-export default function ({ store, ssrContext }) {
+export default function ({store, ssrContext}) {
   const Router = new VueRouter({
     scrollBehavior: () => ({x: 0, y: 0}),
     routes,
@@ -52,16 +54,34 @@ export default function ({ store, ssrContext }) {
         next()
       }
     } else if (to.matched.some(record => record.meta.requiresAdmin)) {
+      Loading.show({
+        message: 'Checking Permissions.<br/><span class="text-primary">Hang on...</span>'
+      })
       axiosRoute.post('/api/admin')
         .then(response => {
           console.log('success')
           console.log(response)
           next()
-        }).catch(error => {
+          Loading.hide()
+        })
+        .catch(error => {
           console.log('error')
           console.log(error)
-          next({name: 'home'})
-      })
+
+          Loading.show({
+            spinner: QSpinnerGears,
+            spinnerColor: 'red',
+            messageColor: 'black',
+            backgroundColor: 'orange',
+            message: 'Doesn\'t have Permissions<br/><span class="text-primary">Redirecting...</span>'
+          })
+          let timer
+          timer = setTimeout(() => {
+            Loading.hide()
+            timer = void 0
+            next({name: 'home'})
+          }, 2000)
+        })
     } else {
       next() // make sure to always call next()!
     }

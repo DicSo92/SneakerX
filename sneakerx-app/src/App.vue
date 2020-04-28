@@ -5,11 +5,22 @@
 </template>
 
 <script>
+    import bus from './utils/bus.js'
+
     export default {
         name: 'App',
         beforeCreate: function () {
             console.log('beforeCreate')
-            this.$store.dispatch('auth/loadUser')
-        }
+            this.$q.loading.show()
+
+            this.$store.dispatch('auth/loadUser', 'firstLoad')
+
+            bus.$on('hideFirstLoading', () => {
+                this.$q.loading.hide()
+            })
+        },
+        created (){
+
+        },
     }
 </script>

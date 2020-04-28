@@ -218,6 +218,7 @@
 
 <style scoped lang="scss">
   #userList {
-    max-width: 100%;
+    width: 750px;
+    max-width: 90vw;
   }
 </style>
