@@ -15,6 +15,12 @@ class Product extends Model
         return $this->belongsTo(Brand::class);
     }
 
+    public function imagesProduct()
+    {
+        return $this->hasOne(ImagesProduct::class);
+    }
+
+
     // JoinTables:
     // products_colors : [ product_id: ..., colors: [ { color: '#555', available: true}, {...}, ... ] ]
     // products_shoe_sizes : [ product_id: ..., sizes: [ { size: 42, available: true}, {...}, ... ] ]
