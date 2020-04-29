@@ -64,5 +64,39 @@
         "price": "23000",
         "brand_id": 2,
         "refLink": "https://eu.puma.com/fr/fr/pd/basket-porsche-hybrid-runner-ii-pour-homme/339956.html?dwvar_339956_color=01"
+    },
+
+
+    {
+        "name": "Club C 85",
+        "description": "CLUB C 85\nUNE CHAUSSURE OLD-SCHOOL INSPIRÉE PAR LE RAYONNEMENT MONDIAL DU SPORT\nLe monde est à toi ! Cette chaussure pour homme reprend les codes d'une tennis des années 80 en y ajoutant une touche internationale. Sa bande multicolore renforce son look audacieux. Fabriquée en cuir, la tige offre douceur et souplesse. La semelle intérieure est décorée d'un imprimé rétro composé de plusieurs drapeaux.",
+        "image": "Club_C_85_Blanc_EG6425_01_standard.jpg",
+        "price": "8995",
+        "brand_id": 3,
+        "refLink": "https://www.reebok.fr/club-c-85/EG6425.html"
+    },
+    {
+        "name": "Reebok Nano X",
+        "description": "REEBOK NANO X\nUNE CHAUSSURE AU MAINTIEN IMPECCABLE CONÇUE POUR L'ENTRAÎNEMENT\nPour fêter le dixième anniversaire de la Nano, Reebok sort une itération de cette chaussure iconique. Ce modèle pour homme est équipé d'une tige textile douce avec des zones plus stretch et renforcées aux endroits stratégiques. Son amorti aérien te fait gagner en rapidité et en légèreté.",
+        "image": "Reebok_Nano_X_Noir_EF7298_01_standard.jpg",
+        "price": "12995",
+        "brand_id": 3,
+        "refLink": "https://www.reebok.fr/reebok-nano-x/EF7298.html"
+    },
+    {
+        "name": "Reebok Royal Classic Jogger 3.0",
+        "description": "REEBOK ROYAL CLASSIC JOGGER 3.0\nUNE CHAUSSURE AUX TONS NEUTRES INSPIRÉE DU RUNNING\nDifficile de résister au style rétro-running. Ce modèle d'inspiration eighties affiche un design épuré et sportif. Ses bandes latérales contrastantes et son renfort talon rappellent notre héritage. Avec ses coloris neutres, elle joue à fond la carte minimaliste. Toute en superpositions, sa tige allie suède synthétique et matière textile.",
+        "image": "Reebok_Royal_Classic_Jogger_3.0_Bleu_EG9409_01_standard.jpg",
+        "price": "5495",
+        "brand_id": 3,
+        "refLink": "https://www.reebok.fr/reebok-royal-classic-jogger-3.0/EG9409.html"
+    },
+    {
+        "name": "Workout Plus",
+        "description": "WORKOUT PLUS\nRETRO SHOE WITH MODERN VIBES\nNous allons rappeler aux mordus de sneakers pourquoi notre Workout Plus est une véritable icône, en revenant à l'essentiel. La tige au look minimaliste met l'accent sur la célèbre coupe en forme de H et le confort exceptionnel",
+        "image": "Workout_Plus_Noir_CN2127_01_standard.jpg",
+        "price": "8995",
+        "brand_id": 3,
+        "refLink": "https://www.reebok.fr/workout-plus/CN2127.html"
     }
 ]
