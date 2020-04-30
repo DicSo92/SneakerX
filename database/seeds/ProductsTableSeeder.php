@@ -20,17 +20,26 @@ class ProductsTableSeeder extends Seeder
         $json = File::get("database/data/productsSeeder.json");
         $products = json_decode($json);
 
-        foreach ($products as $product ) {
-            $brandName = Brand::findOrFail($product->brand_id)->name;
+        foreach ($products as $product) {
+            $brandName = Brand::find($product->brand_id)->name;
+            $slug = Str::slug($product->name, '-');
 
-            Cloudder::upload(storage_path('seedImages/products/'.$brandName.'/'.$product->image), null, array('folder' => 'SneakerX/Products/'.$brandName));
-            $image = Cloudder::getResult();
+            Cloudder::upload(storage_path('seedImages/products/'.$brandName.'/'.$product->image), null, array('folder' => 'SneakerX/Products/'.$brandName.'/'.$slug));
+            $uploadImage = Cloudder::getResult();
+
+            $imagesTable = array();
+            foreach ($product->images as $image) {
+                Cloudder::upload(storage_path('seedImages/products/'.$brandName.'/'.$image), null, array('folder' => 'SneakerX/Products/'.$brandName.'/'.$slug));
+                $uploadImages = Cloudder::getResult();
+                array_push($imagesTable, $uploadImages['url']);
+            }
 
             Product::create([
                 'name' => $product->name,
-                'slug' => Str::slug($product->name, '-'),
+                'slug' => $slug,
                 'description' => $product->description,
-                'image' => $image['url'],
+                'image' => $uploadImage['url'],
+                'images' => $imagesTable,
                 'price' => $product->price,
                 'brand_id' => $product->brand_id,
             ]);

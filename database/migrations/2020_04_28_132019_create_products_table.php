@@ -19,6 +19,7 @@ class CreateProductsTable extends Migration
             $table->string('slug')->unique();
             $table->longText('description');
             $table->string('image')->nullable()->default(null);
+            $table->json('images')->nullable()->default(null);
             $table->bigInteger('price')->nullable()->default(null);
             $table->boolean('active')->default(false);
             $table->foreignId('brand_id')

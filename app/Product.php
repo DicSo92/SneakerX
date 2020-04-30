@@ -7,17 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $fillable = [
-        'name', 'description', 'image', 'price', 'active', 'brand_id'
+        'name', 'description', 'image', 'images', 'price', 'active', 'brand_id'
+    ];
+    protected $casts = [
+        'images' => 'array'
     ];
 
     public function brand()
     {
         return $this->belongsTo(Brand::class);
-    }
-
-    public function imagesProduct()
-    {
-        return $this->hasOne(ImagesProduct::class);
     }
 
 
