@@ -1,0 +1,195 @@
+[
+    {
+        "name": "Superstar - Originals",
+        "description": "CHAUSSURE SUPERSTAR\nUNE CHAUSSURE SHELL-TOE ORNÉE D’UN IMPRIMÉ LOGO INTÉGRAL.\nCrie-le sur les toits. Partage ta passion pour adidas. Icône depuis 50 ans, la chaussure adidas Superstar n’a jamais hésité à repousser les limites et à se démarquer. Cette version affiche ta passion haut et fort pour la marque avec un graphisme réfléchissant « Brand with the 3 stripes » sur la tige. Les 3 bandes originales dentelées et un logo trèfle sur le patch au talon imposent ton style dans une couleur contrastée.",
+        "image": "Chaussure_Superstar_Blanc_FV2819_01_standard.jpg",
+        "images": [
+            "Chaussure_Superstar_Blanc_FV2819_02_standard.jpg",
+            "Chaussure_Superstar_Blanc_FV2819_03_standard.jpg",
+            "Chaussure_Superstar_Blanc_FV2819_04_standard.jpg",
+            "Chaussure_Superstar_Blanc_FV2819_05_standard.jpg",
+            "Chaussure_Superstar_Blanc_FV2819_06_standard.jpg"
+        ],
+        "price": "9995",
+        "brand_id": 1,
+        "refLink": "https://www.adidas.fr/chaussure-superstar/FV2819.html"
+    },
+    {
+        "name": "ZX 2K 4D",
+        "description": "CHAUSSURE ZX 2K 4D\nUNE ZX SYNONYME DE PROGRÈS.\nFusionnant références culturelles et prouesses technologiques, la nouvelle ZX affiche un dégradé de couleurs vives. Fidèle à l'esprit innovant de la ZX, cette chaussure possède la semelle intermédiaire adidas 4D avant-gardiste et se démarque des autres par sa tige en mesh au style audacieux.",
+        "image": "Chaussure_ZX_2K_4D_Jaune_FV9028_01_standard.jpg",
+        "images": [
+            "Chaussure_ZX_2K_4D_Jaune_FV9028_02_standard.jpg",
+            "Chaussure_ZX_2K_4D_Jaune_FV9028_03_standard.jpg",
+            "Chaussure_ZX_2K_4D_Jaune_FV9028_04_standard.jpg",
+            "Chaussure_ZX_2K_4D_Jaune_FV9028_05_standard.jpg",
+            "Chaussure_ZX_2K_4D_Jaune_FV9028_06_standard.jpg"
+        ],
+        "price": "19995",
+        "brand_id": 1,
+        "refLink": "https://www.adidas.fr/chaussure-zx-2k-4d/FV9028.html"
+    },
+    {
+        "name": "Superstar Girl Are Awesome - Originals",
+        "description": "CHAUSSURE SUPERSTAR GIRLS ARE AWESOME\nUNE CHAUSSURE À SHELL-TOE CRÉÉE AVEC GIRLS ARE AWESOME.\nUn pas vers le futur. Redéfinis les limites du possible. Girls Are Awesome est une marque qui rejoint un mouvement mondial qui inspire et donne la parole aux femmes, aujourd'hui et demain. Sans compromis, la chaussure adidas Superstar est née pour défier le statu quo. Ensemble, célébrons les femmes. Créée à l'occasion du 50ème anniversaire de la sneaker adidas Superstar, cette nouvelle version de la chaussure à shell-toe affiche un logo \"Girls Are Awesome\" sur le patch au talon.",
+        "image": "Chaussure_Superstar_Girls_Are_Awesome_Blanc_FW8087_01_standard.jpg",
+        "images": [
+            "Chaussure_Superstar_Girls_Are_Awesome_Blanc_FW8087_02_standard.jpg",
+            "Chaussure_Superstar_Girls_Are_Awesome_Blanc_FW8087_03_standard.jpg",
+            "Chaussure_Superstar_Girls_Are_Awesome_Blanc_FW8087_04_standard.jpg",
+            "Chaussure_Superstar_Girls_Are_Awesome_Blanc_FW8087_05_standard.jpg",
+            "Chaussure_Superstar_Girls_Are_Awesome_Blanc_FW8087_06_standard.jpg"
+        ],
+        "price": "9995",
+        "brand_id": 1,
+        "refLink": "https://www.adidas.fr/chaussure-superstar-girls-are-awesome/FW8087.html"
+    },
+    {
+        "name": "Stan Smith",
+        "description": "CHAUSSURE STAN SMITH\nUNE VERSION AUTHENTIQUE D’UNE ICÔNE TENNIS DE 1971.\nAffiche un style classique. Le tennisman Stan Smith a marqué son époque. Cette chaussure adidas porte bien son nom et te permet d'imposer ton style dans la rue. Avec sa tige en cuir minimaliste et ses détails sobres, cette sneaker en cuir reste fidèle au modèle original de 1971.",
+        "image": "Chaussure_Stan_Smith_Blanc_M20324_07_standard.jpg",
+        "images": [
+            "Chaussure_Stan_Smith_Blanc_M20324_02_standard.jpg",
+            "Chaussure_Stan_Smith_Blanc_M20324_03_standard.jpg",
+            "Chaussure_Stan_Smith_Blanc_M20324_04_standard.jpg",
+            "Chaussure_Stan_Smith_Blanc_M20324_05_standard.jpg",
+            "Chaussure_Stan_Smith_Blanc_M20324_06_standard.jpg",
+            "Chaussure_Stan_Smith_Blanc_M20324_01_standard.jpg"
+        ],
+        "price": "9495",
+        "brand_id": 1,
+        "refLink": "https://www.adidas.fr/chaussure-stan-smith/M20324.html"
+    },
+
+
+    {
+        "name": "Basket Future Rider Play On",
+        "description": "Conquérez les rues avec cette version de la Rider, l'une des premières chaussures à avoir introduit la Running-Performance dans le monde de la basket de rue. Grâce à sa matière supérieure hyper légère en nylon, cuir velours et cuir lisse, ainsi qu'à notre célèbre semelle extérieure amortissante, cette mise à jour d'un grand classique novateur fera de vous la star du bitume.",
+        "image": "Basket-Future-Rider-Play-On.jpg",
+        "images": [
+            "Basket-Future-Rider-Play-On(1).jpg",
+            "Basket-Future-Rider-Play-On(2).jpg",
+            "Basket-Future-Rider-Play-On(3).jpg",
+            "Basket-Future-Rider-Play-On(4).jpg",
+            "Basket-Future-Rider-Play-On(5).jpg"
+        ],
+        "price": "9000",
+        "brand_id": 2,
+        "refLink": "https://eu.puma.com/fr/fr/pd/basket-future-rider-play-on/371149.html?dwvar_371149_color=04#"
+    },
+    {
+        "name": "Basket Ralph Sampson Low OG Sneaker",
+        "description": "La star unique des Houston Rockets, Ralph Sampson, dominait ses adversaires pas uniquement par sa grandeur de 2,20 mètres. La Allstar quadruple de la NB, le Rookie of the Year et le MVP des matchs Allstar, brillait avant tout grâce à son style de jeu en souplesse et rapidité comme aucun autre dans le monde du basket. La nouvelle édition authentique de sa basket singée célèbre un joueur exceptionnel et se présente ainsi avec un cuir de qualité supérieure et la signature brillante dorée de Ralph Simpson sur le côté extérieur de la chaussure.",
+        "image": "Basket-Ralph-Sampson-Low-OG-Sneaker.jpg",
+        "images": [
+            "Basket-Ralph-Sampson-Low-OG-Sneaker(1).jpg",
+            "Basket-Ralph-Sampson-Low-OG-Sneaker(2).jpg",
+            "Basket-Ralph-Sampson-Low-OG-Sneaker(3).jpg",
+            "Basket-Ralph-Sampson-Low-OG-Sneaker(4).jpg",
+            "Basket-Ralph-Sampson-Low-OG-Sneaker(5).jpg"
+        ],
+        "price": "10000",
+        "brand_id": 2,
+        "refLink": "https://eu.puma.com/fr/fr/pd/basket-ralph-sampson-low-og-sneaker/370719.html?dwvar_370719_color=01#"
+    },
+    {
+        "name": "Basket RS-X Move",
+        "description": "Nous aimons tous jouer pendant notre temps libre (quand nous avons le temps, cela va de soi). C'est de ce fait que s'est inspirée cette chaussure qui, avec son mélange de matières absolument impressionnant et ses couleurs vives, ne manquera pas de se faire remarquer. Cette basket réinvente en quelque sorte le design classique de la RS – en arborant un look encore plus eXtrême.",
+        "image": "Basket-RS-X-Move.jpg",
+        "images": [
+            "Basket-RS-X-Move(1).jpg",
+            "Basket-RS-X-Move(2).jpg",
+            "Basket-RS-X-Move(3).jpg",
+            "Basket-RS-X-Move(4).jpg",
+            "Basket-RS-X-Move(5).jpg"
+        ],
+        "price": "11000",
+        "brand_id": 2,
+        "refLink": "https://eu.puma.com/fr/fr/pd/basket-rs-x-move/372429.html"
+    },
+    {
+        "name": "Basket Porsche Hybrid Runner II",
+        "description": "Tout comme son nom, la toute nouvelle Porsche Design Hybrid Runner II se trouve à l'interface de la sportivité et de l'élégance. Cette chaussure combine une semelle intermédiaire hybride avec les technologies IGNITE et NRGY et une semelle extérieure high tech pour te proposer un confort et une suspension inégalés et avoir toujours une longueur d'avance.",
+        "image": "Basket-Porsche-Hybrid-Runner-II-pour-homme.jpg",
+        "images": [
+            "Basket-Porsche-Hybrid-Runner-II-pour-homme(1).jpg",
+            "Basket-Porsche-Hybrid-Runner-II-pour-homme(2).jpg",
+            "Basket-Porsche-Hybrid-Runner-II-pour-homme(3).jpg",
+            "Basket-Porsche-Hybrid-Runner-II-pour-homme(4).jpg",
+            "Basket-Porsche-Hybrid-Runner-II-pour-homme(5).jpg",
+            "Basket-Porsche-Hybrid-Runner-II-pour-homme(6).jpg"
+        ],
+        "price": "23000",
+        "brand_id": 2,
+        "refLink": "https://eu.puma.com/fr/fr/pd/basket-porsche-hybrid-runner-ii-pour-homme/339956.html?dwvar_339956_color=01"
+    },
+
+
+    {
+        "name": "Club C 85",
+        "description": "CLUB C 85\nUNE CHAUSSURE OLD-SCHOOL INSPIRÉE PAR LE RAYONNEMENT MONDIAL DU SPORT\nLe monde est à toi ! Cette chaussure pour homme reprend les codes d'une tennis des années 80 en y ajoutant une touche internationale. Sa bande multicolore renforce son look audacieux. Fabriquée en cuir, la tige offre douceur et souplesse. La semelle intérieure est décorée d'un imprimé rétro composé de plusieurs drapeaux.",
+        "image": "Club_C_85_Blanc_EG6425_01_standard.jpg",
+        "images": [
+            "Club_C_85_Blanc_EG6425_02_standard.jpg",
+            "Club_C_85_Blanc_EG6425_03_standard.jpg",
+            "Club_C_85_Blanc_EG6425_04_standard.jpg",
+            "Club_C_85_Blanc_EG6425_05_standard.jpg",
+            "Club_C_85_Blanc_EG6425_06_standard_hover.jpg",
+            "Club_C_85_Blanc_EG6425_52_standard.jpg"
+        ],
+        "price": "8995",
+        "brand_id": 3,
+        "refLink": "https://www.reebok.fr/club-c-85/EG6425.html"
+    },
+    {
+        "name": "Reebok Nano X",
+        "description": "REEBOK NANO X\nUNE CHAUSSURE AU MAINTIEN IMPECCABLE CONÇUE POUR L'ENTRAÎNEMENT\nPour fêter le dixième anniversaire de la Nano, Reebok sort une itération de cette chaussure iconique. Ce modèle pour homme est équipé d'une tige textile douce avec des zones plus stretch et renforcées aux endroits stratégiques. Son amorti aérien te fait gagner en rapidité et en légèreté.",
+        "image": "Reebok_Nano_X_Noir_EF7298_01_standard.jpg",
+        "images": [
+            "Reebok_Nano_X_Noir_EF7298_02_standard.jpg",
+            "Reebok_Nano_X_Noir_EF7298_03_standard.jpg",
+            "Reebok_Nano_X_Noir_EF7298_04_standard.jpg",
+            "Reebok_Nano_X_Noir_EF7298_05_standard.jpg",
+            "Reebok_Nano_X_Noir_EF7298_06_standard_hover.jpg",
+            "Reebok_Nano_X_Noir_EF7298_52_standard.jpg",
+            "Reebok_Nano_X_Noir_EF7298_h1_standard.jpg",
+            "Reebok_Nano_X_Noir_EF7298_h2_standard.jpg",
+            "Reebok_Nano_X_Noir_EF7298_h3_standard.jpg"
+        ],
+        "price": "12995",
+        "brand_id": 3,
+        "refLink": "https://www.reebok.fr/reebok-nano-x/EF7298.html"
+    },
+    {
+        "name": "Reebok Royal Classic Jogger 3.0",
+        "description": "REEBOK ROYAL CLASSIC JOGGER 3.0\nUNE CHAUSSURE AUX TONS NEUTRES INSPIRÉE DU RUNNING\nDifficile de résister au style rétro-running. Ce modèle d'inspiration eighties affiche un design épuré et sportif. Ses bandes latérales contrastantes et son renfort talon rappellent notre héritage. Avec ses coloris neutres, elle joue à fond la carte minimaliste. Toute en superpositions, sa tige allie suède synthétique et matière textile.",
+        "image": "Reebok_Royal_Classic_Jogger_3.0_Bleu_EG9409_01_standard.jpg",
+        "images": [
+            "Reebok_Royal_Classic_Jogger_3.0_Bleu_EG9409_02_standard.jpg",
+            "Reebok_Royal_Classic_Jogger_3.0_Bleu_EG9409_03_standard.jpg",
+            "Reebok_Royal_Classic_Jogger_3.0_Bleu_EG9409_04_standard.jpg",
+            "Reebok_Royal_Classic_Jogger_3.0_Bleu_EG9409_05_standard.jpg",
+            "Reebok_Royal_Classic_Jogger_3.0_Bleu_EG9409_06_standard_hover.jpg",
+            "Reebok_Royal_Classic_Jogger_3.0_Bleu_EG9409_52_standard.jpg"
+        ],
+        "price": "5495",
+        "brand_id": 3,
+        "refLink": "https://www.reebok.fr/reebok-royal-classic-jogger-3.0/EG9409.html"
+    },
+    {
+        "name": "Workout Plus",
+        "description": "WORKOUT PLUS\nRETRO SHOE WITH MODERN VIBES\nNous allons rappeler aux mordus de sneakers pourquoi notre Workout Plus est une véritable icône, en revenant à l'essentiel. La tige au look minimaliste met l'accent sur la célèbre coupe en forme de H et le confort exceptionnel",
+        "image": "Workout_Plus_Noir_CN2127_01_standard.jpg",
+        "images": [
+            "Workout_Plus_Noir_CN2127_02_standard.jpg",
+            "Workout_Plus_Noir_CN2127_03_standard.jpg",
+            "Workout_Plus_Noir_CN2127_04_standard.jpg",
+            "Workout_Plus_Noir_CN2127_05_standard.jpg",
+            "Workout_Plus_Noir_CN2127_06_standard_hover.jpg",
+            "Workout_Plus_Noir_CN2127_52_standard.jpg"
+        ],
+        "price": "8995",
+        "brand_id": 3,
+        "refLink": "https://www.reebok.fr/workout-plus/CN2127.html"
+    }
+]

@@ -1,16 +1,31 @@
 <template>
   <q-page class="column flex-center">
-    <img
-      alt="Quasar logo"
-      src="~assets/quasar-logo-full.svg"
-    >
     <h3>Products</h3>
+    <ProductsList></ProductsList>
   </q-page>
 </template>
 
 <script>
+    import ProductsList from 'components/admin/products/ProductsList.vue'
+
     export default {
-        name: "Products"
+        name: "Products",
+        components: {
+            ProductsList
+        },
+        data () {
+            return {
+
+            }
+        },
+        created() {
+        },
+        mounted() {
+        },
+        computed: {
+        },
+        methods: {
+        }
     }
 </script>
 
