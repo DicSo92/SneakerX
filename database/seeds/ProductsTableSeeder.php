@@ -41,6 +41,7 @@ class ProductsTableSeeder extends Seeder
                 'image' => $uploadImage['url'],
                 'images' => $imagesTable,
                 'price' => $product->price,
+                'refLink' => $product->refLink,
                 'brand_id' => $product->brand_id,
             ]);
         }

@@ -26,6 +26,7 @@ class CreateProductsTable extends Migration
                 ->nullable()
                 ->constrained()
                 ->onDelete('cascade');
+            $table->text('refLink');
             $table->timestamps();
         });
     }
