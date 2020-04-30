@@ -69,7 +69,7 @@
               <img :src="props.row.image">
             </q-avatar>
           </q-td>
-          <q-td key="name" :props="props" class="columnName" auto-width>
+          <q-td key="name" :props="props" class="columnName text-bold" auto-width>
             {{ props.row.name }}
           </q-td>
           <q-td key="slug" :props="props" auto-width>
@@ -93,7 +93,7 @@
           <q-td key="created_at" :props="props" auto-width>{{ cFormatDate(props.row.created_at) }}</q-td>
           <q-td key="updated_at" :props="props" auto-width>{{ cFormatDate(props.row.updated_at) }}</q-td>
           <q-td key="active" :props="props" auto-width>
-            {{ props.row.active }}
+            <q-btn round size="xs" :color="props.row.active === 1 ? 'positive' : 'negative'" :icon="props.row.active === 1 ? 'done' : 'clear'" />
           </q-td>
         </q-tr>
       </template>
@@ -137,7 +137,7 @@
                     {name: 'refLink', label: 'Ref. Link', field: 'refLink', align: 'left', sortable: true},
                     {name: 'created_at', label: 'Created At', field: 'created_at', sortable: true},
                     {name: 'updated_at', label: 'Updated At', field: 'updated_at', sortable: true},
-                    {name: 'active', label: 'Active', field: 'active', sortable: true},
+                    {name: 'active', label: 'Active', field: 'active', align: 'center', sortable: true},
                 ],
             }
         },
@@ -202,21 +202,23 @@
 
   .my-sticky-column-table {
     max-width: 100%;
-    thead tr:first-child th:first-child {
-    /* bg color is important for th; just specify one */
-    background-color: #fff;
-    }
     td:first-child {
+      text-align: center;
+    }
+    thead tr:first-child th:first-child, tr:last-child th:last-child {
+      background-color: #dedede;
+    }
+    td:first-child, td:last-child {
       background-color: #efefef;
     }
-    th:first-child {
+    td:first-child, th:first-child {
       position: sticky;
       left: 0;
       z-index: 1;
     }
-    td:first-child {
+    td:last-child, th:last-child {
       position: sticky;
-      left: 0;
+      right: 0;
       z-index: 1;
     }
   }
