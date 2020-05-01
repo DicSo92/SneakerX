@@ -85,23 +85,27 @@
           </q-td>
 
           <q-td key="brand_id" :props="props" auto-width>
-            <div class="column flex-center">
-              <q-badge color="amber">
+            <q-btn outline rounded size="sm" color="primary" :label="brands[props.row.brand_id].name" >
+              <q-badge floating transparent color="amber">
                 {{ props.row.brand_id }}
               </q-badge>
-              <q-badge outline color="primary" class="q-mt-xs" :label="brands[props.row.brand_id].name"/>
-            </div>
+            </q-btn>
           </q-td>
-          <q-td key="colors" :props="props" class="columnRefLink" auto-width>
+          <q-td key="colors" :props="props" class="columnColors" auto-width>
             <div class="flex">
               <div v-for="color in props.row.colors" class="squareColor q-mr-sm q-my-xs" :style="{background: color.color}"></div>
             </div>
           </q-td>
-          <q-td key="sizes" :props="props" class="columnRefLink" auto-width>
-            {{ props.row.sizes }}
+          <q-td key="sizes" :props="props" class="columnSizes" auto-width>
+            <div class="flex">
+              <q-badge outline color="secondary" text-color="black"
+                       v-for="size in props.row.sizes"
+                       :label="size.size"
+                       class="q-mr-sm q-my-xs" />
+            </div>
           </q-td>
-          <q-td key="refLink" :props="props" class="columnRefLink" auto-width>
-            {{ props.row.refLink }}
+          <q-td key="refLink" :props="props" auto-width>
+            <q-btn outline size="sm" rounded color="primary" label="Official Page" @click="openExternalLink(props.row.refLink)"/>
           </q-td>
           <q-td key="created_at" :props="props" auto-width>{{ cFormatDate(props.row.created_at) }}</q-td>
           <q-td key="updated_at" :props="props" auto-width>{{ cFormatDate(props.row.updated_at) }}</q-td>
@@ -140,6 +144,19 @@
                 <p class="text-overline no-margin">{{brands[props.row.brand_id].name}}</p>
                 <div class="column">
                   <p class="text-left text-caption text-grey-6" style="white-space: normal">{{props.row.description}}</p>
+                  <div class="flex q-mb-xs">
+                    <div class="flex q-mr-md">
+                      <p class="text-subtitle2 q-mb-none q-mr-sm">Colors :</p>
+                      <div v-for="color in props.row.colors" class="squareColor expandSquareColor q-mr-sm q-my-xs" :style="{background: color.color}"></div>
+                    </div>
+                    <div class="flex">
+                      <p class="text-subtitle2 q-mb-none q-mr-sm">Sizes :</p>
+                      <q-badge outline color="secondary" text-color="black"
+                               v-for="size in props.row.sizes"
+                               :label="size.size"
+                               class="q-mr-sm q-my-xs" />
+                    </div>
+                  </div>
                   <div class="flex">
                     <q-btn flat rounded color="primary" label="Preview" />
                     <q-btn outline rounded color="primary" label="Official Page" @click="openExternalLink(props.row.refLink)"/>
@@ -179,7 +196,7 @@
                 products: [],
 
                 selected: [],
-                visibleColumns: ['id', 'image', 'name', 'description', 'price', 'brand_id', 'colors', 'sizes', 'active'],
+                visibleColumns: ['id', 'image', 'name', 'description', 'price', 'brand_id', 'colors', 'active'],
 
                 pagination: {
                     sortBy: 'id',
@@ -199,7 +216,7 @@
                     {name: 'brand_id', label: 'Brand Id', field: 'brand_id', align: 'center', sortable: true},
                     {name: 'colors', label: 'Colors', field: 'colors', align: 'left'},
                     {name: 'sizes', label: 'Sizes', field: 'sizes', align: 'left'},
-                    {name: 'refLink', label: 'Ref. Link', field: 'refLink', align: 'left', sortable: true},
+                    {name: 'refLink', label: 'Ref. Link', field: 'refLink', align: 'left'},
                     {name: 'created_at', label: 'Created At', field: 'created_at', sortable: true},
                     {name: 'updated_at', label: 'Updated At', field: 'updated_at', sortable: true},
                     {
@@ -262,17 +279,21 @@
     overflow: hidden;
   }
 
-  .columnRefLink {
+  .columnName {
     text-overflow: ellipsis;
     max-width: 200px;
     /* Needed to make it work */
     overflow: hidden;
     white-space: nowrap;
   }
-
-  .columnName {
-    text-overflow: ellipsis;
-    max-width: 250px;
+  .columnColors {
+    min-width: 80px;
+    /* Needed to make it work */
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .columnSizes {
+    min-width: 140px;
     /* Needed to make it work */
     overflow: hidden;
     white-space: nowrap;
@@ -317,6 +338,9 @@
   .squareColor {
     width: 15px;
     height: 15px;
+  }
+  .expandSquareColor {
+    border: 1px white solid;
   }
 </style>
 
