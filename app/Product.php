@@ -10,7 +10,9 @@ class Product extends Model
         'name', 'description', 'image', 'images', 'price', 'active', 'brand_id'
     ];
     protected $casts = [
-        'images' => 'array'
+        'images' => 'array',
+        'colors' => 'array',
+        'sizes' => 'array'
     ];
 
     public function brand()

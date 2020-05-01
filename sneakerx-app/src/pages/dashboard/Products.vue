@@ -15,17 +15,17 @@
 
       <q-tabs v-model="tab" class="text-teal">
         <q-tab label="All Products" name="one" />
-        <q-tab v-for="brand in brands" :label="brand.name" :name="brand.name" />
+        <q-tab v-for="brand in brands" :label="brand.name" :key="brand.id" :name="brand.name" />
       </q-tabs>
 
       <q-separator />
 
       <q-tab-panels v-model="tab" animated>
         <q-tab-panel name="one">
-          <ProductsList></ProductsList>
+          <ProductsList :brands="brands"></ProductsList>
         </q-tab-panel>
 
-        <q-tab-panel v-for="brand in brands" :name="brand.name">
+        <q-tab-panel v-for="brand in brands" :key="brand.id" :name="brand.name">
           With so much content to display at once, and often so little screen real-estate,
           Cards have fast become the design pattern of choice for many companies, including
           the likes of Google and Twitter.
