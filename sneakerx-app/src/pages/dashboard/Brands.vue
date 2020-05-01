@@ -1,7 +1,41 @@
 <template>
-  <q-page class="column items-center">
-    <h3>Brands</h3>
-    <BrandsList></BrandsList>
+  <q-page class="column items-center" padding>
+    <div class="full-width q-mb-md">
+      <h5 class="no-margin">Brands</h5>
+      <q-separator/>
+    </div>
+
+    <q-card class="full-width">
+      <q-card-section class="bg-teal text-white flex full-width">
+        <div class="text-h6">Brand / List</div>
+        <q-space/>
+        <div class="flex">
+          <q-btn class="q-mr-sm"
+                 color="primary"
+                 icon="edit"
+                 label="Edit"
+                 @click=""
+          />
+          <q-btn class="q-mr-sm"
+                 color="positive"
+                 icon="add"
+                 label="Add"
+                 @click=""
+          />
+          <q-btn color="negative"
+                 icon="delete"
+                 label="Delete"
+                 @click=""
+          />
+        </div>
+      </q-card-section>
+
+      <q-separator/>
+
+      <q-card-section>
+        <BrandsList></BrandsList>
+      </q-card-section>
+    </q-card>
     <AddModal></AddModal>
     <EditModal></EditModal>
   </q-page>
