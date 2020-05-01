@@ -1,5 +1,5 @@
 <template>
-  <q-card bordered class="my-card bg-teal-3 column justify-around">
+  <q-card bordered class="my-card bg-teal-4 column justify-around">
     <q-card-section>
       <div class="row items-center no-wrap">
         <div class="col-2">
