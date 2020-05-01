@@ -5,7 +5,7 @@
         <q-btn flat dense round
                icon="menu"
                aria-label="Menu"
-               @click="leftDrawerOpen = !leftDrawerOpen"/>
+               @click="toggleMenu"/>
         <q-toolbar-title>
           DashBoard
         </q-toolbar-title>
@@ -22,8 +22,8 @@
         <q-toggle
           v-model="animation"
           checked-icon="check"
-          color="red"
-          label="Animations"
+          color="green"
+          label="Animations :"
           left-label
           unchecked-icon="clear"
         />
@@ -32,6 +32,8 @@
 
     <q-drawer v-model="leftDrawerOpen"
               show-if-above
+              :mini="!leftDrawerOpen || miniState || $q.screen.sm"
+              :breakpoint="500"
               bordered
               content-class="bg-grey-1">
       <q-list>
@@ -86,7 +88,9 @@
         data() {
             return {
                 leftDrawerOpen: false,
-                animation: false
+                miniState: false,
+
+                animation: false,
             }
         },
         watch: {
@@ -139,7 +143,11 @@
             }
         },
         methods: {
+            toggleMenu () {
+                // this.leftDrawerOpen = !this.leftDrawerOpen
 
+                this.miniState = !this.miniState
+            },
         }
     }
 </script>
