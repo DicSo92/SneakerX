@@ -11,7 +11,9 @@
     </div>
 
     <q-list bordered id="list">
-      <q-item clickable v-ripple v-for="brand in brands">
+      <q-item clickable v-ripple
+              v-for="brand in brands"
+              :key="brand.id">
         <q-item-section avatar>
           <q-avatar rounded>
             <img :src="brand.image ? brand.image : 'statics/no-image.jpg'">

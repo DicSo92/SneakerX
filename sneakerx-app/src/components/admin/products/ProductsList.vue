@@ -100,6 +100,7 @@
             <div class="flex">
               <q-badge outline color="secondary" text-color="black"
                        v-for="size in props.row.sizes"
+                       :key="size.size"
                        :label="size.size"
                        class="q-mr-sm q-my-xs" />
             </div>
@@ -132,7 +133,8 @@
                 <div class="flex justify-center items-center" style="flex-grow: 3;">
                   <q-avatar rounded size="100px"
                             class="q-ma-xs"
-                            v-for="image in props.row.images">
+                            v-for="image in props.row.images"
+                            :key="image">
                     <img :src="image">
                   </q-avatar>
                 </div>
@@ -147,12 +149,16 @@
                   <div class="flex q-mb-xs">
                     <div class="flex q-mr-md">
                       <p class="text-subtitle2 q-mb-none q-mr-sm">Colors :</p>
-                      <div v-for="color in props.row.colors" class="squareColor expandSquareColor q-mr-sm q-my-xs" :style="{background: color.color}"></div>
+                      <div v-for="color in props.row.colors"
+                           :key="color.color"
+                           class="squareColor expandSquareColor q-mr-sm q-my-xs"
+                           :style="{background: color.color}"></div>
                     </div>
                     <div class="flex">
                       <p class="text-subtitle2 q-mb-none q-mr-sm">Sizes :</p>
                       <q-badge outline color="secondary" text-color="black"
                                v-for="size in props.row.sizes"
+                               :key="size.size"
                                :label="size.size"
                                class="q-mr-sm q-my-xs" />
                     </div>
