@@ -85,7 +85,7 @@
           </q-td>
 
           <q-td key="brand_id" :props="props" auto-width>
-            <q-btn outline rounded size="sm" color="primary" :label="brands[props.row.brand_id].name" >
+            <q-btn outline rounded size="sm" color="primary" :label="getBrandName(props.row.brand_id)" >
               <q-badge floating transparent color="amber">
                 {{ props.row.brand_id }}
               </q-badge>
@@ -143,7 +143,7 @@
 
               <div class="column items-start" style="flex-shrink: 3;">
                 <h6 class="text-bold no-margin">{{props.row.name}}</h6>
-                <p class="text-overline no-margin">{{brands[props.row.brand_id].name}}</p>
+                <p class="text-overline no-margin">{{getBrandName(props.row.brand_id)}}</p>
                 <div class="column">
                   <p class="text-left text-caption text-grey-6" style="white-space: normal">{{props.row.description}}</p>
                   <div class="flex q-mb-xs">
@@ -246,6 +246,9 @@
         methods: {
             cFormatDate(Date) {
                 return date.formatDate(Date, 'DD/MM/YY HH:mm')
+            },
+            getBrandName(id) {
+                return this.brands.find(brand => brand.id === id).name
             },
             openExternalLink(link) {
                 openURL(link)
