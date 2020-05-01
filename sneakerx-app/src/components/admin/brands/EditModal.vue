@@ -99,7 +99,7 @@
             }
         },
         mounted() {
-            bus.$on('showEditModalBrand', (show, brand) => {
+            this.$root.$on('showEditBrand', (show, brand) => {
                 this.brandToEdit = brand
                 this.name = brand.name
                 this.description = brand.description

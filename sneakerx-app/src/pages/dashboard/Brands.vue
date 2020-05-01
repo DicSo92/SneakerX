@@ -73,10 +73,10 @@
                 this.selected = selected
             },
             addBrand() {
-                this.$root.$emit('addBrand')
+                this.$root.$emit('showAddBrand', true)
             },
             editBrand () {
-                this.$root.$emit('editBrand', this.selected[0])
+                this.$root.$emit('showEditBrand', true, this.selected[0])
             },
             deleteBrand () {
                 this.$root.$emit('deleteBrand', this.selected[0].id)

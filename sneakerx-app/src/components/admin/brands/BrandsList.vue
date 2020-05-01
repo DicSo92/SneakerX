@@ -122,7 +122,7 @@
                 visibleColumns: ['id', 'image', 'name', 'description', 'banner'],
                 columns: [
                     {name: 'id', required: true, label: 'ID', field: row => row.id, align: 'left', sortable: true},
-                    {name: 'image', align: 'left', label: 'Image', field: 'image'},
+                    {name: 'image', align: 'center', label: 'Image', field: 'image'},
                     {name: 'name', align: 'left', label: 'Name', field: 'name', sortable: true},
                     {name: 'description', align: 'left', label: 'Description', field: 'description', sortable: true},
                     {name: 'created_at', label: 'Created At', field: 'created_at', sortable: true},
@@ -134,12 +134,8 @@
         created() {
             this.getBrands()
 
-            this.$root.$on('addBrand', this.addBrand)
             this.$root.$on('deleteBrand', id => {
                 this.deleteBrand(id)
-            })
-            this.$root.$on('editBrand', brand => {
-                this.editBrand(brand)
             })
         },
         mounted() {
@@ -185,12 +181,6 @@
                         this.hideLoading('An error occurred : ' + error.message)
                     })
             },
-            addBrand() {
-                bus.$emit('showAddModalBrand', true)
-            },
-            editBrand(brand) {
-                bus.$emit('showEditModalBrand', true, brand)
-            },
             hideLoading(message) {
                 this.$q.loading.show({
                     spinner: QSpinnerGears,
@@ -208,12 +198,8 @@
         },
         beforeDestroy () {
             // Don't forget to turn the listener off before your component is destroyed
-            this.$root.$off('addBrand', this.addBrand)
             this.$root.$off('deleteBrand', id => {
                 this.deleteBrand(id)
-            })
-            this.$root.$off('editBrand', brand => {
-                this.editBrand(brand)
             })
         },
     }
