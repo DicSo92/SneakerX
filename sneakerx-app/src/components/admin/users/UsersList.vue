@@ -1,21 +1,5 @@
 <template>
-  <div class="q-pa-md" id="userList">
-    <div class="row full-width q-mb-sm">
-      <q-space />
-      <q-btn class="q-mr-sm"
-             color="positive"
-             icon="add"
-             label="Add User"
-             @click="addUser"
-      />
-      <q-btn color="negative"
-             icon="delete"
-             label="Delete Selection"
-             :disable="!selected.length"
-             @click="deleteUsers"
-      />
-    </div>
-
+  <div class="full-width" id="userList">
     <q-table
       title="Treats"
       :data="users"
@@ -138,6 +122,9 @@
         },
         created() {
             this.getUsers()
+
+            this.$root.$on('deleteUsers', this.deleteUsers)
+            this.$root.$on('addUser', this.addUser)
         },
         mounted() {
             this.showTable = true
@@ -146,7 +133,8 @@
             selected (val) {
                 let authIndex = this.selected.findIndex(user => user.id === this.getUserId)
                 if (authIndex !== -1) this.selected.splice(authIndex, 1)
-            }
+                this.$emit('selectedChange', val)
+            },
         },
         computed: {
             getUserId() {
@@ -212,13 +200,15 @@
         },
         beforeDestroy () {
             this.$q.loading.hide()
+            // Don't forget to turn the listener off before your component is destroyed
+            this.$root.$off('deleteUsers', this.deleteUsers)
+            this.$root.$off('addUser', this.addUser)
         },
     }
 </script>
 
 <style scoped lang="scss">
   #userList {
-    width: 750px;
-    max-width: 90vw;
+
   }
 </style>
