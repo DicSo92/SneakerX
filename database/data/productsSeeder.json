@@ -10,6 +10,19 @@
             "Chaussure_Superstar_Blanc_FV2819_05_standard.jpg",
             "Chaussure_Superstar_Blanc_FV2819_06_standard.jpg"
         ],
+        "colors": [
+            {"name": "black", "color": "#232323", "available": true},
+            {"name": "green", "color": "#0e3e0c", "available": false},
+            {"name": "white", "color": "#efefef", "available": true},
+            {"name": "blue", "color": "#294e75", "available": true}
+        ],
+        "sizes": [
+            {"size": 39, "available": true},
+            {"size": 40, "available": true},
+            {"size": 41, "available": true},
+            {"size": 42, "available": false},
+            {"size": 43, "available": true}
+        ],
         "price": "9995",
         "brand_id": 1,
         "refLink": "https://www.adidas.fr/chaussure-superstar/FV2819.html"
@@ -24,6 +37,19 @@
             "Chaussure_ZX_2K_4D_Jaune_FV9028_04_standard.jpg",
             "Chaussure_ZX_2K_4D_Jaune_FV9028_05_standard.jpg",
             "Chaussure_ZX_2K_4D_Jaune_FV9028_06_standard.jpg"
+        ],
+        "colors": [
+            {"name": "black", "color": "#232323", "available": true},
+            {"name": "green", "color": "#0e3e0c", "available": false},
+            {"name": "white", "color": "#efefef", "available": true},
+            {"name": "blue", "color": "#294e75", "available": true}
+        ],
+        "sizes": [
+            {"size": 39, "available": true},
+            {"size": 40, "available": true},
+            {"size": 41, "available": true},
+            {"size": 42, "available": false},
+            {"size": 43, "available": true}
         ],
         "price": "19995",
         "brand_id": 1,
@@ -40,6 +66,19 @@
             "Chaussure_Superstar_Girls_Are_Awesome_Blanc_FW8087_05_standard.jpg",
             "Chaussure_Superstar_Girls_Are_Awesome_Blanc_FW8087_06_standard.jpg"
         ],
+        "colors": [
+            {"name": "black", "color": "#232323", "available": true},
+            {"name": "green", "color": "#0e3e0c", "available": false},
+            {"name": "white", "color": "#efefef", "available": true},
+            {"name": "blue", "color": "#294e75", "available": true}
+        ],
+        "sizes": [
+            {"size": 39, "available": true},
+            {"size": 40, "available": true},
+            {"size": 41, "available": true},
+            {"size": 42, "available": false},
+            {"size": 43, "available": true}
+        ],
         "price": "9995",
         "brand_id": 1,
         "refLink": "https://www.adidas.fr/chaussure-superstar-girls-are-awesome/FW8087.html"
@@ -55,6 +94,19 @@
             "Chaussure_Stan_Smith_Blanc_M20324_05_standard.jpg",
             "Chaussure_Stan_Smith_Blanc_M20324_06_standard.jpg",
             "Chaussure_Stan_Smith_Blanc_M20324_01_standard.jpg"
+        ],
+        "colors": [
+            {"name": "black", "color": "#232323", "available": true},
+            {"name": "green", "color": "#0e3e0c", "available": false},
+            {"name": "white", "color": "#efefef", "available": true},
+            {"name": "blue", "color": "#294e75", "available": true}
+        ],
+        "sizes": [
+            {"size": 39, "available": true},
+            {"size": 40, "available": true},
+            {"size": 41, "available": true},
+            {"size": 42, "available": false},
+            {"size": 43, "available": true}
         ],
         "price": "9495",
         "brand_id": 1,
@@ -73,6 +125,19 @@
             "Basket-Future-Rider-Play-On(4).jpg",
             "Basket-Future-Rider-Play-On(5).jpg"
         ],
+        "colors": [
+            {"name": "black", "color": "#232323", "available": true},
+            {"name": "green", "color": "#0e3e0c", "available": false},
+            {"name": "white", "color": "#efefef", "available": true},
+            {"name": "blue", "color": "#294e75", "available": true}
+        ],
+        "sizes": [
+            {"size": 39, "available": true},
+            {"size": 40, "available": true},
+            {"size": 41, "available": true},
+            {"size": 42, "available": false},
+            {"size": 43, "available": true}
+        ],
         "price": "9000",
         "brand_id": 2,
         "refLink": "https://eu.puma.com/fr/fr/pd/basket-future-rider-play-on/371149.html?dwvar_371149_color=04#"
@@ -87,6 +152,19 @@
             "Basket-Ralph-Sampson-Low-OG-Sneaker(3).jpg",
             "Basket-Ralph-Sampson-Low-OG-Sneaker(4).jpg",
             "Basket-Ralph-Sampson-Low-OG-Sneaker(5).jpg"
+        ],
+        "colors": [
+            {"name": "black", "color": "#232323", "available": true},
+            {"name": "green", "color": "#0e3e0c", "available": false},
+            {"name": "white", "color": "#efefef", "available": true},
+            {"name": "blue", "color": "#294e75", "available": true}
+        ],
+        "sizes": [
+            {"size": 39, "available": true},
+            {"size": 40, "available": true},
+            {"size": 41, "available": true},
+            {"size": 42, "available": false},
+            {"size": 43, "available": true}
         ],
         "price": "10000",
         "brand_id": 2,
@@ -103,6 +181,19 @@
             "Basket-RS-X-Move(4).jpg",
             "Basket-RS-X-Move(5).jpg"
         ],
+        "colors": [
+            {"name": "black", "color": "#232323", "available": true},
+            {"name": "green", "color": "#0e3e0c", "available": false},
+            {"name": "white", "color": "#efefef", "available": true},
+            {"name": "blue", "color": "#294e75", "available": true}
+        ],
+        "sizes": [
+            {"size": 39, "available": true},
+            {"size": 40, "available": true},
+            {"size": 41, "available": true},
+            {"size": 42, "available": false},
+            {"size": 43, "available": true}
+        ],
         "price": "11000",
         "brand_id": 2,
         "refLink": "https://eu.puma.com/fr/fr/pd/basket-rs-x-move/372429.html"
@@ -118,6 +209,19 @@
             "Basket-Porsche-Hybrid-Runner-II-pour-homme(4).jpg",
             "Basket-Porsche-Hybrid-Runner-II-pour-homme(5).jpg",
             "Basket-Porsche-Hybrid-Runner-II-pour-homme(6).jpg"
+        ],
+        "colors": [
+            {"name": "black", "color": "#232323", "available": true},
+            {"name": "green", "color": "#0e3e0c", "available": false},
+            {"name": "white", "color": "#efefef", "available": true},
+            {"name": "blue", "color": "#294e75", "available": true}
+        ],
+        "sizes": [
+            {"size": 39, "available": true},
+            {"size": 40, "available": true},
+            {"size": 41, "available": true},
+            {"size": 42, "available": false},
+            {"size": 43, "available": true}
         ],
         "price": "23000",
         "brand_id": 2,
@@ -136,6 +240,19 @@
             "Club_C_85_Blanc_EG6425_05_standard.jpg",
             "Club_C_85_Blanc_EG6425_06_standard_hover.jpg",
             "Club_C_85_Blanc_EG6425_52_standard.jpg"
+        ],
+        "colors": [
+            {"name": "black", "color": "#232323", "available": true},
+            {"name": "green", "color": "#0e3e0c", "available": false},
+            {"name": "white", "color": "#efefef", "available": true},
+            {"name": "blue", "color": "#294e75", "available": true}
+        ],
+        "sizes": [
+            {"size": 39, "available": true},
+            {"size": 40, "available": true},
+            {"size": 41, "available": true},
+            {"size": 42, "available": false},
+            {"size": 43, "available": true}
         ],
         "price": "8995",
         "brand_id": 3,
@@ -156,6 +273,19 @@
             "Reebok_Nano_X_Noir_EF7298_h2_standard.jpg",
             "Reebok_Nano_X_Noir_EF7298_h3_standard.jpg"
         ],
+        "colors": [
+            {"name": "black", "color": "#232323", "available": true},
+            {"name": "green", "color": "#0e3e0c", "available": false},
+            {"name": "white", "color": "#efefef", "available": true},
+            {"name": "blue", "color": "#294e75", "available": true}
+        ],
+        "sizes": [
+            {"size": 39, "available": true},
+            {"size": 40, "available": true},
+            {"size": 41, "available": true},
+            {"size": 42, "available": false},
+            {"size": 43, "available": true}
+        ],
         "price": "12995",
         "brand_id": 3,
         "refLink": "https://www.reebok.fr/reebok-nano-x/EF7298.html"
@@ -172,6 +302,19 @@
             "Reebok_Royal_Classic_Jogger_3.0_Bleu_EG9409_06_standard_hover.jpg",
             "Reebok_Royal_Classic_Jogger_3.0_Bleu_EG9409_52_standard.jpg"
         ],
+        "colors": [
+            {"name": "black", "color": "#232323", "available": true},
+            {"name": "green", "color": "#0e3e0c", "available": false},
+            {"name": "white", "color": "#efefef", "available": true},
+            {"name": "blue", "color": "#294e75", "available": true}
+        ],
+        "sizes": [
+            {"size": 39, "available": true},
+            {"size": 40, "available": true},
+            {"size": 41, "available": true},
+            {"size": 42, "available": false},
+            {"size": 43, "available": true}
+        ],
         "price": "5495",
         "brand_id": 3,
         "refLink": "https://www.reebok.fr/reebok-royal-classic-jogger-3.0/EG9409.html"
@@ -187,6 +330,19 @@
             "Workout_Plus_Noir_CN2127_05_standard.jpg",
             "Workout_Plus_Noir_CN2127_06_standard_hover.jpg",
             "Workout_Plus_Noir_CN2127_52_standard.jpg"
+        ],
+        "colors": [
+            {"name": "black", "color": "#232323", "available": true},
+            {"name": "green", "color": "#0e3e0c", "available": false},
+            {"name": "white", "color": "#efefef", "available": true},
+            {"name": "blue", "color": "#294e75", "available": true}
+        ],
+        "sizes": [
+            {"size": 39, "available": true},
+            {"size": 40, "available": true},
+            {"size": 41, "available": true},
+            {"size": 42, "available": false},
+            {"size": 43, "available": true}
         ],
         "price": "8995",
         "brand_id": 3,

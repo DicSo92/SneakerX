@@ -40,6 +40,8 @@ class ProductsTableSeeder extends Seeder
                 'description' => $product->description,
                 'image' => $uploadImage['url'],
                 'images' => $imagesTable,
+                'colors' => $product->colors,
+                'sizes' => $product->sizes,
                 'price' => $product->price,
                 'refLink' => $product->refLink,
                 'brand_id' => $product->brand_id,
