@@ -65,6 +65,11 @@
           <q-td key="name" :props="props">
             <div class="text-pre-wrap text-bold">{{ props.row.name }}</div>
           </q-td>
+          <q-td key="description" :props="props">
+            <div class="columnDescription" :class="!props.row.description ? 'text-red-5' : ''">
+              {{props.row.description ? props.row.description : 'No description'}}
+            </div>
+          </q-td>
           <q-td key="created_at" :props="props" class="text-caption text-grey-7">{{ cFormatDate(props.row.created_at)
             }}
           </q-td>
@@ -91,43 +96,6 @@
 
     </q-table>
 
-    <!--    <div class="full-width flex justify-between q-mb-sm">-->
-    <!--      <div id="spinnerContainer">-->
-    <!--        <q-spinner color="primary"-->
-    <!--                   size="3em"-->
-    <!--                   v-if="loading"/>-->
-    <!--      </div>-->
-    <!--      <q-btn label="New Brand" @click="addBrand" color="primary"/>-->
-    <!--    </div>-->
-
-    <!--    <q-list bordered id="list">-->
-    <!--      <q-item clickable v-ripple-->
-    <!--              v-for="brand in brands"-->
-    <!--              :key="brand.id">-->
-    <!--        <q-item-section avatar>-->
-    <!--          <q-avatar rounded>-->
-    <!--            <img :src="brand.image ? brand.image : 'statics/no-image.jpg'">-->
-    <!--          </q-avatar>-->
-    <!--        </q-item-section>-->
-
-    <!--        <q-item-section>-->
-    <!--          <q-item-label>{{brand.name}}</q-item-label>-->
-    <!--          <q-item-label caption lines="2" :class="!brand.description ? 'text-red-5' : ''">{{brand.description ? brand.description : 'No description'}}</q-item-label>-->
-    <!--        </q-item-section>-->
-
-    <!--        <q-item-section top thumbnail class="q-ml-none">-->
-    <!--          <img :src="brand.banner ? brand.banner : 'statics/no-image.jpg'">-->
-    <!--        </q-item-section>-->
-
-    <!--        <q-item-section avatar>-->
-    <!--          <q-btn outline round color="indigo-12" size='sm' icon="edit" @click="editBrand(brand)" />-->
-    <!--        </q-item-section>-->
-    <!--        <q-item-section avatar>-->
-    <!--          <q-btn outline round color="red-8" size='sm' icon="delete" @click="deleteBrand(brand.id)" />-->
-    <!--        </q-item-section>-->
-    <!--      </q-item>-->
-    <!--    </q-list>-->
-
   </div>
 </template>
 
@@ -151,11 +119,12 @@
                     // rowsNumber: xx if getting data from a server
                 },
                 selected: [],
-                visibleColumns: ['id', 'image', 'name', 'banner'],
+                visibleColumns: ['id', 'image', 'name', 'description', 'banner'],
                 columns: [
                     {name: 'id', required: true, label: 'ID', field: row => row.id, align: 'left', sortable: true},
                     {name: 'image', align: 'left', label: 'Image', field: 'image'},
                     {name: 'name', align: 'left', label: 'Name', field: 'name', sortable: true},
+                    {name: 'description', align: 'left', label: 'Description', field: 'description', sortable: true},
                     {name: 'created_at', label: 'Created At', field: 'created_at', sortable: true},
                     {name: 'updated_at', label: 'Updated At', field: 'updated_at', sortable: true},
                     {name: 'banner', label: 'Banner', field: 'banner', align: 'right'},
@@ -253,6 +222,17 @@
 <style scoped lang="scss">
   #spinnerContainer {
     min-width: 10px;
+  }
+  .columnDescription {
+    font-size: 0.85em;
+    font-style: italic;
+    max-width: 200px;
+    white-space: normal;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   .BrandTable {
