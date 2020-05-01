@@ -92,6 +92,14 @@
               <q-badge outline color="primary" class="q-mt-xs" :label="brands[props.row.brand_id].name"/>
             </div>
           </q-td>
+          <q-td key="colors" :props="props" class="columnRefLink" auto-width>
+            <div class="flex">
+              <div v-for="color in props.row.colors" class="squareColor q-mr-sm q-my-xs" :style="{background: color.color}"></div>
+            </div>
+          </q-td>
+          <q-td key="sizes" :props="props" class="columnRefLink" auto-width>
+            {{ props.row.sizes }}
+          </q-td>
           <q-td key="refLink" :props="props" class="columnRefLink" auto-width>
             {{ props.row.refLink }}
           </q-td>
@@ -155,7 +163,7 @@
 </template>
 
 <script>
-    import {QSpinnerFacebook, QSpinnerGears, date, openURL } from 'quasar'
+    import { date, openURL } from 'quasar'
 
     export default {
         name: "ProductsList",
@@ -171,7 +179,7 @@
                 products: [],
 
                 selected: [],
-                visibleColumns: ['id', 'image', 'name', 'description', 'price', 'brand_id', 'refLink', 'active'],
+                visibleColumns: ['id', 'image', 'name', 'description', 'price', 'brand_id', 'colors', 'sizes', 'active'],
 
                 pagination: {
                     sortBy: 'id',
@@ -189,6 +197,8 @@
                     // {name: 'images', label: 'Images', field: 'images', sortable: true},
                     {name: 'price', label: 'Price', field: 'price', sortable: true},
                     {name: 'brand_id', label: 'Brand Id', field: 'brand_id', align: 'center', sortable: true},
+                    {name: 'colors', label: 'Colors', field: 'colors', align: 'left'},
+                    {name: 'sizes', label: 'Sizes', field: 'sizes', align: 'left'},
                     {name: 'refLink', label: 'Ref. Link', field: 'refLink', align: 'left', sortable: true},
                     {name: 'created_at', label: 'Created At', field: 'created_at', sortable: true},
                     {name: 'updated_at', label: 'Updated At', field: 'updated_at', sortable: true},
@@ -303,6 +313,10 @@
     /*background-color: #1b5e20;*/
     position: sticky;
     right: 0;
+  }
+  .squareColor {
+    width: 15px;
+    height: 15px;
   }
 </style>
 
