@@ -18,6 +18,15 @@
           <q-breadcrumbs-el label="Users" icon="group" v-if="currentRoute === 'users_admin'"/>
           <q-breadcrumbs-el label="News" icon="fiber_new" v-if="currentRoute === 'news_admin'"/>
         </q-breadcrumbs>
+        <q-space/>
+        <q-toggle
+          v-model="animation"
+          checked-icon="check"
+          color="red"
+          label="Animations"
+          left-label
+          unchecked-icon="clear"
+        />
       </q-toolbar>
     </q-header>
 
@@ -54,8 +63,8 @@
       <transition
         :duration="700"
         mode="out-in"
-        enter-active-class="animated fadeIn"
-        leave-active-class="animated fadeOut"
+        :enter-active-class="'animated ' + animationName.enter"
+        :leave-active-class="'animated ' + animationName.leave"
       >
         <router-view/>
       </transition>
@@ -77,6 +86,7 @@
         data() {
             return {
                 leftDrawerOpen: false,
+                animation: false
             }
         },
         watch: {
@@ -85,6 +95,9 @@
             }
         },
         computed: {
+            animationName() {
+                return this.animation ? {enter: 'fadeInLeft', leave: 'fadeOutLeft'} : {enter: 'fadeIn', leave: 'fadeOut'}
+            },
             authUser () {
                 return this.$store.state.auth.user
             },
