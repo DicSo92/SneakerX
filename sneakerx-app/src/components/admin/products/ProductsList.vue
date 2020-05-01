@@ -15,7 +15,7 @@
 
 
       <template v-slot:top>
-        <q-icon name="group" size="lg"/>
+        <q-icon name="list" size="lg"/>
 
         <q-space/>
 
@@ -151,7 +151,7 @@
                       <p class="text-subtitle2 q-mb-none q-mr-sm">Colors :</p>
                       <div v-for="color in props.row.colors"
                            :key="color.color"
-                           class="squareColor expandSquareColor q-mr-sm q-my-xs"
+                           class="squareColor q-mr-sm q-my-xs"
                            :style="{background: color.color}"></div>
                     </div>
                     <div class="flex">
@@ -208,7 +208,7 @@
                     sortBy: 'id',
                     descending: false,
                     // page: 2,
-                    rowsPerPage: 6
+                    rowsPerPage: 8
                     // rowsNumber: xx if getting data from a server
                 },
                 columns: [
@@ -347,9 +347,8 @@
   .squareColor {
     width: 15px;
     height: 15px;
-  }
-  .expandSquareColor {
     border: 1px white solid;
+    border-radius: 3px;
   }
 </style>
 
