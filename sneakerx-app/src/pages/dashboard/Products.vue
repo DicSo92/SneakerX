@@ -1,10 +1,5 @@
 <template>
   <q-page class="column items-center" padding>
-    <div class="full-width q-mb-md">
-      <h5 class="no-margin">Products</h5>
-      <q-separator/>
-    </div>
-
     <q-card class="full-width">
       <q-card-section class="bg-teal text-white">
         <div class="text-h6">Product / List</div>

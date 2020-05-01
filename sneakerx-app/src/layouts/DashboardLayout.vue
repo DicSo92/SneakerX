@@ -10,6 +10,14 @@
           DashBoard
         </q-toolbar-title>
       </q-toolbar>
+      <q-toolbar inset>
+        <q-breadcrumbs active-color="white" style="font-size: 16px">
+          <q-breadcrumbs-el label="Home" icon="home" :to="{name: 'home_admin'}"/>
+          <q-breadcrumbs-el label="Products" icon="widgets" v-if="currentRoute === 'products_admin'"/>
+          <q-breadcrumbs-el label="Brands" icon="local_offer" v-if="currentRoute === 'brands_admin'"/>
+          <q-breadcrumbs-el label="Users" icon="group" v-if="currentRoute === 'users_admin'"/>
+        </q-breadcrumbs>
+      </q-toolbar>
     </q-header>
 
     <q-drawer v-model="leftDrawerOpen"
@@ -58,7 +66,15 @@
                 leftDrawerOpen: false,
             }
         },
+        watch: {
+            currentRoute(val) {
+                console.log(val);
+            }
+        },
         computed: {
+            currentRoute() {
+                return this.$route.name
+            },
             links() {
                 const home = {
                     title: 'Home',

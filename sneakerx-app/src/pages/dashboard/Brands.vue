@@ -1,10 +1,5 @@
 <template>
   <q-page class="column items-center" padding>
-    <div class="full-width q-mb-md">
-      <h5 class="no-margin">Brands</h5>
-      <q-separator/>
-    </div>
-
     <q-card class="full-width">
       <q-card-section class="bg-teal text-white flex full-width">
         <div class="text-h6">Brand / List</div>
@@ -55,7 +50,7 @@
             AddModal,
             EditModal
         },
-        data () {
+        data() {
             return {
                 selected: []
             }
@@ -65,9 +60,7 @@
         },
         mounted() {
         },
-        computed: {
-
-        },
+        computed: {},
         methods: {
             changeSelect(selected) {
                 this.selected = selected
@@ -75,10 +68,10 @@
             addBrand() {
                 this.$root.$emit('showAddBrand', true)
             },
-            editBrand () {
+            editBrand() {
                 this.$root.$emit('showEditBrand', true, this.selected[0])
             },
-            deleteBrand () {
+            deleteBrand() {
                 this.$root.$emit('deleteBrand', this.selected[0].id)
             },
         }
