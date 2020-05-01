@@ -69,7 +69,7 @@
             }
         },
         mounted() {
-            bus.$on('showAddModalBrand', show => {
+            this.$root.$on('showAddBrand', show => {
                 this.showEdit = !!show
             })
         },

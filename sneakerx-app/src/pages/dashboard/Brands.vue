@@ -1,7 +1,43 @@
 <template>
-  <q-page class="column items-center">
-    <h3>Brands</h3>
-    <BrandsList></BrandsList>
+  <q-page class="column items-center" padding>
+    <div class="full-width q-mb-md">
+      <h5 class="no-margin">Brands</h5>
+      <q-separator/>
+    </div>
+
+    <q-card class="full-width">
+      <q-card-section class="bg-teal text-white flex full-width">
+        <div class="text-h6">Brand / List</div>
+        <q-space/>
+        <div class="flex">
+          <q-btn class="q-mr-sm"
+                 color="primary"
+                 icon="edit"
+                 label="Edit"
+                 :disable="!selected.length"
+                 @click="editBrand"
+          />
+          <q-btn class="q-mr-sm"
+                 color="positive"
+                 icon="add"
+                 label="Add"
+                 @click="addBrand"
+          />
+          <q-btn color="negative"
+                 icon="delete"
+                 label="Delete"
+                 :disable="!selected.length"
+                 @click="deleteBrand"
+          />
+        </div>
+      </q-card-section>
+
+      <q-separator/>
+
+      <q-card-section>
+        <BrandsList @selectedChange="changeSelect"></BrandsList>
+      </q-card-section>
+    </q-card>
     <AddModal></AddModal>
     <EditModal></EditModal>
   </q-page>
@@ -21,7 +57,7 @@
         },
         data () {
             return {
-
+                selected: []
             }
         },
         created() {
@@ -33,7 +69,18 @@
 
         },
         methods: {
-
+            changeSelect(selected) {
+                this.selected = selected
+            },
+            addBrand() {
+                this.$root.$emit('showAddBrand', true)
+            },
+            editBrand () {
+                this.$root.$emit('showEditBrand', true, this.selected[0])
+            },
+            deleteBrand () {
+                this.$root.$emit('deleteBrand', this.selected[0].id)
+            },
         }
     }
 </script>

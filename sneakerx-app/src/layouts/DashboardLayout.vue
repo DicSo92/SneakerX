@@ -30,7 +30,14 @@
     </q-drawer>
 
     <q-page-container>
-      <router-view/>
+      <transition
+        :duration="700"
+        mode="out-in"
+        enter-active-class="animated fadeIn"
+        leave-active-class="animated fadeOut"
+      >
+        <router-view/>
+      </transition>
     </q-page-container>
 
   </q-layout>
