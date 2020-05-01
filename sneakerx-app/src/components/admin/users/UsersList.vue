@@ -100,7 +100,7 @@
 </template>
 
 <script>
-    import { QSpinnerFacebook, QSpinnerGears, date } from 'quasar'
+    import { QSpinnerGears, date } from 'quasar'
 
     export default {
         name: "UsersList",
