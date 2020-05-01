@@ -14,6 +14,7 @@
                  color="primary"
                  icon="edit"
                  label="Edit"
+                 :disable="!selected.length"
                  @click="editBrand"
           />
           <q-btn class="q-mr-sm"
@@ -25,6 +26,7 @@
           <q-btn color="negative"
                  icon="delete"
                  label="Delete"
+                 :disable="!selected.length"
                  @click="deleteBrand"
           />
         </div>

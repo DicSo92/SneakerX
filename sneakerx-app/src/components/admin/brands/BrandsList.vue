@@ -13,7 +13,7 @@
     >
 
       <template v-slot:top>
-        <q-icon name="group" size="lg"/>
+        <q-icon name="local_offer" size="lg"/>
 
         <q-space/>
 
