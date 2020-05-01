@@ -16,6 +16,7 @@
           <q-breadcrumbs-el label="Products" icon="widgets" v-if="currentRoute === 'products_admin'"/>
           <q-breadcrumbs-el label="Brands" icon="local_offer" v-if="currentRoute === 'brands_admin'"/>
           <q-breadcrumbs-el label="Users" icon="group" v-if="currentRoute === 'users_admin'"/>
+          <q-breadcrumbs-el label="News" icon="fiber_new" v-if="currentRoute === 'news_admin'"/>
         </q-breadcrumbs>
       </q-toolbar>
     </q-header>
@@ -25,10 +26,22 @@
               bordered
               content-class="bg-grey-1">
       <q-list>
-        <q-item-label header
-                      class="text-grey-8">
-          Essential Links
+        <q-item-label header class="text-grey-8">
+          Welcome <span class="text-bold">{{authUser.name}}</span>,
         </q-item-label>
+
+        <q-item clickable tag="a" :to="{name: 'home'}">
+          <q-item-section avatar>
+            <q-icon name="home" />
+          </q-item-section>
+
+          <q-item-section>
+            <q-item-label>Go To Website</q-item-label>
+            <q-item-label caption>website.home</q-item-label>
+          </q-item-section>
+        </q-item>
+
+        <q-separator class="q-my-md"/>
 
         <EssentialLink v-for="link in links"
                        :key="link.title"
@@ -72,15 +85,24 @@
             }
         },
         computed: {
+            authUser () {
+                return this.$store.state.auth.user
+            },
             currentRoute() {
                 return this.$route.name
             },
             links() {
-                const home = {
-                    title: 'Home',
-                    caption: 'Home',
-                    icon: 'home',
-                    link: 'home'
+                const homeDash = {
+                    title: 'Dashboard',
+                    caption: 'dashboard.home',
+                    icon: 'dashboard',
+                    link: 'home_admin'
+                }
+                const news = {
+                    title: 'News',
+                    caption: 'list.news',
+                    icon: 'fiber_new',
+                    link: 'news_admin'
                 }
                 const products = {
                     title: 'Products',
@@ -94,19 +116,13 @@
                     icon: 'group',
                     link: 'users_admin'
                 }
-                const categories = {
-                    title: 'Categories',
-                    caption: 'list.categories',
-                    icon: 'category',
-                    link: 'categories_admin'
-                }
                 const brands = {
                     title: 'Brands',
                     caption: 'list.brands',
                     icon: 'local_offer',
                     link: 'brands_admin'
                 }
-                return [home, products, users, categories, brands]
+                return [homeDash, users, news, products, brands]
             }
         },
         methods: {
