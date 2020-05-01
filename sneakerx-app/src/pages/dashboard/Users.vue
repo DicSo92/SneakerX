@@ -49,12 +49,10 @@
             }
         },
         created() {
-
         },
         mounted() {
         },
         computed: {
-
         },
         methods: {
             changeSelect(selected) {
