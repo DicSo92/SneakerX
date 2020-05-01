@@ -14,18 +14,18 @@
                  color="primary"
                  icon="edit"
                  label="Edit"
-                 @click=""
+                 @click="editBrand"
           />
           <q-btn class="q-mr-sm"
                  color="positive"
                  icon="add"
                  label="Add"
-                 @click=""
+                 @click="addBrand"
           />
           <q-btn color="negative"
                  icon="delete"
                  label="Delete"
-                 @click=""
+                 @click="deleteBrand"
           />
         </div>
       </q-card-section>
@@ -33,7 +33,7 @@
       <q-separator/>
 
       <q-card-section>
-        <BrandsList></BrandsList>
+        <BrandsList @selectedChange="changeSelect"></BrandsList>
       </q-card-section>
     </q-card>
     <AddModal></AddModal>
@@ -55,7 +55,7 @@
         },
         data () {
             return {
-
+                selected: []
             }
         },
         created() {
@@ -67,7 +67,18 @@
 
         },
         methods: {
-
+            changeSelect(selected) {
+                this.selected = selected
+            },
+            addBrand() {
+                this.$root.$emit('addBrand')
+            },
+            editBrand () {
+                this.$root.$emit('editBrand', this.selected[0])
+            },
+            deleteBrand () {
+                this.$root.$emit('deleteBrand', this.selected[0].id)
+            },
         }
     }
 </script>

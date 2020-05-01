@@ -164,11 +164,24 @@
         },
         created() {
             this.getBrands()
+
+            this.$root.$on('addBrand', this.addBrand)
+            this.$root.$on('deleteBrand', id => {
+                this.deleteBrand(id)
+            })
+            this.$root.$on('editBrand', brand => {
+                this.editBrand(brand)
+            })
         },
         mounted() {
             bus.$on('refreshBrands', () => {
                 this.getBrands()
             })
+        },
+        watch: {
+            selected (val) {
+                this.$emit('selectedChange', val)
+            },
         },
         methods: {
             cFormatDate(Date) {
@@ -223,7 +236,17 @@
                     this.timer = void 0
                 }, 2000)
             },
-        }
+        },
+        beforeDestroy () {
+            // Don't forget to turn the listener off before your component is destroyed
+            this.$root.$off('addBrand', this.addBrand)
+            this.$root.$off('deleteBrand', id => {
+                this.deleteBrand(id)
+            })
+            this.$root.$off('editBrand', brand => {
+                this.editBrand(brand)
+            })
+        },
     }
 </script>
 
