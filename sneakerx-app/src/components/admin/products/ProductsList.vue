@@ -57,7 +57,7 @@
       </template>
 
       <template v-slot:body="props">
-        <q-tr :props="props">
+        <q-tr :props="props" @click="props.expand = !props.expand" class="cursor-pointer">
           <q-td auto-width>
             <q-checkbox v-model="props.selected"/>
           </q-td>
@@ -81,19 +81,47 @@
             </div>
           </q-td>
           <q-td key="price" :props="props" auto-width>
-            {{ props.row.price }}
+            {{ props.row.price / 100 }} €
           </q-td>
 
           <q-td key="brand_id" :props="props" auto-width>
-            {{ props.row.brand_id }}
+            <div class="column flex-center">
+              <q-badge color="amber">
+                {{ props.row.brand_id }}
+              </q-badge>
+              <q-badge outline color="primary" class="q-mt-xs" :label="brands[props.row.brand_id].name" />
+            </div>
           </q-td>
-          <q-td key="refLink" :props="props"class="columnRefLink" auto-width>
+          <q-td key="refLink" :props="props" class="columnRefLink" auto-width>
             {{ props.row.refLink }}
           </q-td>
           <q-td key="created_at" :props="props" auto-width>{{ cFormatDate(props.row.created_at) }}</q-td>
           <q-td key="updated_at" :props="props" auto-width>{{ cFormatDate(props.row.updated_at) }}</q-td>
           <q-td key="active" :props="props" auto-width>
             <q-btn round size="xs" :color="props.row.active === 1 ? 'positive' : 'negative'" :icon="props.row.active === 1 ? 'done' : 'clear'" />
+          </q-td>
+        </q-tr>
+        <q-tr v-show="props.expand" :props="props">
+          <q-td colspan="100%">
+            <div class="flex">
+              <div class="column items-start">
+                <p class="text-bold no-margin">Main Image : </p>
+                <q-avatar rounded size="150px">
+                  <img :src="props.row.image">
+                </q-avatar>
+              </div>
+              <q-separator vertical inset class="q-mx-md"/>
+              <div class="column items-start">
+                <p class="text-bold no-margin">Secondary Images : </p>
+                <div class="flex justify-center items-center" style="flex-grow: 3;">
+                  <q-avatar rounded size="100px"
+                            class="q-mr-sm"
+                            v-for="image in props.row.images">
+                    <img :src="image">
+                  </q-avatar>
+                </div>
+              </div>
+            </div>
           </q-td>
         </q-tr>
       </template>
@@ -108,6 +136,9 @@
     export default {
         name: "ProductsList",
         components: {},
+        props: [
+            'brands'
+        ],
         data() {
             return {
                 showTable: false,
@@ -126,7 +157,7 @@
                     // rowsNumber: xx if getting data from a server
                 },
                 columns: [
-                    {name: 'id', required: true, label: 'ID', align: 'left', sortable: true},
+                    {name: 'id', required: true, label: 'ID', field: row => row.id, align: 'left', sortable: true},
                     {name: 'image', label: 'Image', field: 'image', align: 'left', sortable: true},
                     {name: 'name', align: 'left', label: 'Name', field: 'name', sortable: true},
                     {name: 'slug', label: 'Slug', field: 'slug', align: 'left', sortable: true},
@@ -137,7 +168,7 @@
                     {name: 'refLink', label: 'Ref. Link', field: 'refLink', align: 'left', sortable: true},
                     {name: 'created_at', label: 'Created At', field: 'created_at', sortable: true},
                     {name: 'updated_at', label: 'Updated At', field: 'updated_at', sortable: true},
-                    {name: 'active', label: 'Active', field: 'active', align: 'center', sortable: true},
+                    {name: 'active', label: 'Active', field: 'active', align: 'center', sortable: true, required: true,},
                 ],
             }
         },

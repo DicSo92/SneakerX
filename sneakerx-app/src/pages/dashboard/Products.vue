@@ -22,7 +22,7 @@
 
       <q-tab-panels v-model="tab" animated>
         <q-tab-panel name="one">
-          <ProductsList></ProductsList>
+          <ProductsList :brands="brands"></ProductsList>
         </q-tab-panel>
 
         <q-tab-panel v-for="brand in brands" :name="brand.name">
