@@ -80,9 +80,9 @@
           <q-td key="is_admin" :props="props" auto-width>
             <q-btn size="sm" outline rounded :color="props.row.is_admin ? 'orange' : 'secondary'" :label="props.row.is_admin ? 'Admin' : 'User'" />
           </q-td>
-          <q-td key="created_at" :props="props" auto-width>{{ cFormatDate(props.row.created_at) }}</q-td>
-          <q-td key="email_verified_at" :props="props" auto-width>{{ cFormatDate(props.row.email_verified_at) }}</q-td>
-          <q-td key="updated_at" :props="props" auto-width>{{ cFormatDate(props.row.updated_at) }}</q-td>
+          <q-td key="created_at" :props="props" class="text-caption text-grey-7" auto-width>{{ cFormatDate(props.row.created_at) }}</q-td>
+          <q-td key="email_verified_at" :props="props" class="text-caption text-grey-7" auto-width>{{ cFormatDate(props.row.email_verified_at) }}</q-td>
+          <q-td key="updated_at" :props="props" class="text-caption text-grey-7" auto-width>{{ cFormatDate(props.row.updated_at) }}</q-td>
         </q-tr>
       </template>
 
