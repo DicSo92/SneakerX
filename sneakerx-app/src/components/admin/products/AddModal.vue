@@ -60,7 +60,7 @@
                   </div>
                   <q-list bordered dense class="q-mb-sm">
                     <transition-group tag="div" name="list" >
-                      <q-item dense clickable v-for="color in colors" :key="color.color" class="transitionItem">
+                      <q-item dense clickable v-for="(color, index) in colors" :key="color.color" class="transitionItem">
                         <q-item-section avatar>
                           <div class="q-mr-sm" style="width: 20px; height: 20px" :style="{backgroundColor: color.color}"></div>
                         </q-item-section>
@@ -71,7 +71,7 @@
                           </div>
                         </q-item-section>
                         <q-item-section side>
-                          <q-btn round size="xs" color="negative" icon="clear" @click="removeColor(color)"/>
+                          <q-btn round size="xs" color="negative" icon="clear" @click="removeColor(index)"/>
                         </q-item-section>
                       </q-item>
                     </transition-group>
@@ -197,8 +197,8 @@
             }
         },
         methods: {
-            removeColor(color) {
-                this.colors.splice(this.colors.indexOf(el => el.name === color.name && el.color === color.color), 1)
+            removeColor(index) {
+                this.colors.splice(index, 1)
             },
             addInputColor() {
 
@@ -208,7 +208,7 @@
                     this.colors.push(this.inputColor)
                     this.inputColor = {
                         name: '',
-                        color: '#B33636',
+                        color: '#'+(Math.random()*0xFFFFFF<<0).toString(16),
                         available: true,
                     }
                 } else {
