@@ -32,7 +32,8 @@
 
     <q-drawer v-model="leftDrawerOpen"
               show-if-above
-              :mini="!leftDrawerOpen || miniState || $q.screen.sm"
+              :mini="!leftDrawerOpen || miniState"
+              :mini-to-overlay="$q.screen.xs || $q.screen.sm"
               :breakpoint="500"
               bordered
               content-class="bg-grey-1">
@@ -59,6 +60,11 @@
                        v-bind="link"/>
 
       </q-list>
+      <div class="q-mini-drawer-hide absolute"
+           style="top: 15px; right: -17px"
+           v-if="$q.screen.xs || $q.screen.sm">
+        <q-btn dense round unelevated color="accent" icon="chevron_left" @click="miniState = true"/>
+      </div>
     </q-drawer>
 
     <q-page-container>
