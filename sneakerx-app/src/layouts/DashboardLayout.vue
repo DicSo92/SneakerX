@@ -42,7 +42,7 @@
           Welcome <span class="text-bold">{{authUser.name}}</span>,
         </q-item-label>
 
-        <q-item clickable tag="a" :to="{name: 'home'}">
+        <q-item clickable tag="a" :class="miniState ? 'q-mt-xl' : ''" :to="{name: 'home'}">
           <q-item-section avatar>
             <q-icon name="home" />
           </q-item-section>
