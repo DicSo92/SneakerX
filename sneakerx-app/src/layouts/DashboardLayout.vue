@@ -13,10 +13,13 @@
       <q-toolbar inset>
         <q-breadcrumbs active-color="white" style="font-size: 16px">
           <q-breadcrumbs-el label="Home" icon="home" :to="{name: 'home_admin'}"/>
-          <q-breadcrumbs-el label="Products" icon="widgets" v-if="currentRoute === 'products_admin'"/>
-          <q-breadcrumbs-el label="Brands" icon="local_offer" v-if="currentRoute === 'brands_admin'"/>
-          <q-breadcrumbs-el label="Users" icon="group" v-if="currentRoute === 'users_admin'"/>
-          <q-breadcrumbs-el label="News" icon="fiber_new" v-if="currentRoute === 'news_admin'"/>
+          <q-breadcrumbs-el v-for="li in links"
+                            :key="li.title"
+                            :label="li.title"
+                            :icon="li.icon"
+                            :to="{name: li.link}"
+                            v-if="currentRoute === li.link && li.link !== 'home_admin'"
+          />
         </q-breadcrumbs>
         <q-space/>
         <q-toggle
@@ -145,7 +148,13 @@
                     icon: 'local_offer',
                     link: 'brands_admin'
                 }
-                return [homeDash, users, news, products, brands]
+                const orders = {
+                    title: 'Orders',
+                    caption: 'list.orders',
+                    icon: 'shopping_cart',
+                    link: 'orders_admin'
+                }
+                return [homeDash, users, news, products, brands, orders]
             }
         },
         methods: {

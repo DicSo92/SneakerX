@@ -48,6 +48,11 @@ const routes = [
         name: 'products_admin',
         component: () => import('pages/dashboard/Products.vue'),
       },
+      {
+        path: 'orders',
+        name: 'orders_admin',
+        component: () => import('pages/dashboard/Orders.vue'),
+      },
     ],
   }
 ]
