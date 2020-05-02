@@ -53,21 +53,34 @@
                     <div class="text-subtitle2 q-ml-xs">Colors* :</div>
                     <div class="text-caption text-negative q-ml-sm" v-if="!colors.length">No colors selected*</div>
                     <q-space/>
-<!--                    <q-btn dense rounded no-caps size="md"-->
-<!--                           icon="add" glossy color="deep-orange"-->
-<!--                           @click="addInputColor"-->
-<!--                    />-->
+                    <!--                    <q-btn dense rounded no-caps size="md"-->
+                    <!--                           icon="add" glossy color="deep-orange"-->
+                    <!--                           @click="addInputColor"-->
+                    <!--                    />-->
                   </div>
-                  <q-list bordered dense class="q-mb-sm">
-                    <transition-group tag="div" name="list" >
-                      <q-item dense clickable v-for="(color, index) in colors" :key="color.color" class="transitionItem">
+                  <!--                  <q-list bordered dense class="q-mb-sm">-->
+                  <draggable
+                    class="q-mb-sm no-padding"
+                    tag="div"
+                    v-model="colors"
+                    v-bind="dragOptions"
+                    @start="drag = true"
+                    @end="drag = false"
+                  >
+                    <transition-group type="transition" :name="!drag ? 'flip-list' : null">
+
+                      <q-item dense v-for="(color, index) in colors" :key="color.color"
+                              class="colorItem">
                         <q-item-section avatar>
-                          <div class="q-mr-sm" style="width: 20px; height: 20px" :style="{backgroundColor: color.color}"></div>
+                          <div class="q-mr-sm" style="width: 20px; height: 20px"
+                               :style="{backgroundColor: color.color}"></div>
                         </q-item-section>
                         <q-item-section>
                           <div class="flex full-width justify-between">
                             <div>{{color.name}}</div>
-                            <div class="text-caption" :class="color.available ? 'text-positive' : 'text-negative'">{{color.available ? 'Available' : 'Unavailable'}}</div>
+                            <div class="text-caption" :class="color.available ? 'text-positive' : 'text-negative'">
+                              {{color.available ? 'Available' : 'Unavailable'}}
+                            </div>
                           </div>
                         </q-item-section>
                         <q-item-section side>
@@ -75,7 +88,7 @@
                         </q-item-section>
                       </q-item>
                     </transition-group>
-                  </q-list>
+                  </draggable>
 
                   <div class="row q-gutter-sm items-start">
                     <q-input filled v-model="inputColor.name" label="Color Name *"
@@ -149,11 +162,16 @@
 </template>
 
 <script>
+    import draggable from "vuedraggable";
+
     export default {
         name: "AddModal",
         props: [
             'brands'
         ],
+        components: {
+            draggable
+        },
         data() {
             return {
                 showEdit: false,
@@ -174,6 +192,7 @@
                     available: true,
                 },
                 colors: [],
+                drag: false
                 // [ {name: ..., color: ..., available: true}]
             }
         },
@@ -183,10 +202,18 @@
             })
         },
         watch: {
-            inputColor (val) {
+            inputColor(val) {
             }
         },
         computed: {
+            dragOptions() {
+                return {
+                    animation: 200,
+                    group: "description",
+                    disabled: false,
+                    ghostClass: "ghost"
+                };
+            },
             validateColorInput() {
                 if (this.inputColor.name.length > 0 && this.colors.find(el => el.name === this.inputColor.name)) {
                     return {value: false, message: 'This name is already taken'}
@@ -209,7 +236,7 @@
                     this.colors.push(this.inputColor)
                     this.inputColor = {
                         name: '',
-                        color: '#'+(Math.random()*0xFFFFFF<<0).toString(16),
+                        color: '#' + (Math.random() * 0xFFFFFF << 0).toString(16),
                         available: true,
                     }
                 } else {
@@ -231,18 +258,28 @@
 </script>
 
 <style scoped lang="scss">
-  .list-enter, .list-leave-to {
+  .no-move {
+    transition: transform 0s;
+  }
+  .ghost {
+    opacity: 0.7;
+    background: #c8ebfb;
+  }
+  .flip-list-move {
+    transition: all 0.5s;
+  }
+
+  .flip-list-enter, .flip-list-leave-to {
     opacity: 0;
     transform: translateX(-50px);
   }
-  .list-leave-active {
+  .flip-list-leave-active {
     position: absolute;
     /*z-index: 10;*/
   }
-  .list-move {
-    transition: transform 0.5s;
-  }
-  .transitionItem {
-    transition: all 0.5s;
+
+
+  .colorItem {
+    cursor: move !important;
   }
 </style>
