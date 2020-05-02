@@ -52,13 +52,54 @@
                     <q-icon name="colorize" size="sm" color="purple"/>
                     <div class="text-subtitle2 q-ml-xs">Colors* :</div>
                     <div class="text-caption text-negative q-ml-sm">No colors selected*</div>
+                    <q-space/>
+                    <q-btn dense rounded no-caps size="md"
+                           icon="add" glossy color="deep-orange"
+                           @click="addInputColor"
+                    />
                   </div>
-                  <div class="flex">
-                    <q-btn dense rounded no-caps size="sm" icon-right="add" glossy color="deep-orange">
-                      <q-popup-proxy transition-show="scale" transition-hide="scale">
-                        <q-color v-model="colorPicker"/>
-                      </q-popup-proxy>
-                    </q-btn>
+                  <q-list bordered dense class="q-mb-sm">
+                    <q-item clickable>
+                      <q-item-section avatar>
+                        <div class="q-mr-sm" style="width: 20px; height: 20px" :style="{backgroundColor: colorPicker}"></div>
+                      </q-item-section>
+                      <q-item-section>Blue Light</q-item-section>
+                      <q-item-section side>
+                        <q-btn round size="xs" color="negative" icon="clear"/>
+                      </q-item-section>
+                    </q-item>
+
+                    <q-item clickable>
+                      <q-item-section avatar>
+                        <div class="q-mr-sm" style="width: 20px; height: 20px" :style="{backgroundColor: colorPicker}"></div>
+                      </q-item-section>
+                      <q-item-section>Purple Sky</q-item-section>
+                      <q-item-section side>
+                        <q-btn round size="xs" color="negative" icon="clear"/>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+
+                  <div class="row q-gutter-sm items-start">
+                    <q-input filled v-model="colorName" label="Color Name *"
+                             dense
+                             class="col"
+                             hint="Color Name for catalog"
+                             lazy-rules
+                             :rules="[ val => val && val.length > 0 || 'Please type something']"
+                    />
+                    <q-separator vertical/>
+                    <div class="column col-auto" style="margin-top: 12px">
+                      <div class="flex">
+                        <div class="q-pa-md q-mr-sm" :style="{backgroundColor: colorPicker}"></div>
+                        <q-btn dense no-caps size="md" icon-right="colorize" glossy color="teal">
+                          <q-popup-proxy transition-show="scale" transition-hide="scale">
+                            <q-color v-model="colorPicker"/>
+                          </q-popup-proxy>
+                        </q-btn>
+                      </div>
+                      <q-btn dense no-caps size="sm" icon="save" color="primary" class="q-mt-sm"/>
+                    </div>
                   </div>
                 </div>
                 <q-separator vertical class="q-mx-md"/>
@@ -126,7 +167,8 @@
                 image: true,
                 brandSelected: null,
                 colorPicker: '#B33636',
-                directActive: false
+                directActive: false,
+                colorName: ''
             }
         },
         mounted() {
@@ -135,6 +177,9 @@
             })
         },
         methods: {
+            addInputColor() {
+
+            },
             addBrand() {
                 console.log('Fake Submit');
             },
