@@ -7,32 +7,66 @@
           class="q-gutter-md"
         >
           <div class="row">
-            <q-avatar rounded size="200px" class="col-auto">
-              <img src="http://res.cloudinary.com/charly-luzzi/image/upload/v1588357094/SneakerX/Products/Adidas/superstar-originals/e5k42tybhaxhnx6tkjrr.jpg">
-            </q-avatar>
-            <div class="col q-px-md column ">
-              <q-input filled v-model="name" label="Brand Name *"
-                       hint="Main Name"
-                       lazy-rules
-                       :rules="[ val => val && val.length > 0 || 'Please type something']"
+            <div class="col-3" v-if="image">
+              <q-img
+                src="http://res.cloudinary.com/charly-luzzi/image/upload/v1588357094/SneakerX/Products/Adidas/superstar-originals/e5k42tybhaxhnx6tkjrr.jpg"
+                style="width: 100%; height: auto"
               />
-              <q-select color="purple-12"
-                        v-model="modelBrand"
-                        :options="brands"
-                        option-value="id"
-                        option-label="name"
-                        option-disable="inactive"
-                        emit-value
-                        map-options
-                        label="Select Brand">
-                <template v-slot:prepend>
-                  <q-icon name="event" />
-                </template>
-              </q-select>
+            </div>
+            <q-uploader
+              v-else
+              label="Image (Restricted to images)"
+              accept=".jpg, image/*"
+              hide-upload-btn
+              class="col-auto"
+              @added="toggleImagesData($event, true, 'image')"
+              @removed="toggleImagesData($event, false, 'image')"
+            />
+            <div class="col q-px-md column ">
+              <div class="row items-start q-gutter-md">
+                <q-input filled v-model="name" label="Brand Name *"
+                         class="col-8"
+                         hint="Main Name"
+                         lazy-rules
+                         :rules="[ val => val && val.length > 0 || 'Please type something']"
+                />
+                <q-select color="teal-4" class="col"
+                          filled
+                          v-model="brandSelected"
+                          :options="brands"
+                          option-value="id"
+                          option-label="name"
+                          option-disable="inactive"
+                          emit-value
+                          map-options
+                          label="Select Brand">
+                  <template v-slot:prepend>
+                    <q-icon name="local_offer"/>
+                  </template>
+                </q-select>
+              </div>
+
+              <div class="row q-mt-md">
+                <div class="column col-6">
+                  <div class="flex q-mb-sm">
+                    <q-icon name="colorize" size="sm" color="purple"/>
+                    <div class="text-subtitle2 q-ml-xs">Colors* :</div>
+                    <div class="text-caption text-negative q-ml-sm">No colors selected*</div>
+                  </div>
+                  <div class="flex">
+                    <q-btn dense rounded no-caps size="sm" icon-right="add" glossy color="deep-orange">
+                      <q-popup-proxy transition-show="scale" transition-hide="scale">
+                        <q-color v-model="colorPicker"/>
+                      </q-popup-proxy>
+                    </q-btn>
+                  </div>
+                </div>
+                <q-separator vertical class="q-mx-md"/>
+              </div>
             </div>
           </div>
 
-          <q-editor v-model="description" min-height="8rem" />
+          <q-editor v-model="description" min-height="8rem"/>
 
           <div class="flex justify-between">
             <q-uploader
@@ -53,14 +87,18 @@
           </div>
 
 
-          <div>
-            <q-btn :loading="loading" color="primary" label="Submit" type="submit" icon-right="send">
-              <template v-slot:loading>
-                <q-spinner-hourglass class="on-left" />
-                Loading...
-              </template>
-            </q-btn>
-            <q-btn label="Cancel" @click="showEdit = false" color="primary" flat class="q-ml-sm"/>
+          <div class="column">
+            <q-toggle v-model="directActive" label="Check to instantly publish product on catalog. (Not recommended)"/>
+            <div>
+              <q-btn :loading="loading" color="primary" label="Submit" type="submit" icon-right="send">
+                <template v-slot:loading>
+                  <q-spinner-hourglass class="on-left"/>
+                  Loading...
+                </template>
+              </q-btn>
+              <q-btn label="Cancel" @click="showEdit = false" color="primary" flat class="q-ml-sm"/>
+            </div>
+
 
           </div>
         </q-form>
@@ -75,7 +113,7 @@
         props: [
             'brands'
         ],
-        data () {
+        data() {
             return {
                 showEdit: false,
                 name: '',
@@ -85,8 +123,10 @@
 
                 loading: false,
 
-
-                modelBrand: null
+                image: true,
+                brandSelected: null,
+                colorPicker: '#B33636',
+                directActive: false
             }
         },
         mounted() {
@@ -98,7 +138,7 @@
             addBrand() {
                 console.log('Fake Submit');
             },
-            toggleImagesData (files, added, qFor) {
+            toggleImagesData(files, added, qFor) {
                 if (qFor === 'banner') {
                     this.bannerFile = added ? files[0] : null
                 } else if (qFor === 'image') {
