@@ -82,6 +82,7 @@
                              dense
                              class="col"
                              hint="Color Name for catalog"
+                             @keydown.enter.prevent="addColor"
                              :rules="[val => validateColorInput.value || validateColorInput.message]"
                     />
                     <q-separator vertical/>
@@ -204,7 +205,7 @@
 
             },
             addColor() {
-                if (this.inputColor.name.length > 0) {
+                if (this.inputColor.name.length > 0 && this.validateColorInput.value) {
                     this.colors.push(this.inputColor)
                     this.inputColor = {
                         name: '',
