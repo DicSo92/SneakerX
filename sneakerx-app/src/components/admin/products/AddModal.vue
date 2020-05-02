@@ -51,64 +51,53 @@
                   <div class="flex q-mb-sm">
                     <q-icon name="colorize" size="sm" color="purple"/>
                     <div class="text-subtitle2 q-ml-xs">Colors* :</div>
-                    <div class="text-caption text-negative q-ml-sm">No colors selected*</div>
+                    <div class="text-caption text-negative q-ml-sm" v-if="!colors.length">No colors selected*</div>
                     <q-space/>
-                    <q-btn dense rounded no-caps size="md"
-                           icon="add" glossy color="deep-orange"
-                           @click="addInputColor"
-                    />
+<!--                    <q-btn dense rounded no-caps size="md"-->
+<!--                           icon="add" glossy color="deep-orange"-->
+<!--                           @click="addInputColor"-->
+<!--                    />-->
                   </div>
                   <q-list bordered dense class="q-mb-sm">
-                    <q-item clickable>
-                      <q-item-section avatar>
-                        <div class="q-mr-sm" style="width: 20px; height: 20px" :style="{backgroundColor: colorPicker}"></div>
-                      </q-item-section>
-                      <q-item-section>
-                        <div class="flex full-width justify-around">
-                          <div>Blue Sky</div>
-                          <div class="text-caption text-positive">Available</div>
-                        </div>
-                      </q-item-section>
-                      <q-item-section side>
-                        <q-btn round size="xs" color="negative" icon="clear"/>
-                      </q-item-section>
-                    </q-item>
-
-                    <q-item clickable>
-                      <q-item-section avatar>
-                        <div class="q-mr-sm" style="width: 20px; height: 20px" :style="{backgroundColor: colorPicker}"></div>
-                      </q-item-section>
-                      <q-item-section>
-                        <div class="flex full-width justify-around">
-                          <div>Blue Sky</div>
-                          <div class="text-caption text-positive">Available</div>
-                        </div>
-                      </q-item-section>
-                      <q-item-section side>
-                        <q-btn round size="xs" color="negative" icon="clear"/>
-                      </q-item-section>
-                    </q-item>
+                    <transition-group tag="div" name="list" >
+                      <q-item dense clickable v-for="color in colors" :key="color.color" class="transitionItem">
+                        <q-item-section avatar>
+                          <div class="q-mr-sm" style="width: 20px; height: 20px" :style="{backgroundColor: color.color}"></div>
+                        </q-item-section>
+                        <q-item-section>
+                          <div class="flex full-width justify-between">
+                            <div>{{color.name}}</div>
+                            <div class="text-caption" :class="color.available ? 'text-positive' : 'text-negative'">{{color.available ? 'Available' : 'Unavailable'}}</div>
+                          </div>
+                        </q-item-section>
+                        <q-item-section side>
+                          <q-btn round size="xs" color="negative" icon="clear" @click="removeColor(color)"/>
+                        </q-item-section>
+                      </q-item>
+                    </transition-group>
                   </q-list>
 
                   <div class="row q-gutter-sm items-start">
-                    <q-input filled v-model="colorName" label="Color Name *"
+                    <q-input filled v-model="inputColor.name" label="Color Name *"
                              dense
                              class="col"
                              hint="Color Name for catalog"
-                             lazy-rules
-                             :rules="[ val => val && val.length > 0 || 'Please type something']"
+                             :rules="[val => validateColorInput.value || validateColorInput.message]"
                     />
                     <q-separator vertical/>
                     <div class="column col-auto" style="margin-top: 12px">
                       <div class="flex">
-                        <div class="q-pa-md q-mr-sm" :style="{backgroundColor: colorPicker}"></div>
+                        <div class="q-pa-md q-mr-sm" :style="{backgroundColor: inputColor.color}"></div>
                         <q-btn dense no-caps size="md" icon-right="colorize" glossy color="teal">
                           <q-popup-proxy transition-show="scale" transition-hide="scale">
-                            <q-color v-model="colorPicker"/>
+                            <q-color v-model="inputColor.color"/>
                           </q-popup-proxy>
                         </q-btn>
                       </div>
-                      <q-btn dense no-caps size="sm" icon="save" color="primary" class="q-mt-sm"/>
+                      <q-btn dense no-caps size="sm"
+                             icon="save" color="primary"
+                             class="q-mt-sm"
+                             @click="addColor" :disabled="inputColor.name.length === 0 || !validateColorInput.value"/>
                     </div>
                   </div>
                 </div>
@@ -176,9 +165,15 @@
 
                 image: true,
                 brandSelected: null,
-                colorPicker: '#B33636',
                 directActive: false,
-                colorName: ''
+
+                inputColor: {
+                    name: '',
+                    color: '#B33636',
+                    available: true,
+                },
+                colors: [],
+                // [ {name: ..., color: ..., available: true}]
             }
         },
         mounted() {
@@ -186,9 +181,39 @@
                 this.showEdit = !!show
             })
         },
+        watch: {
+            inputColor (val) {
+            }
+        },
+        computed: {
+            validateColorInput() {
+                if (this.inputColor.name.length > 0 && this.colors.find(el => el.name === this.inputColor.name)) {
+                    return {value: false, message: 'This name is already taken'}
+                } else if (this.inputColor.name.length > 0 && this.colors.find(el => el.color === this.inputColor.color)) {
+                    return {value: false, message: 'This color is already taken'}
+                } else {
+                    return {value: true, message: ''}
+                }
+            }
+        },
         methods: {
+            removeColor(color) {
+                this.colors.splice(this.colors.indexOf(el => el.name === color.name && el.color === color.color), 1)
+            },
             addInputColor() {
 
+            },
+            addColor() {
+                if (this.inputColor.name.length > 0) {
+                    this.colors.push(this.inputColor)
+                    this.inputColor = {
+                        name: '',
+                        color: '#B33636',
+                        available: true,
+                    }
+                } else {
+                    console.log('error')
+                }
             },
             addBrand() {
                 console.log('Fake Submit');
@@ -204,6 +229,19 @@
     }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+  .list-enter, .list-leave-to {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  .list-leave-active {
+    position: absolute;
+    /*z-index: 10;*/
+  }
+  .list-move {
+    transition: transform 0.5s;
+  }
+  .transitionItem {
+    transition: all 0.5s;
+  }
 </style>
