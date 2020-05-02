@@ -63,7 +63,12 @@
                       <q-item-section avatar>
                         <div class="q-mr-sm" style="width: 20px; height: 20px" :style="{backgroundColor: colorPicker}"></div>
                       </q-item-section>
-                      <q-item-section>Blue Light</q-item-section>
+                      <q-item-section>
+                        <div class="flex full-width justify-around">
+                          <div>Blue Sky</div>
+                          <div class="text-caption text-positive">Available</div>
+                        </div>
+                      </q-item-section>
                       <q-item-section side>
                         <q-btn round size="xs" color="negative" icon="clear"/>
                       </q-item-section>
@@ -73,7 +78,12 @@
                       <q-item-section avatar>
                         <div class="q-mr-sm" style="width: 20px; height: 20px" :style="{backgroundColor: colorPicker}"></div>
                       </q-item-section>
-                      <q-item-section>Purple Sky</q-item-section>
+                      <q-item-section>
+                        <div class="flex full-width justify-around">
+                          <div>Blue Sky</div>
+                          <div class="text-caption text-positive">Available</div>
+                        </div>
+                      </q-item-section>
                       <q-item-section side>
                         <q-btn round size="xs" color="negative" icon="clear"/>
                       </q-item-section>
