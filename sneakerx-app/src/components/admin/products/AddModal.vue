@@ -80,9 +80,15 @@
                     <q-chip v-for="(size, index) in sizesAsc" :key="size.size"
                             dense
                             removable
-                            @remove="sizes.splice(index, 1)" class="text-positive">
-                      <q-avatar color="red" text-color="white">{{size.size}}</q-avatar>
-                      Available
+                            clickable
+                            :color="size.available ? 'green-6' : 'red-7'"
+                            :selected.sync="sizes[index].available"
+                            class="text-bold"
+                            text-color="white"
+                            icon="warning"
+                            @remove="sizes.splice(index, 1)">
+<!--                      <q-avatar color="red" text-color="white">{{size.size}}</q-avatar>-->
+                      {{size.size}}
                     </q-chip>
                   </div>
                 </div>
@@ -162,22 +168,7 @@
                 colors: [],
 
                 sizes: [],
-                sizeOptions: [{size: 34, available: true}, {size: 35, available: true}, {
-                    size: 36,
-                    available: true
-                }, {size: 37, available: true}, {size: 38, available: true}, {size: 39, available: true}, {
-                    size: 40,
-                    available: true
-                }, {size: 41, available: true}, {size: 42, available: true}, {size: 43, available: true}, {
-                    size: 44,
-                    available: true
-                }, {size: 45, available: true}, {size: 46, available: true}, {size: 47, available: true}, {
-                    size: 48,
-                    available: true
-                }, {size: 49, available: true}, {size: 50, available: true}, {size: 51, available: true}, {
-                    size: 52,
-                    available: true
-                }]
+                sizeOptions: [{size: 34, available: true}, {size: 35, available: true}, {size: 36, available: true}, {size: 37, available: true}, {size: 38, available: true}, {size: 39, available: true}, {size: 40, available: true}, {size: 41, available: true}, {size: 42, available: true}, {size: 43, available: true}, {size: 44, available: true}, {size: 45, available: true}, {size: 46, available: true}, {size: 47, available: true}, {size: 48, available: true}, {size: 49, available: true}, {size: 50, available: true}, {size: 51, available: true}, {size: 52, available: true}]
             }
         },
         mounted() {
