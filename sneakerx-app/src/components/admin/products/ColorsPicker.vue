@@ -1,6 +1,6 @@
 <template>
   <div class="column">
-    <div class="flex q-mb-sm">
+    <div class="flex q-mb-sm q-pb-sm" style="border-bottom: solid 1px #eeeeee;">
       <q-icon name="colorize" size="sm" color="purple"/>
       <div class="text-subtitle2 q-ml-xs">Colors* :</div>
       <div class="text-caption text-negative q-ml-sm" v-if="!colors.length">No colors selected*</div>
@@ -10,38 +10,8 @@
       <!--                           @click="addInputColor"-->
       <!--                    />-->
     </div>
-    <draggable
-      class="q-mb-sm no-padding"
-      tag="div"
-      v-model="colors"
-      v-bind="dragOptions"
-      @start="drag = true"
-      @end="drag = false"
-    >
-      <transition-group type="transition" :name="!drag ? 'flip-list' : null">
 
-        <q-item dense v-for="(color, index) in colors" :key="color.color"
-                class="colorItem">
-          <q-item-section avatar>
-            <div class="q-mr-sm" style="width: 20px; height: 20px"
-                 :style="{backgroundColor: color.color}"></div>
-          </q-item-section>
-          <q-item-section>
-            <div class="flex full-width justify-between">
-              <div>{{color.name}}</div>
-              <div class="text-caption" :class="color.available ? 'text-positive' : 'text-negative'">
-                {{color.available ? 'Available' : 'Unavailable'}}
-              </div>
-            </div>
-          </q-item-section>
-          <q-item-section side>
-            <q-btn round size="xs" color="negative" icon="clear" @click="removeColor(index)"/>
-          </q-item-section>
-        </q-item>
-      </transition-group>
-    </draggable>
-
-    <div class="row q-gutter-sm items-start">
+    <div class="row q-gutter-sm items-start q-mb-sm">
       <q-input filled v-model="inputColor.name" label="Color Name *"
                dense
                class="col"
@@ -65,6 +35,42 @@
                @click="addColor" :disabled="inputColor.name.length === 0 || !validateColorInput.value"/>
       </div>
     </div>
+
+    <draggable
+      class="no-padding listContainer"
+      tag="div"
+      handle=".handle"
+      v-model="colors"
+      v-bind="dragOptions"
+      @start="drag = true"
+      @end="drag = false"
+      v-if="colors.length"
+    >
+      <transition-group type="transition" :name="!drag ? 'flip-list' : null">
+
+        <q-item dense v-for="(color, index) in colors" :key="color.color">
+          <q-item-section avatar>
+            <div class="flex items-center justify-start">
+              <q-icon size="sm" name="drag_indicator" class="handle q-mr-sm"/>
+              <div class="q-mr-sm" style="width: 20px; height: 20px"
+                   :style="{backgroundColor: color.color}">
+              </div>
+            </div>
+          </q-item-section>
+          <q-item-section>
+            <div class="flex full-width justify-between">
+              <div>{{color.name}}</div>
+              <div class="text-caption" :class="color.available ? 'text-positive' : 'text-negative'">
+                {{color.available ? 'Available' : 'Unavailable'}}
+              </div>
+            </div>
+          </q-item-section>
+          <q-item-section side>
+            <q-btn round size="xs" color="negative" icon="clear" @click="removeColor(index)"/>
+          </q-item-section>
+        </q-item>
+      </transition-group>
+    </draggable>
   </div>
 </template>
 
@@ -157,7 +163,10 @@
   }
 
 
-  .colorItem {
-    cursor: move !important;
+  .handle {
+    cursor: move;
+  }
+  .listContainer {
+    border: solid 1px #eeeeee;
   }
 </style>
