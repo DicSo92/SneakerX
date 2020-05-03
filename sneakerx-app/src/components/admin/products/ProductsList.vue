@@ -145,7 +145,7 @@
                 <h6 class="text-bold no-margin">{{props.row.name}}</h6>
                 <p class="text-overline no-margin">{{getBrandName(props.row.brand_id)}}</p>
                 <div class="column">
-                  <p class="text-left text-caption text-grey-6" style="white-space: normal">{{props.row.description}}</p>
+                  <p class="text-left text-caption text-grey-6 expandDescription">{{props.row.description}}</p>
                   <div class="flex q-mb-xs">
                     <div class="flex q-mr-md">
                       <p class="text-subtitle2 q-mb-none q-mr-sm">Colors :</p>
@@ -275,7 +275,13 @@
   #productList {
 
   }
-
+  .expandDescription {
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 8;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
   .columnDescription {
     font-size: 0.85em;
     font-style: italic;
