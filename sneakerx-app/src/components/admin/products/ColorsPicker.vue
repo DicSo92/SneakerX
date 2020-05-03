@@ -74,13 +74,14 @@
     export default {
         name: "ColorsPicker",
         props: [
-            'colors'
+            'colorsProps'
         ],
         components: {
             draggable,
         },
         data() {
             return {
+                colors: this.colorsProps,
                 inputColor: {
                     name: '',
                     color: '#B33636',
@@ -116,9 +117,6 @@
         methods: {
             removeColor(index) {
                 this.colors.splice(index, 1)
-            },
-            addInputColor() {
-
             },
             addColor() {
                 if (this.inputColor.name.length > 0 && this.validateColorInput.value) {

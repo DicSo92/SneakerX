@@ -47,7 +47,7 @@
               </div>
 
               <div class="row q-mt-md">
-                <ColorsPicker :colors="colors" class="col-6"
+                <ColorsPicker :colorsProps="colors" class="col-6"
                               @colorsChange="changeColorsOnEmit">
                 </ColorsPicker>
 
