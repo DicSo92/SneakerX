@@ -15,7 +15,7 @@
       option-label="size"
       label="Choose Sizes"
       counter
-      hint="Counter Sizes"
+      hint="Sizes :"
       class="full-width q-mb-md">
 
       <template v-if="sizes.length" v-slot:append>

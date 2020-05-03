@@ -111,8 +111,9 @@
           <q-td key="created_at" :props="props" auto-width>{{ cFormatDate(props.row.created_at) }}</q-td>
           <q-td key="updated_at" :props="props" auto-width>{{ cFormatDate(props.row.updated_at) }}</q-td>
           <q-td key="active" :props="props" auto-width>
-            <q-btn round size="xs" :color="props.row.active === 1 ? 'positive' : 'negative'"
-                   :icon="props.row.active === 1 ? 'done' : 'clear'"/>
+            <q-btn rounded size="xs" :color="props.row.active === 1 ? 'green-6' : 'red-7'"
+                   :label="props.row.active === 1 ? 'active' : 'disable'"/>
+
           </q-td>
         </q-tr>
 

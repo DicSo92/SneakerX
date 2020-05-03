@@ -66,7 +66,7 @@
             </div>
           </q-item-section>
           <q-item-section side>
-            <q-btn round size="xs" color="negative" icon="clear" @click="removeColor(index)"/>
+            <q-btn dense round size="xs" color="negative" icon="clear" @click="removeColor(index)"/>
           </q-item-section>
         </q-item>
       </transition-group>
