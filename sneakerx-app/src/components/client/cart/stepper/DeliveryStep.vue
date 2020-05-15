@@ -136,7 +136,7 @@
             getAddressBook() {
                 this.loadingAddressBook = true
 
-                this.$axios.get('/api/addressBook')
+                this.$axios.get('/api/client/addressBook')
                     .then(response => {
                         console.log(response);
 
@@ -170,7 +170,7 @@
             },
             saveToAddressBook() {
                 this.loadingSaveNewAddress = true
-                this.$axios.post('/api/addressBook', this.invoice)
+                this.$axios.post('/api/client/addressBook', this.invoice)
                     .then(response => {
                         console.log(response);
 
