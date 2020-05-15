@@ -53,3 +53,9 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('auth:san
     Route::post('brands/{id}', 'BrandController@updateBrand')->name('brands.update');
     Route::delete('brands/imageDelete/{id}', 'BrandController@removeImage')->name('brands.imageDelete');
 });
+
+
+Route::namespace('Client')->prefix('client')->name('client.')->group(function () {
+    Route::get('products', 'ProductController@index')->name('products.index');
+    Route::get('products/{slug}', 'ProductController@show')->name('products.show');
+});
