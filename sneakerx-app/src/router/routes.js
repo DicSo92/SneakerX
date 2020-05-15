@@ -15,7 +15,13 @@ const routes = [
         name: 'auth',
         component: () => import('pages/Auth.vue'),
         meta: { requiresVisitor: true }
-      }
+      },
+      {
+        path: 'catalog',
+        name: 'catalog',
+        component: () => import('pages/client/Catalog.vue'),
+        // meta: { requiresVisitor: true }
+      },
     ],
   },
   {
