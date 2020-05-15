@@ -29,6 +29,12 @@ const routes = [
         component: () => import('pages/client/Product.vue'),
         // meta: { requiresVisitor: true }
       },
+      {
+        path: 'cart',
+        name: 'cart',
+        component: () => import('pages/client/Cart.vue'),
+        // meta: { requiresVisitor: true }
+      },
     ],
   },
   {

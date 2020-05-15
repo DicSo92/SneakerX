@@ -14,6 +14,7 @@
             this.$q.loading.show()
 
             this.$store.dispatch('auth/loadUser', 'firstLoad')
+            this.$store.dispatch('cart/getStorageCart')
 
             bus.$on('hideFirstLoading', () => {
                 this.$q.loading.hide()
