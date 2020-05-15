@@ -100,10 +100,9 @@
                 } else {
                     this.createOrderNoAccount()
                 }
-
             },
             createOrderNoAccount() {
-                this.$axios.post('/api/order/no-account', {
+                this.$axios.post('/api/client/order/no-account', {
                     products: JSON.stringify(this.getCart),
                     totalPrice: this.getTotalPrice,
                     email: this.email,
@@ -122,7 +121,7 @@
                     })
             },
             createOrderForUser() {
-                this.$axios.post('/api/order', {
+                this.$axios.post('/api/client/order', {
                     products: JSON.stringify(this.getCart),
                     totalPrice: this.getTotalPrice,
                     cardNumbers: this.cardNumbers.slice(-4),

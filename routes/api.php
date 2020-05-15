@@ -60,4 +60,9 @@ Route::namespace('Client')->prefix('client')->name('client.')->group(function ()
     Route::get('products/{slug}', 'ProductController@show')->name('products.show');
 
     Route::middleware('auth:sanctum')->apiResource('addressBook', 'AddressBookController');
+
+
+    Route::middleware('auth:sanctum')->post('order', 'OrderController@store')->name('orders.store');
+    Route::post('order/no-account', 'OrderController@storeNoAccount')->name('orders.storeNoAccount');
+    Route::get('order/{orderId}', 'OrderController@show')->name('orders.show');
 });

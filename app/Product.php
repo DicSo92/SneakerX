@@ -19,6 +19,10 @@ class Product extends Model
     {
         return $this->belongsTo(Brand::class);
     }
+    public function ordersProducts()
+    {
+        return $this->hasMany(OrdersProduct::class);
+    }
 
 
     // JoinTables:

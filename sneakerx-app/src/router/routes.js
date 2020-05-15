@@ -35,6 +35,13 @@ const routes = [
         component: () => import('pages/client/Cart.vue'),
         // meta: { requiresVisitor: true }
       },
+      {
+        path: 'orderConfirmation/:orderId',
+        name: 'orderConfirmation',
+        props: true,
+        component: () => import('pages/client/OrderConfirmation.vue'),
+        // meta: { requiresVisitor: true }
+      }
     ],
   },
   {
