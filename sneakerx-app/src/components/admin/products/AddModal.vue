@@ -64,19 +64,13 @@
 
           <div class="flex justify-between">
             <q-uploader
-              label="Banner (Restricted to images)"
+              label="Images List (Restricted to images)"
               accept=".jpg, image/*"
               hide-upload-btn
+              multiple
               @added="toggleImagesData($event, true, 'banner')"
               @removed="toggleImagesData($event, false, 'banner')"
-
-            />
-            <q-uploader
-              label="Image (Restricted to images)"
-              accept=".jpg, image/*"
-              hide-upload-btn
-              @added="toggleImagesData($event, true, 'image')"
-              @removed="toggleImagesData($event, false, 'image')"
+              class="full-width" style="min-height: 300px"
             />
           </div>
 
@@ -143,10 +137,10 @@
             addBrand() {
                 console.log('Fake Submit');
             },
-            toggleImagesData(files, added, qFor) {
-                if (qFor === 'banner') {
+            toggleImagesData(files, added, bannerOrImage) {
+                if (bannerOrImage === 'banner') {
                     this.bannerFile = added ? files[0] : null
-                } else if (qFor === 'image') {
+                } else if (bannerOrImage === 'image') {
                     this.imageFile = added ? files[0] : null
                 }
             }
