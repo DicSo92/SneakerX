@@ -22,6 +22,13 @@ const routes = [
         component: () => import('pages/client/Catalog.vue'),
         // meta: { requiresVisitor: true }
       },
+      {
+        path: 'catalog/:slug',
+        name: 'product',
+        props: true,
+        component: () => import('pages/client/Product.vue'),
+        // meta: { requiresVisitor: true }
+      },
     ],
   },
   {
