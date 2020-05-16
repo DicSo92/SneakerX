@@ -38,20 +38,25 @@ Route::post('/logout', function () {
 
 
 Route::middleware('auth:sanctum')->post('/admin', function () {
-    if (auth()->user()->is_admin) {
+    if (auth()->user()->role->name === 'SuperAdmin' OR auth()->user()->role->name === 'Admin') {
         return response(true);
     } else {
         return response('Not admin', 401);
     }
 });
 
-Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('auth:sanctum', 'admin')->group(function () {
+Route::namespace('Admin')->prefix('admin')->name('superAdmin.')->middleware('auth:sanctum', 'superAdmin')->group(function () {
     Route::apiResource('users', 'UserController');
     Route::apiResource('brands', 'BrandController');
     Route::apiResource('products', 'ProductController');
 
     Route::post('brands/{id}', 'BrandController@updateBrand')->name('brands.update');
     Route::delete('brands/imageDelete/{id}', 'BrandController@removeImage')->name('brands.imageDelete');
+});
+Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('auth:sanctum', 'allAdmin')->group(function () {
+    Route::apiResource('users', 'UserController')->only(['index', 'show']);
+    Route::apiResource('brands', 'BrandController')->only(['index', 'show']);
+    Route::apiResource('products', 'ProductController')->only(['index', 'show']);
 });
 
 
