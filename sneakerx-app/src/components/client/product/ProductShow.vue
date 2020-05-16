@@ -19,7 +19,7 @@
         :fullscreen.sync="fullscreen"
         infinite>
         <q-carousel-slide :name="product.image" :img-src="product.image" />
-        <q-carousel-slide v-for="img in product.images" :name="img" :img-src="img" />
+        <q-carousel-slide v-for="img in product.images" :key="img" :name="img" :img-src="img" />
 
         <template v-slot:control>
           <q-carousel-control

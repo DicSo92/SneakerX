@@ -77,8 +77,10 @@
               <q-input v-model="props.row.email" dense autofocus counter />
             </q-popup-edit>
           </q-td>
-          <q-td key="is_admin" :props="props" auto-width>
-            <q-btn size="sm" outline rounded :color="props.row.is_admin ? 'orange' : 'secondary'" :label="props.row.is_admin ? 'Admin' : 'User'" />
+          <q-td key="role" :props="props" auto-width>
+            <q-btn size="sm" outline rounded
+                   :color="props.row.role.name === 'SuperAdmin' ? 'red' : props.row.role.name === 'Admin' ? 'orange' : 'secondary'"
+                   :label="props.row.role.name" />
           </q-td>
           <q-td key="created_at" :props="props" class="text-caption text-grey-7" auto-width>{{ cFormatDate(props.row.created_at) }}</q-td>
           <q-td key="email_verified_at" :props="props" class="text-caption text-grey-7" auto-width>{{ cFormatDate(props.row.email_verified_at) }}</q-td>
@@ -120,7 +122,7 @@
                     // rowsNumber: xx if getting data from a server
                 },
                 selected: [],
-                visibleColumns: ['id', 'name', 'email', 'is_admin', 'created_at', 'email_verified_at'],
+                visibleColumns: ['id', 'name', 'email', 'role', 'created_at', 'email_verified_at'],
                 columns: [
                     {
                         name: 'id', required: true, label: 'ID',
@@ -131,7 +133,7 @@
                     },
                     {name: 'name', align: 'left', label: 'Name', field: 'name', sortable: true},
                     {name: 'email', label: 'Email', field: 'email', align: 'left', sortable: true},
-                    {name: 'is_admin', label: 'Admin', field: 'is_admin', align: 'center', sortable: true},
+                    {name: 'role', label: 'Role', field: 'role', align: 'center', sortable: true},
                     {name: 'created_at', label: 'Created At', field: 'created_at', sortable: true},
                     {name: 'email_verified_at', label: 'Verified At', field: 'email_verified_at', sortable: true},
                     {name: 'updated_at', label: 'Updated At', field: 'updated_at', sortable: true},
