@@ -11,16 +11,10 @@ class Brand extends Model
 
     protected $fillable = ['name', 'description', 'banner', 'image'];
 
-//    protected static $logAttributes = ['name', 'description', 'banner', 'image'];
     protected static $logFillable = true;
-    public function getDescriptionForEvent(string $eventName): string
-    {
-        return "User {$eventName}";
-    }
-    protected static $logName = 'User';
+    protected static $logName = 'Brand';
     protected static $logOnlyDirty = true;
     protected static $submitEmptyLogs = false;
-
 
     public function products()
     {
