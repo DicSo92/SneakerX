@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class CheckAdmin
+class CheckAllAdmin
 {
     /**
      * Handle an incoming request.
@@ -15,10 +15,9 @@ class CheckAdmin
      */
     public function handle($request, Closure $next)
     {
-//        if (!auth()->user()->is_admin) {
-        if (auth()->user()->role->name !== 'Admin') {
-            abort(403, 'Access denied');
+        if (auth()->user()->role->name === 'Admin' OR auth()->user()->role->name === 'SuperAdmin') {
+            return $next($request);
         }
-        return $next($request);
+        abort(403, 'Access denied');
     }
 }
