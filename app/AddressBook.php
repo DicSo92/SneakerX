@@ -14,7 +14,7 @@ class AddressBook extends Model
     ];
 
     protected static $logFillable = true;
-    protected static $logName = 'User';
+    protected static $logName = 'AddressBook';
     protected static $logOnlyDirty = true;
     protected static $submitEmptyLogs = false;
 

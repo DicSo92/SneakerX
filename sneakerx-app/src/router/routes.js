@@ -79,6 +79,11 @@ const routes = [
         name: 'orders_admin',
         component: () => import('pages/dashboard/Orders.vue'),
       },
+      {
+        path: 'activityLogs',
+        name: 'activityLogs_admin',
+        component: () => import('pages/dashboard/ActivityLogs.vue'),
+      },
     ],
   }
 ]

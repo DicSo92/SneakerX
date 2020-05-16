@@ -154,7 +154,13 @@
                     icon: 'shopping_cart',
                     link: 'orders_admin'
                 }
-                return [homeDash, users, news, products, brands, orders]
+                const activityLogs = {
+                    title: 'Activity Logs',
+                    caption: 'list.activityLogs',
+                    icon: 'code',
+                    link: 'activityLogs_admin'
+                }
+                return [homeDash, users, news, products, brands, orders, activityLogs]
             }
         },
         methods: {
