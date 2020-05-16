@@ -57,6 +57,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('auth:san
     Route::apiResource('users', 'UserController')->only(['index', 'show']);
     Route::apiResource('brands', 'BrandController')->only(['index', 'show']);
     Route::apiResource('products', 'ProductController')->only(['index', 'show']);
+    Route::get('activityLog', 'ActivityLogController@index')->name('activityLog.index');
 });
 
 
