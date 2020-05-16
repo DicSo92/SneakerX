@@ -7,7 +7,7 @@
         </q-item-section>
       </q-item>
       <q-separator/>
-      <q-item clickable>
+      <q-item clickable :to="{name: 'home_admin'}">
         <q-item-section>Dashboard</q-item-section>
       </q-item>
       <q-separator/>
