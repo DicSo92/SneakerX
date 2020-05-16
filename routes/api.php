@@ -38,7 +38,7 @@ Route::post('/logout', function () {
 
 
 Route::middleware('auth:sanctum')->post('/admin', function () {
-    if (auth()->user()->is_admin) {
+    if (auth()->user()->role->name === 'SuperAdmin' OR auth()->user()->role->name === 'Admin') {
         return response(true);
     } else {
         return response('Not admin', 401);
