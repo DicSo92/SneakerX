@@ -18,10 +18,8 @@
         :autoplay="autoplay"
         :fullscreen.sync="fullscreen"
         infinite>
-        <q-carousel-slide class="" :name="1" :img-src="product.image" />
-        <q-carousel-slide class="" :name="2" :img-src="product.image" />
-        <q-carousel-slide class="" :name="3" :img-src="product.image" />
-        <q-carousel-slide class="" :name="4" :img-src="product.image" />
+        <q-carousel-slide :name="product.image" :img-src="product.image" />
+        <q-carousel-slide v-for="img in product.images" :name="img" :img-src="img" />
 
         <template v-slot:control>
           <q-carousel-control
@@ -90,7 +88,14 @@
             </div>
           </div>
           <div class="row full-width q-my-sm">
-            <q-select square outlined v-model="size" :options="sizes" label="Choose a Size" class="col"/>
+            <q-select square outlined v-model="size"
+                      :options="product.sizes"
+                      option-value="size"
+                      option-label="size"
+                      map-options
+                      emit-value
+                      :option-disable="opt => !opt.available"
+                      label="Choose a Size" class="col"/>
             <q-select square outlined v-model="quantity" :options="quantities" class="col-auto q-ml-sm"/>
           </div>
           <div class="row">
@@ -113,7 +118,7 @@
             return {
                 fullscreen: false,
                 autoplay: false,
-                slide: 1,
+                slide: this.product.image,
                 stars: 4,
 
                 sizes: [36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52],
