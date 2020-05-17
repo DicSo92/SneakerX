@@ -6,6 +6,7 @@
       :columns="columns"
       :visible-columns="visibleColumns"
       row-key="id"
+      :pagination="pagination"
       selection="single"
       :selected.sync="selected"
       :loading="loading"
