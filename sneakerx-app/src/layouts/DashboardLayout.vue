@@ -30,6 +30,14 @@
           left-label
           unchecked-icon="clear"
         />
+        <q-toggle
+          v-model="darkMode"
+          checked-icon="check"
+          color="green"
+          label="Dark Mode (Beta) :"
+          left-label
+          unchecked-icon="clear"
+        />
       </q-toolbar>
     </q-header>
 
@@ -100,11 +108,15 @@
                 miniState: false,
 
                 animation: false,
+                darkMode: this.$q.dark.isActive
             }
         },
         watch: {
             currentRoute(val) {
                 console.log(val);
+            },
+            darkMode(val) {
+                this.setDarkMode(val)
             }
         },
         computed: {
@@ -164,6 +176,9 @@
             }
         },
         methods: {
+            setDarkMode(status) {
+                this.$q.dark.set(status)
+            },
             toggleMenu () {
                 // this.leftDrawerOpen = !this.leftDrawerOpen
 

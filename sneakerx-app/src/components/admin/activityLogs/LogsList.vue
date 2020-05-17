@@ -64,7 +64,7 @@
             <div class="text-pre-wrap text-bold">{{ props.row.log_name }}</div>
           </q-td>
           <q-td key="description" :props="props">
-            <div class="columnDescription">{{props.row.description}}</div>
+            <div>{{props.row.description}}</div>
           </q-td>
           <q-td key="subject_id" :props="props">
             <div>{{props.row.subject_id}}</div>
@@ -197,17 +197,6 @@
 <style scoped lang="scss">
   #spinnerContainer {
     min-width: 10px;
-  }
-  .columnDescription {
-    font-size: 0.85em;
-    font-style: italic;
-    max-width: 200px;
-    white-space: normal;
-
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
   }
 
   .BrandTable {
