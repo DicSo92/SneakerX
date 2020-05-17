@@ -249,7 +249,8 @@
                 return date.formatDate(Date, 'DD/MM/YY HH:mm')
             },
             getBrandName(id) {
-                return this.brands.find(brand => brand.id === id).name
+                let brand = this.brands.find(brand => brand.id === id)
+                return brand ? brand.name : 'unknown'
             },
             openExternalLink(link) {
                 openURL(link)
