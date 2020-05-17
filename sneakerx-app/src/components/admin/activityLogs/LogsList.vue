@@ -5,7 +5,7 @@
       :data="activityLogs"
       :columns="columns"
       :visible-columns="visibleColumns"
-      row-key="name"
+      row-key="id"
       selection="single"
       :selected.sync="selected"
       :loading="loading"
@@ -52,7 +52,7 @@
       </template>
 
       <template v-slot:body="props">
-        <q-tr :props="props">
+        <q-tr :props="props" @click="props.expand = !props.expand" class="cursor-pointer">
           <q-td>
             <q-checkbox v-model="props.selected"/>
           </q-td>
@@ -71,17 +71,43 @@
           <q-td key="subject_type" :props="props">
             <div>{{props.row.subject_type}}</div>
           </q-td>
-          <q-td key="properties" :props="props">
-            <div>{{props.row.properties}}</div>
-          </q-td>
           <q-td key="created_at" :props="props" class="text-caption text-grey-7">
             {{ cFormatDate(props.row.created_at) }}
           </q-td>
-          <q-td key="updated_at" :props="props" class="text-caption text-grey-7">
-            {{ cFormatDate(props.row.updated_at) }}
-          </q-td>
           <q-td key="causer_id" :props="props" auto-width>
             <div class="text-pre-wrap text-bold">{{ props.row.causer_id }}</div>
+          </q-td>
+        </q-tr>
+
+        <q-tr v-show="props.expand" :props="props">
+          <q-td colspan="100%">
+            <div class="flex no-wrap" v-if="props.row.properties.old">
+              <div class="column items-start">
+                <p class="text-bold no-margin">Old data : </p>
+                <div class="flex justify-center items-center" style="flex-grow: 3;">
+                  <div class="" v-for="(property, index) in props.row.properties.old">
+                    <span class="text-bold">{{index}} : </span>
+                    {{property ? property : 'NULL'}}
+                  </div>
+                </div>
+              </div>
+              <q-separator vertical inset class="q-mx-md"/>
+              <div class="column items-start">
+                <p class="text-bold no-margin">New data : </p>
+                <div class="flex justify-center items-center" style="flex-grow: 3;">
+                  <div class="" v-for="(property, index) in props.row.properties.attributes">
+                    <span class="text-bold">{{index}} : </span>
+                    {{property ? property : 'NULL'}}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex q-gutter-md" v-else>
+              <div class="" v-for="(property, index) in props.row.properties.attributes">
+                <span class="text-bold">{{index}} : </span>
+                {{property ? property : 'NULL'}}
+              </div>
+            </div>
           </q-td>
         </q-tr>
       </template>
@@ -121,17 +147,15 @@
                     // rowsNumber: xx if getting data from a server
                 },
                 selected: [],
-                visibleColumns: ['id', 'log_name', 'description', 'subject_id', 'subject_type', 'properties', 'causer_id'],
+                visibleColumns: ['id', 'log_name', 'description', 'subject_id', 'subject_type', 'created_at', 'causer_id'],
                 columns: [
                     {name: 'id', required: true, label: 'ID', field: row => row.id, align: 'left', sortable: true},
                     {name: 'log_name', align: 'left', label: 'Log Name', field: 'log_name', sortable: true},
                     {name: 'description', align: 'left', label: 'Description', field: 'description', sortable: true},
-                    {name: 'subject_id', align: 'left', label: '# Subject', field: 'subject_id', sortable: true},
+                    {name: 'subject_id', align: 'left', label: '# Subject', field: 'subject_id'},
                     {name: 'subject_type', align: 'left', label: 'Subject', field: 'subject_type', sortable: true},
-                    {name: 'properties', align: 'left', label: 'Properties', field: 'properties'},
                     {name: 'created_at', label: 'Created At', field: 'created_at', sortable: true},
-                    {name: 'updated_at', label: 'Updated At', field: 'updated_at', sortable: true},
-                    {name: 'causer_id', label: '# User', field: 'causer_id', align: 'right', sortable: true},
+                    {name: 'causer_id', required: true, label: '# User', field: 'causer_id', align: 'right', sortable: true},
                 ],
             }
         },
