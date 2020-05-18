@@ -6,7 +6,6 @@
       :columns="columns"
       :visible-columns="visibleColumns"
       row-key="id"
-      :pagination="pagination"
       selection="single"
       :selected.sync="selected"
       :loading="loading"
@@ -40,7 +39,6 @@
 
       <template v-slot:header="props">
         <q-tr :props="props">
-          <q-th auto-width></q-th>
           <q-th
             v-for="col in props.cols"
             :key="col.name"
@@ -54,36 +52,37 @@
 
       <template v-slot:body="props">
         <q-tr :props="props" @click="props.expand = !props.expand" class="cursor-pointer">
-          <q-td>
-            <q-checkbox v-model="props.selected"/>
-          </q-td>
           <q-td key="id" :props="props" auto-width>
             {{ props.row.id }} #
           </q-td>
-          <q-td key="log_name" :props="props">
-            <div class="text-pre-wrap text-bold">{{ props.row.log_name }}</div>
+          <q-td key="log_name" :props="props" auto-width>
+            <q-chip :color="colorByLogName(props.row.log_name)"
+                    text-color="white" size="md" square
+                    :label="props.row.log_name" />
           </q-td>
-          <q-td key="description" :props="props">
-            <div>{{props.row.description}}</div>
+          <q-td key="description" :props="props" >
+            <q-chip :color="colorByDescription(props.row.description)"
+                    text-color="white" size="md"
+                    :label="props.row.description" />
           </q-td>
-          <q-td key="subject_id" :props="props">
-            <div>{{props.row.subject_id}}</div>
-          </q-td>
-          <q-td key="subject_type" :props="props">
+          <q-td key="subject_type" :props="props" auto-width>
             <div>{{props.row.subject_type}}</div>
+          </q-td>
+          <q-td key="subject_id" :props="props" auto-width>
+            <div>{{props.row.subject_id}}</div>
           </q-td>
           <q-td key="created_at" :props="props" class="text-caption text-grey-7">
             {{ cFormatDate(props.row.created_at) }}
           </q-td>
           <q-td key="causer_id" :props="props" auto-width>
-            <div class="text-pre-wrap text-bold">{{ props.row.causer_id }}</div>
+            <div class="text-pre-wrap text-bold">{{ props.row.causer_id ? '# ' + props.row.causer_id : 'Unknown' }}</div>
           </q-td>
         </q-tr>
 
         <q-tr v-show="props.expand" :props="props">
           <q-td colspan="100%">
-            <div class="flex no-wrap" v-if="props.row.properties.old">
-              <div class="column items-start">
+            <div class="row no-wrap" v-if="props.row.properties.old">
+              <div class="col-6 column items-start">
                 <p class="text-bold no-margin">Old data : </p>
                 <div class="flex justify-center items-center" style="flex-grow: 3;">
                   <div class="" v-for="(property, index) in props.row.properties.old">
@@ -93,7 +92,7 @@
                 </div>
               </div>
               <q-separator vertical inset class="q-mx-md"/>
-              <div class="column items-start">
+              <div class="col-auto column items-start">
                 <p class="text-bold no-margin">New data : </p>
                 <div class="flex justify-center items-center" style="flex-grow: 3;">
                   <div class="" v-for="(property, index) in props.row.properties.attributes">
@@ -153,8 +152,8 @@
                     {name: 'id', required: true, label: 'ID', field: row => row.id, align: 'left', sortable: true},
                     {name: 'log_name', align: 'left', label: 'Log Name', field: 'log_name', sortable: true},
                     {name: 'description', align: 'left', label: 'Description', field: 'description', sortable: true},
-                    {name: 'subject_id', align: 'left', label: '# Subject', field: 'subject_id'},
                     {name: 'subject_type', align: 'left', label: 'Subject', field: 'subject_type', sortable: true},
+                    {name: 'subject_id', align: 'center', label: '# Subject', field: 'subject_id'},
                     {name: 'created_at', label: 'Created At', field: 'created_at', sortable: true},
                     {name: 'causer_id', required: true, label: '# User', field: 'causer_id', align: 'right', sortable: true},
                 ],
@@ -174,6 +173,24 @@
             },
         },
         methods: {
+            colorByLogName(logName) {
+                if (logName === 'User') {
+                    return 'blue-5'
+                } else if (logName === 'Brand') {
+                    return 'purple-4'
+                } else if (logName === 'Order') {
+                    return 'amber-5'
+                }
+            },
+            colorByDescription(description) {
+                if (description === 'created') {
+                    return 'green-5'
+                } else if (description === 'updated') {
+                    return 'orange-5'
+                } else if (description === 'deleted') {
+                    return 'red-5'
+                }
+            },
             cFormatDate(Date) {
                 return date.formatDate(Date, 'DD/MM/YY HH:mm')
             },
@@ -201,29 +218,5 @@
 
   .BrandTable {
     max-width: 100%;
-
-    td:first-child {
-      text-align: center;
-    }
-
-    thead tr:first-child th:first-child, tr:last-child th:last-child {
-      background-color: #dedede;
-    }
-
-    td:first-child, td:last-child {
-      background-color: #efefef;
-    }
-
-    td:first-child, th:first-child {
-      position: sticky;
-      left: 0;
-      z-index: 1;
-    }
-
-    td:last-child, th:last-child {
-      position: sticky;
-      right: 0;
-      z-index: 1;
-    }
   }
 </style>

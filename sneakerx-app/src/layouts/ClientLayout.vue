@@ -94,8 +94,5 @@
 </script>
 
 <style lang="scss">
-  .listScrollable {
-    max-height: 30vh;
-    overflow-y: auto;
-  }
+
 </style>
