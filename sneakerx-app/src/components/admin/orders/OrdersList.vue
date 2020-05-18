@@ -49,7 +49,7 @@
       </template>
 
       <template v-slot:body="props">
-        <q-tr :props="props">
+        <q-tr :props="props" @click="props.expand = !props.expand" class="cursor-pointer">
           <q-td key="id" :props="props" auto-width>
             {{ props.row.id }} #
           </q-td>
@@ -83,6 +83,113 @@
             <q-chip :color="props.row.deliveryStatus ? 'green-5' : 'orange-5'"
                     text-color="white" size="md"
                     :label="props.row.deliveryStatus ? 'DELIVER' : 'In Progress'"/>
+          </q-td>
+        </q-tr>
+
+        <q-tr v-show="props.expand" :props="props">
+          <q-td colspan="100%">
+            <div class="flex no-wrap q-gutter-sm">
+              <div class="column userInformations">
+                <div class="text-overline" :class="!props.row.user ? 'text-red' : ''" >
+                  {{props.row.user ? 'User Informations' : 'User without an account'}} :
+                </div>
+                <div class="text-caption q-pl-sm q-pb-sm">
+                  <span class="text-bold">Order Email : </span>
+                  {{props.row.email}}
+                </div>
+                <div class="q-pl-sm q-pb-sm column" v-if="props.row.user">
+                  <div class="text-caption">
+                    <span class="text-bold">User name : </span>
+                    {{props.row.user.name}}
+                  </div>
+                </div>
+                <q-btn outline color="primary"
+                       label="User Profile"
+                       v-if="props.row.user"
+                       size="sm" />
+              </div>
+
+              <q-separator vertical spaced/>
+
+              <div class="column">
+                <div class="text-overline">
+                  Invoice Informations :
+                </div>
+                <div class="q-pl-sm column">
+                  <div class="text-caption">
+                    {{props.row.orders_billing_addresses.firstName + ' ' + props.row.orders_billing_addresses.lastName}}
+                  </div>
+                  <div class="text-caption">
+                    {{props.row.orders_billing_addresses.address + ' - ' + props.row.orders_billing_addresses.postalCode + ', ' + props.row.orders_billing_addresses.city}}
+                  </div>
+                  <div class="text-caption">
+                    {{props.row.orders_billing_addresses.country}}
+                  </div>
+                  <div class="text-caption">
+                    Tel: {{props.row.orders_billing_addresses.phone}}
+                  </div>
+                </div>
+              </div>
+
+              <q-separator vertical spaced/>
+
+              <div class="column">
+                <div class="text-overline">
+                  Delivery Informations :
+                </div>
+                <div class="q-pl-sm column">
+                  <div class="text-caption">
+                    {{props.row.orders_delivery_addresses.firstName + ' ' + props.row.orders_delivery_addresses.lastName}}
+                  </div>
+                  <div class="text-caption">
+                    {{props.row.orders_delivery_addresses.address + ' - ' + props.row.orders_delivery_addresses.postalCode + ', ' + props.row.orders_delivery_addresses.city}}
+                  </div>
+                  <div class="text-caption">
+                    {{props.row.orders_delivery_addresses.country}}
+                  </div>
+                  <div class="text-caption">
+                    Tel: {{props.row.orders_delivery_addresses.phone}}
+                  </div>
+                </div>
+              </div>
+
+              <q-separator vertical spaced/>
+
+              <div class="listScrollable">
+                <q-list>
+                  <q-item v-for="(product, index) in props.row.orders_products"
+                          :key="product.id"
+                          class="q-my-sm"
+                          clickable
+                          dense
+                          v-ripple>
+                    <q-item-section avatar>
+                      <q-avatar rounded>
+                        <img :src="product.product.image">
+                      </q-avatar>
+                    </q-item-section>
+
+                    <q-item-section>
+                      <q-item-label lines="1" class="text-bold">
+                        <span>x{{product.quantity}} |</span>
+                        {{ product.product.name }}
+                        <span class="text-caption text-grey-8">- ADIDAS</span>
+                      </q-item-label>
+                      <q-item-label caption>
+                        Color: {{product.color.name}}
+                        <span class="q-ml-md">Size: {{product.size}}</span>
+                      </q-item-label>
+                    </q-item-section>
+
+                    <q-item-section side>
+                      <q-item-label caption>
+                        {{((product.product.price / 100) * product.quantity).toFixed(2)}} €
+                      </q-item-label>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
           </q-td>
         </q-tr>
       </template>
@@ -162,6 +269,14 @@
     }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+  .listScrollable {
+    max-height: 15vh;
+    /*width: 350px;*/
+    flex-grow: 2;
+    overflow-y: auto;
+  }
+  .userInformations {
+    flex-grow: 1;
+  }
 </style>
