@@ -91,23 +91,28 @@
           <q-td colspan="100%">
             <div class="flex no-wrap q-gutter-sm">
               <div class="column userInformations">
-                <div class="text-overline" :class="!props.row.user ? 'text-red' : ''" >
-                  {{props.row.user ? 'User Informations' : 'User without an account'}} :
+                <div class="text-overline" >
+                  User Informations :
                 </div>
-                <div class="text-caption q-pl-sm q-pb-sm">
-                  <span class="text-bold">Order Email : </span>
-                  {{props.row.email}}
-                </div>
-                <div class="q-pl-sm q-pb-sm column" v-if="props.row.user">
-                  <div class="text-caption">
-                    <span class="text-bold">User name : </span>
-                    {{props.row.user.name}}
+                <div class="q-pl-sm">
+                  <div class="text-caption text-bold text-red" v-if="!props.row.user">
+                    User without an account
                   </div>
+                  <div class="text-caption q-pb-sm">
+                    <span class="text-bold">Order Email : </span>
+                    {{props.row.email}}
+                  </div>
+                  <div class="q-pb-sm column" v-if="props.row.user">
+                    <div class="text-caption">
+                      <span class="text-bold">User name : </span>
+                      {{props.row.user.name}}
+                    </div>
+                  </div>
+                  <q-btn outline color="primary"
+                         label="User Profile"
+                         v-if="props.row.user"
+                         size="sm" />
                 </div>
-                <q-btn outline color="primary"
-                       label="User Profile"
-                       v-if="props.row.user"
-                       size="sm" />
               </div>
 
               <q-separator vertical spaced/>
@@ -280,7 +285,7 @@
   .listScrollable {
     max-height: 15vh;
     /*width: 350px;*/
-    flex-grow: 2;
+    flex-grow: 3;
     overflow-y: auto;
   }
   .userInformations {
