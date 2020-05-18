@@ -1,14 +1,11 @@
 <template>
   <div class="full-width">
-    <q-table
-      title="Treats"
-      :data="roles"
-      :columns="columns"
-      row-key="id"
-      :loading="loading"
-      class="BrandTable"
-    >
-
+    <q-table title="Treats"
+             :data="roles"
+             :columns="columns"
+             row-key="id"
+             :loading="loading"
+             class="BrandTable">
       <template v-slot:top>
         <q-icon name="local_offer" size="lg"/>
 
@@ -21,38 +18,30 @@
 
       <template v-slot:header="props">
         <q-tr :props="props">
-          <q-th
-            v-for="col in props.cols"
-            :key="col.name"
-            :props="props"
-            class="text-italic text-purple"
-          >
+          <q-th v-for="col in props.cols"
+                :key="col.name"
+                :props="props"
+                class="text-italic text-purple">
             {{ col.label }}
           </q-th>
         </q-tr>
       </template>
 
       <template v-slot:body="props">
-        <q-tr :props="props" @click="props.expand = !props.expand" class="cursor-pointer">
+        <q-tr :props="props">
           <q-td key="id" :props="props" auto-width>
-            {{ props.row.id }} #
+            <div class="text-bold">
+              {{ props.row.id }} #
+            </div>
           </q-td>
           <q-td key="name" :props="props" auto-width>
-            <div class="text-bold">
-              {{props.row.name}}
-            </div>
+            <q-btn size="sm" outline rounded
+                   :color="props.row.name === 'SuperAdmin' ? 'red' : props.row.name === 'Admin' ? 'orange' : 'secondary'"
+                   :label="props.row.name" />
           </q-td>
           <q-td key="description" :props="props" auto-width>
             <div class="text-caption">
               {{props.row.description}}
-            </div>
-          </q-td>
-        </q-tr>
-
-        <q-tr v-show="props.expand" :props="props">
-          <q-td colspan="100%">
-            <div class="flex no-wrap q-gutter-sm">
-              Expand
             </div>
           </q-td>
         </q-tr>
@@ -74,9 +63,6 @@
 </template>
 
 <script>
-    import bus from '../../../utils/bus.js'
-    import {QSpinnerGears, date} from 'quasar'
-
     export default {
         name: "RolesList",
         data() {
@@ -85,7 +71,6 @@
                 loading: true,
                 search: '',
 
-                visibleColumns: ['id', 'name', 'description'],
                 columns: [
                     {name: 'id', required: true, label: 'ID', field: row => row.id, align: 'left'},
                     {name: 'name', align: 'left', label: 'Name', field: 'name'},
@@ -97,9 +82,6 @@
             this.getRoles()
         },
         mounted() {
-            // bus.$on('refreshActivityLogs', () => {
-            //     this.getActivityLogs()
-            // })
         },
         watch: {
         },
@@ -122,13 +104,4 @@
 </script>
 
 <style scoped lang="scss">
-  .listScrollable {
-    max-height: 15vh;
-    /*width: 350px;*/
-    flex-grow: 3;
-    overflow-y: auto;
-  }
-  .userInformations {
-    flex-grow: 1;
-  }
 </style>
