@@ -39,8 +39,8 @@
     <q-card-section>
       <div class="column" v-if="billingAddress">
         <div class="text-overline">
-          Invoice Informations :
-        </div>
+        Invoice Informations :
+      </div>
         <div class="q-pl-sm column">
           <div class="text-caption">
             {{billingAddress.firstName + ' ' + billingAddress.lastName}}

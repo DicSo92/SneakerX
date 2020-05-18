@@ -123,6 +123,9 @@
     }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+  .listScrollable {
+    max-height: 30vh;
+    overflow-y: auto;
+  }
 </style>
