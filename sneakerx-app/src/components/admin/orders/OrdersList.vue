@@ -7,6 +7,7 @@
       :visible-columns="visibleColumns"
       row-key="id"
       :loading="loading"
+      :pagination.sync="pagination"
       class="BrandTable"
     >
 
@@ -220,6 +221,12 @@
                 orders: [],
                 loading: true,
                 search: '',
+
+                pagination: {
+                    sortBy: 'id',
+                    descending: false,
+                    rowsPerPage: 10
+                },
 
                 selected: [],
                 visibleColumns: ['id', 'email', 'totalPrice', 'paymentStatus', 'created_at', 'updated_at', 'orders_products', 'deliveryStatus'],
