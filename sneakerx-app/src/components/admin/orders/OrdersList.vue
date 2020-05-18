@@ -63,7 +63,7 @@
             <div>{{props.row.paymentStatus}}</div>
           </q-td>
           <q-td key="orders_products" :props="props">
-            <div>x {{props.row.orders_products.reduce((a, b) => a + (b['quantity'] || 0), 0)}}</div>
+            <div>x {{getTotalProducts(props.row.orders_products)}}</div>
           </q-td>
           <q-td key="deliveryStatus" :props="props">
             <div>{{props.row.deliveryStatus}}</div>
@@ -129,6 +129,9 @@
         watch: {
         },
         methods: {
+            getTotalProducts(orderProduct) {
+                return orderProduct.reduce((a, b) => a + (b['quantity'] || 0), 0);
+            },
             cFormatDate(Date) {
                 return date.formatDate(Date, 'DD/MM/YY HH:mm')
             },
