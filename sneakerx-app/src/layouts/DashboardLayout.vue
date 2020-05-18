@@ -166,13 +166,19 @@
                     icon: 'shopping_cart',
                     link: 'orders_admin'
                 }
+                const roles = {
+                    title: 'Roles',
+                    caption: 'list.roles',
+                    icon: 'pan_tool',
+                    link: 'roles_admin'
+                }
                 const activityLogs = {
                     title: 'Activity Logs',
                     caption: 'list.activityLogs',
                     icon: 'code',
                     link: 'activityLogs_admin'
                 }
-                return [homeDash, users, news, products, brands, orders, activityLogs]
+                return [homeDash, users, news, products, brands, orders, roles, activityLogs]
             }
         },
         methods: {

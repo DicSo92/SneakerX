@@ -80,6 +80,11 @@ const routes = [
         component: () => import('pages/dashboard/Orders.vue'),
       },
       {
+        path: 'roles',
+        name: 'roles_admin',
+        component: () => import('pages/dashboard/Roles.vue'),
+      },
+      {
         path: 'activityLogs',
         name: 'activityLogs_admin',
         component: () => import('pages/dashboard/ActivityLogs.vue'),
