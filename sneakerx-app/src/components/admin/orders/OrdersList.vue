@@ -54,25 +54,35 @@
             {{ props.row.id }} #
           </q-td>
           <q-td key="email" :props="props">
-            {{props.row.email}}
+            <div class="text-bold">
+              {{props.row.email}}
+            </div>
           </q-td>
           <q-td key="totalPrice" :props="props">
-            {{props.row.totalPrice / 100 }} €
+            <div class="text-caption">
+              {{props.row.totalPrice / 100 }} €
+            </div>
           </q-td>
-          <q-td key="paymentStatus" :props="props">
-            <div>{{props.row.paymentStatus}}</div>
-          </q-td>
-          <q-td key="orders_products" :props="props">
-            <div>x {{getTotalProducts(props.row.orders_products)}}</div>
-          </q-td>
-          <q-td key="deliveryStatus" :props="props">
-            <div>{{props.row.deliveryStatus}}</div>
+          <q-td key="orders_products" :props="props" auto-width>
+            <div class="text-overline">
+              x {{getTotalProducts(props.row.orders_products)}}
+            </div>
           </q-td>
           <q-td key="created_at" :props="props" class="text-caption text-grey-7">
             {{ cFormatDate(props.row.created_at) }}
           </q-td>
           <q-td key="updated_at" :props="props" class="text-caption text-grey-7">
             {{ cFormatDate(props.row.updated_at) }}
+          </q-td>
+          <q-td key="paymentStatus" :props="props" auto-width>
+            <q-chip :color="props.row.paymentStatus ? 'green-5' : 'orange-5'"
+                    text-color="white" size="md"
+                    :label="props.row.paymentStatus ? 'OK' : 'Waiting'"/>
+          </q-td>
+          <q-td key="deliveryStatus" :props="props" auto-width>
+            <q-chip :color="props.row.deliveryStatus ? 'green-5' : 'orange-5'"
+                    text-color="white" size="md"
+                    :label="props.row.deliveryStatus ? 'DELIVER' : 'In Progress'"/>
           </q-td>
         </q-tr>
       </template>
@@ -105,16 +115,16 @@
                 search: '',
 
                 selected: [],
-                visibleColumns: ['id', 'email', 'totalPrice', 'paymentStatus', 'orders_products', 'deliveryStatus', 'created_at', 'updated_at'],
+                visibleColumns: ['id', 'email', 'totalPrice', 'paymentStatus', 'created_at', 'updated_at', 'orders_products', 'deliveryStatus'],
                 columns: [
                     {name: 'id', required: true, label: 'ID', field: row => row.id, align: 'left', sortable: true},
                     {name: 'email', align: 'left', label: 'Email', field: 'email', sortable: true},
                     {name: 'totalPrice', align: 'left', label: 'Total Price', field: 'totalPrice', sortable: true},
-                    {name: 'paymentStatus', label: 'Payment Status', field: 'paymentStatus', sortable: true},
                     {name: 'orders_products', label: 'Products', field: 'orders_products', sortable: true},
-                    {name: 'deliveryStatus', required: true, label: 'Delivery Status', field: 'deliveryStatus', align: 'right', sortable: true},
                     {name: 'created_at', label: 'Created At', field: 'created_at', sortable: true},
                     {name: 'updated_at', label: 'Updated At', field: 'updated_at', sortable: true},
+                    {name: 'paymentStatus', label: 'Payment', field: 'paymentStatus', align: 'center', sortable: true},
+                    {name: 'deliveryStatus', label: 'Delivery', field: 'deliveryStatus', align: 'center', sortable: true, required: true},
                 ],
             }
         },
