@@ -6,7 +6,6 @@
       :columns="columns"
       :visible-columns="visibleColumns"
       row-key="id"
-      :pagination="pagination"
       selection="single"
       :selected.sync="selected"
       :loading="loading"
@@ -61,10 +60,14 @@
             {{ props.row.id }} #
           </q-td>
           <q-td key="log_name" :props="props">
-            <div class="text-pre-wrap text-bold">{{ props.row.log_name }}</div>
+            <q-chip :color="colorByLogName(props.row.log_name)"
+                    text-color="white" size="md" square
+                    :label="props.row.log_name" />
           </q-td>
           <q-td key="description" :props="props">
-            <div>{{props.row.description}}</div>
+            <q-chip :color="colorByDescription(props.row.description)"
+                    text-color="white" size="md"
+                    :label="props.row.description" />
           </q-td>
           <q-td key="subject_id" :props="props">
             <div>{{props.row.subject_id}}</div>
@@ -76,14 +79,14 @@
             {{ cFormatDate(props.row.created_at) }}
           </q-td>
           <q-td key="causer_id" :props="props" auto-width>
-            <div class="text-pre-wrap text-bold">{{ props.row.causer_id }}</div>
+            <div class="text-pre-wrap text-bold">{{ props.row.causer_id ? props.row.causer_id : 'Unknown' }}</div>
           </q-td>
         </q-tr>
 
         <q-tr v-show="props.expand" :props="props">
           <q-td colspan="100%">
-            <div class="flex no-wrap" v-if="props.row.properties.old">
-              <div class="column items-start">
+            <div class="row no-wrap" v-if="props.row.properties.old">
+              <div class="col-6 column items-start">
                 <p class="text-bold no-margin">Old data : </p>
                 <div class="flex justify-center items-center" style="flex-grow: 3;">
                   <div class="" v-for="(property, index) in props.row.properties.old">
@@ -93,7 +96,7 @@
                 </div>
               </div>
               <q-separator vertical inset class="q-mx-md"/>
-              <div class="column items-start">
+              <div class="col-auto column items-start">
                 <p class="text-bold no-margin">New data : </p>
                 <div class="flex justify-center items-center" style="flex-grow: 3;">
                   <div class="" v-for="(property, index) in props.row.properties.attributes">
@@ -174,6 +177,24 @@
             },
         },
         methods: {
+            colorByLogName(logName) {
+                if (logName === 'User') {
+                    return 'amber-5'
+                } else if (logName === 'Brand') {
+                    return 'purple-5'
+                } else if (logName === 'Order') {
+                    return 'lime-5'
+                }
+            },
+            colorByDescription(description) {
+                if (description === 'created') {
+                    return 'green-5'
+                } else if (description === 'updated') {
+                    return 'orange-5'
+                } else if (description === 'deleted') {
+                    return 'red-5'
+                }
+            },
             cFormatDate(Date) {
                 return date.formatDate(Date, 'DD/MM/YY HH:mm')
             },

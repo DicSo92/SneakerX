@@ -123,12 +123,6 @@ class OrderController extends Controller
         Mail::to('luzzi.charly@gmail.com')->send(new UserOrderMailAdmin($admin));
 
 //        --------------------------------------------------------------------------------------------------------------
-//        return response()->json([
-//            "order" => $newOrder,
-//            "ordersProducts" => $ordersProducts,
-//            "billingAddress" => $newBillingAddress,
-//            "deliveryAddress" => $newDeliveryAddress,
-//        ]);
         return response()->json($newOrder->load(['ordersProducts.product', 'ordersBillingAddresses', 'ordersDeliveryAddresses']));
     }
 
@@ -266,12 +260,6 @@ class OrderController extends Controller
         Mail::to('luzzi.charly@gmail.com')->send(new UserOrderMailAdmin($admin));
 
 //        --------------------------------------------------------------------------------------------------------------
-//        return response()->json([
-//            "order" => $newOrder,
-//            "ordersProducts" => $ordersProducts,
-//            "billingAddress" => $newBillingAddress,
-//            "deliveryAddress" => $newDeliveryAddress,
-//        ]);
         return response()->json($newOrder->load(['ordersProducts.product', 'ordersBillingAddresses', 'ordersDeliveryAddresses']));
     }
 }
