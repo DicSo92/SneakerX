@@ -4,13 +4,13 @@
       alt="Quasar logo"
       src="~assets/quasar-logo-full.svg"
     >
-    <h3>Categories</h3>
+    <h3>News</h3>
   </q-page>
 </template>
 
 <script>
     export default {
-        name: "Categories"
+        name: "News"
     }
 </script>
 
