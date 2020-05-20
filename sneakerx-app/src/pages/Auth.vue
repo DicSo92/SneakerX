@@ -1,7 +1,7 @@
 <template>
   <q-page class="flex flex-center">
     <div class="containerCard row flex-center">
-      <q-card class="authCard col-xs-11 col-sm-9 col-md-6 col-lg-4">
+      <q-card class="col-xs-11 col-sm-9 col-md-6 col-lg-4">
         <q-tabs
           v-model="tab"
           dense
@@ -56,8 +56,5 @@
 <style lang="scss">
   .containerCard {
     width: 100%;
-    .authCard {
-
-    }
   }
 </style>
