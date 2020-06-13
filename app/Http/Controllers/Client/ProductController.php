@@ -19,9 +19,9 @@ class ProductController extends Controller
         $nb = $request->query('nb');
 
         if (isset($nb)) {
-            $tasks = Product::orderBy('created_at', 'DESC')->paginate($nb);
+            $tasks = Product::orderBy('created_at', 'DESC')->with('brand')->paginate($nb);
         } else {
-            $tasks = Product::orderBy('created_at', 'DESC')->paginate(8);
+            $tasks = Product::orderBy('created_at', 'DESC')->with('brand')->paginate(8);
         }
 
         return response()->json($tasks);
