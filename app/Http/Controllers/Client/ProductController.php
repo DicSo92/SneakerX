@@ -19,12 +19,12 @@ class ProductController extends Controller
         $nb = $request->query('nb');
 
         if (isset($nb)) {
-            $tasks = Product::orderBy('created_at', 'DESC')->with('brand')->paginate($nb);
+            $products = Product::orderBy('created_at', 'DESC')->with('brand')->paginate($nb);
         } else {
-            $tasks = Product::orderBy('created_at', 'DESC')->with('brand')->paginate(8);
+            $products = Product::orderBy('created_at', 'DESC')->with('brand')->paginate(8);
         }
 
-        return response()->json($tasks);
+        return response()->json($products);
     }
 
     /**

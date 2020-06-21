@@ -74,4 +74,7 @@ Route::namespace('Client')->prefix('client')->name('client.')->group(function ()
     Route::middleware('auth:sanctum')->post('order', 'OrderController@store')->name('orders.store');
     Route::post('order/no-account', 'OrderController@storeNoAccount')->name('orders.storeNoAccount');
     Route::get('order/{orderId}', 'OrderController@show')->name('orders.show');
+
+    Route::get('news', 'ActualityController@index')->name('actualities.index');
+    Route::get('news/{slug}', 'ActualityController@show')->name('actualities.show');
 });
