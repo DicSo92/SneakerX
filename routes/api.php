@@ -67,6 +67,9 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('auth:san
 Route::namespace('Client')->prefix('client')->name('client.')->group(function () {
     Route::get('products', 'ProductController@index')->name('products.index');
     Route::get('products/{slug}', 'ProductController@show')->name('products.show');
+    Route::get('products/search/{search}', 'ProductController@search')->name('products.search');
+
+    Route::get('brands', 'BrandController@index')->name('products.index');
 
     Route::middleware('auth:sanctum')->apiResource('addressBook', 'AddressBookController');
 

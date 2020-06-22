@@ -42,7 +42,9 @@ class ActualityController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Actuality  $actuality
+     * @param \App\Actuality $actuality
+     * @param                $slug
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Actuality $actuality, $slug)
