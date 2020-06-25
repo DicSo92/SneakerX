@@ -1,14 +1,21 @@
 <template>
-  <q-page class="flex flex-center">
-    <img
-      alt="Quasar logo"
-      src="~assets/quasar-logo-full.svg"
-    >
+  <q-page>
+<!--    <div class="row justify-center">-->
+<!--      <div class="col-7">-->
+<!--        <Carousel/>-->
+<!--      </div>-->
+<!--    </div>-->
+    <Carousel/>
   </q-page>
 </template>
 
 <script>
-export default {
-  name: 'PageIndex'
-}
+    import Carousel from '../components/client/home/Carousel.vue'
+
+    export default {
+        name: 'PageIndex',
+        components: {
+            Carousel
+        }
+    }
 </script>

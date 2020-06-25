@@ -1,9 +1,9 @@
 <template>
   <q-layout view="hHh lpR fFf">
-    <q-header elevated>
+    <q-header elevated class="bg-grey-10">
       <q-toolbar>
-        <q-toolbar-title>
-          <q-avatar square @click="goToHome" class="q-mr-sm cursor-pointer">
+        <q-toolbar-title class="cursor-pointer" @click="goToHome">
+          <q-avatar square  class="q-mr-sm">
             <img src="statics/IconSX-8.png">
           </q-avatar>
           SneakerX
