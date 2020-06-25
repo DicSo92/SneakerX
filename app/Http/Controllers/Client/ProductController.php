@@ -58,4 +58,25 @@ class ProductController extends Controller
         $searchProducts = Product::where('name', 'like', '%' . $search . '%')->with('brand')->paginate($nb);
         return response()->json($searchProducts);
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param                          $brandId
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function productsPerBrand(Request $request, $brandId)
+    {
+        $nb = $request->query('nb');
+
+        if (isset($nb)) {
+            $products = Product::where('brand_id', $brandId)->orderBy('created_at', 'DESC')->with('brand')->paginate($nb);
+        } else {
+            $products = Product::where('brand_id', $brandId)->orderBy('created_at', 'DESC')->with('brand')->paginate(8);
+        }
+
+        return response()->json($products);
+    }
 }
