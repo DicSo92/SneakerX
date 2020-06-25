@@ -80,4 +80,6 @@ Route::namespace('Client')->prefix('client')->name('client.')->group(function ()
 
     Route::get('news', 'ActualityController@index')->name('actualities.index');
     Route::get('news/{slug}', 'ActualityController@show')->name('actualities.show');
+
+    Route::post('contact', 'ContactController@contact')->name('contact.contact');
 });
