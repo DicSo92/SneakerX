@@ -8,7 +8,7 @@
       class="q-gutter-md"
     >
       <q-input
-        filled
+        filled color="purple-9"
         v-model="user.name"
         label="Enter your name *"
         hint="Name and surname"
@@ -16,7 +16,7 @@
         :rules="[ val => val && val.length > 0 || 'Please type something']"
       />
       <q-input
-        filled
+        filled color="purple-9"
         type="email"
         autocomplete="email"
         v-model="user.email"
@@ -26,7 +26,7 @@
       />
 
       <q-input
-        filled
+        filled color="purple-9"
         type="password"
         autocomplete="new-password"
         v-model="user.password"
@@ -38,7 +38,7 @@
       />
 
       <q-input
-        filled
+        filled color="purple-9"
         type="password"
         autocomplete="new-password"
         v-model="user.password_confirmation"
@@ -50,7 +50,7 @@
         ]"
       />
 
-      <q-toggle v-model="accept" label="I accept the license and terms"/>
+      <q-toggle v-model="accept" label="I accept the license and terms" color="purple-9"/>
 
       <p class="text-negative"
          v-if="errors.email">
@@ -58,8 +58,8 @@
       </p>
 
       <div>
-        <q-btn label="Register" type="submit" color="primary" icon="lock"/>
-        <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm"/>
+        <q-btn label="Register" type="submit" color="purple-10" icon="lock"/>
+        <q-btn label="Reset" type="reset" color="black" flat class="q-ml-sm"/>
       </div>
     </q-form>
   </div>

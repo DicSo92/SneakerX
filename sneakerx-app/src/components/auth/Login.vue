@@ -7,7 +7,7 @@
       class="q-gutter-md"
     >
       <q-input
-        filled
+        filled color="purple-9"
         type="email"
         autocomplete="email"
         v-model="email"
@@ -17,7 +17,7 @@
       />
 
       <q-input
-        filled
+        filled color="purple-9"
         type="password"
         autocomplete="current-password"
         v-model="password"
@@ -26,11 +26,11 @@
         :rules="[val => val !== null && val !== '' || 'Please type your password']"
       />
 
-      <q-toggle v-model="accept" label="I accept the license and terms"/>
+      <q-toggle v-model="accept" label="I accept the license and terms" color="purple-9"/>
 
       <div>
-        <q-btn label="LogIn" type="submit" color="primary" icon="lock"/>
-        <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm"/>
+        <q-btn label="LogIn" type="submit" color="purple-10" icon="lock"/>
+        <q-btn label="Reset" type="reset" color="black" flat class="q-ml-sm"/>
       </div>
     </q-form>
   </div>

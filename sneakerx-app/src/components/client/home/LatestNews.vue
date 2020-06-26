@@ -6,14 +6,31 @@
       </div>
     </div>
 
-    <div class="row justify-start items-start q-col-gutter-lg">
-      <div class="col-lg-4 col-sm-6 col-xs-12" v-for="actuality in news">
-        <CardActuality :actuality="actuality"/>
+    <transition
+      :duration="300"
+      mode="out-in"
+      enter-active-class="animated fadeIn"
+      leave-active-class="animated fadeOut">
+      <div class="row justify-start items-start q-col-gutter-lg" v-if="!loading">
+        <div class="col-lg-4 col-sm-6 col-xs-12" v-for="actuality in news">
+          <CardActuality :actuality="actuality"/>
+        </div>
       </div>
-    </div>
+    </transition>
+    <transition
+      :duration="300"
+      mode="out-in"
+      enter-active-class="animated fadeIn"
+      leave-active-class="animated fadeOut">
+      <div class="row justify-start items-start q-col-gutter-lg" v-if="loading">
+        <div class="col-lg-4 col-sm-6 col-xs-12" v-for="actuality in nbPerPage">
+          <CardActualitySkeleton/>
+        </div>
+      </div>
+    </transition>
 
     <div class="row justify-end q-mt-md">
-      <q-btn outline color="black" label="VIEW ALL" icon-right="chevron_right"/>
+      <q-btn outline color="black" label="VIEW ALL" icon-right="chevron_right" @click="goTo('news')"/>
     </div>
 
   </div>
@@ -21,11 +38,13 @@
 
 <script>
     import CardActuality from '../CardActuality.vue'
+    import CardActualitySkeleton from '../CardActualitySkeleton.vue'
 
     export default {
         name: "LatestNews",
         components: {
-            CardActuality
+            CardActuality,
+            CardActualitySkeleton
         },
         data() {
             return {
@@ -51,6 +70,9 @@
                         this.loading = false
                     })
                     .catch(error => console.log(error))
+            },
+            goTo(route) {
+                this.$router.push({name: route})
             }
         }
     }
