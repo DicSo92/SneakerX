@@ -32,7 +32,7 @@
                 <q-select dense :value="cart[index].total"
                           label="Quantity"
                           :options="quantities"
-                          class="col-auto"
+                          class="col-auto" color="purple-9"
                           :style="{minWidth: '70px'}"
                           @input="productQuantityUpdate(product, product.total, $event)"/>
               </div>

@@ -6,7 +6,7 @@
       <div class="row q-col-gutter-lg">
         <div class="col-xs-12 col-sm">
           <div class="row q-col-gutter-sm">
-            <q-input dense outlined v-model="cardName"
+            <q-input dense outlined v-model="cardName" color="purple-10"
                      label="Name on card :"
                      placeholder="John Doe"
                      lazy-rules
@@ -16,7 +16,7 @@
                 <q-icon name="person" />
               </template>
             </q-input>
-            <q-input dense outlined v-model="cardNumbers"
+            <q-input dense outlined v-model="cardNumbers" color="purple-10"
                      label="Card number :"
                      mask="card"
                      unmasked-value
@@ -28,7 +28,7 @@
                 <q-icon name="credit_card" />
               </template>
             </q-input>
-            <q-input dense outlined v-model="dateExp"
+            <q-input dense outlined v-model="dateExp" color="purple-10"
                      label="Expire date"
                      mask="## / ####"
                      placeholder="01 / 2021"
@@ -39,7 +39,7 @@
                 <q-icon name="event" />
               </template>
             </q-input>
-            <q-input dense outlined v-model="securityCode"
+            <q-input dense outlined v-model="securityCode" color="purple-10"
                      label="Security code :"
                      mask="###"
                      placeholder="111"
@@ -60,12 +60,12 @@
 
 
       <q-stepper-navigation>
-        <q-btn color="primary"
+        <q-btn color="purple-10"
                label="Confirm and Pay"
                icon="lock"
                :disable="!validatedCreditCard"
                @click="confirmOrder"/>
-        <q-btn flat @click="changeStep(3)" color="primary" label="Back" class="q-ml-sm" />
+        <q-btn flat @click="changeStep(3)" color="black" label="Back" class="q-ml-sm" />
       </q-stepper-navigation>
     </div>
 </template>

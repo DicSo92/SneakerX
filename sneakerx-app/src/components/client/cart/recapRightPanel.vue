@@ -1,6 +1,6 @@
 <template>
-  <q-card class="q-mb-md">
-    <q-card-section class="bg-primary text-white">
+  <q-card class="q-mb-md" square>
+    <q-card-section class="bg-black text-white">
       <div class="text-subtitle2">Payment Progress</div>
     </q-card-section>
 

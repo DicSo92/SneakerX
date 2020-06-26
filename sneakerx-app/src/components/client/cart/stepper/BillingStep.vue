@@ -3,9 +3,9 @@
     <div class="column">
       <div class="text-caption q-mb-sm">
         Choose a billing address from your address book or enter a
-        <span class="text-bold text-primary">new address</span>.
+        <span class="text-bold text-purple-10">new address</span>.
       </div>
-      <q-select outlined dense
+      <q-select outlined dense color="purple-9"
                 :loading="loadingAddressBook"
                 :disable="loadingAddressBook"
                 v-model="selectedAddress"
@@ -20,54 +20,54 @@
 
       <div v-if="selectedAddress && selectedAddress.newAddress"
            class="row q-col-gutter-sm q-mb-md">
-        <q-input outlined dense
+        <q-input outlined dense color="purple-10"
                  v-model="invoice.firstName"
                  label="Firstname..." class="col"
                  hint="First name*"
                  :rules="[val => !!val || 'Field is required']"
         />
-        <q-input outlined dense
+        <q-input outlined dense color="purple-10"
                  v-model="invoice.lastName"
                  label="Lastname..." class="col"
                  hint="Last name*"
                  :rules="[val => !!val || 'Field is required']"
         />
-        <q-input outlined dense
+        <q-input outlined dense color="purple-10"
                  v-model="invoice.address"
                  label="Address..." class="col-12"
                  hint="Address* (ex: 3 avenue john doe)"
                  :rules="[val => !!val || 'Field is required']"
         />
-        <q-input outlined dense
+        <q-input outlined dense color="purple-10"
                  v-model="invoice.additionalAddress"
                  label="Additional Address" class="col-12"
                  hint="Additional address"
         />
-        <q-input outlined dense
+        <q-input outlined dense color="purple-10"
                  v-model="invoice.postalCode"
                  label="Postal Code" class="col"
                  hint="Postal Code Number*"
                  :rules="[val => !!val || 'Field is required']"
         />
-        <q-input outlined dense
+        <q-input outlined dense color="purple-10"
                  v-model="invoice.city"
                  label="City" class="col"
                  hint="City Name*"
                  :rules="[val => !!val || 'Field is required']"
         />
-        <q-select outlined dense
+        <q-select outlined dense color="purple-10"
                   v-model="invoice.country" :options="countryOptions"
                   label="Country" class="col-12"
                   hint="Country Name*"
                   :rules="[val => !!val || 'Field is required']"
         />
-        <q-input outlined dense
+        <q-input outlined dense color="purple-10"
                  v-model="invoice.phone"
                  label="Phone Number" class="col" type="tel"
                  hint="Telephone number*"
                  :rules="[val => !!val || 'Field is required']"
         />
-        <q-checkbox dense
+        <q-checkbox dense color="black"
                     v-model="saveAddress"
                     label="Save to Address book" class="col-12"
         />
@@ -75,19 +75,19 @@
 
       <div class="column q-gutter-sm">
         <q-radio dense v-model="sameAddressDeliver" :val="true"
-                 label="Deliver to this address"
+                 label="Deliver to this address" color="black"
                  :disable="!selectedAddress"/>
         <q-radio dense v-model="sameAddressDeliver" :val="false"
-                 label="Deliver to another address"
+                 label="Deliver to another address" color="black"
                  :disable="!selectedAddress"/>
       </div>
     </div>
     <q-stepper-navigation>
-      <q-btn :loading="loadingSaveNewAddress" color="primary"
+      <q-btn :loading="loadingSaveNewAddress" color="purple-10"
              @click="nextStep"
              :disable="!newAddressValidated"
              label="Continue"/>
-      <q-btn flat @click="changeStep(1)" color="primary" label="Back" class="q-ml-sm" />
+      <q-btn flat @click="changeStep(1)" color="black" label="Back" class="q-ml-sm" />
     </q-stepper-navigation>
   </div>
 </template>

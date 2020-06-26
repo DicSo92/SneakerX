@@ -1,28 +1,32 @@
 <template>
   <q-page class="flex column justify-start items-center" padding>
-    <div class="row full-width borderBottom q-mb-md">
-      <h6 class="no-margin ">Cart :</h6>
-    </div>
+    <div class="row justify-center full-width">
+      <div class="col-10">
+        <div class="row full-width borderBottom q-mb-md">
+          <h6 class="no-margin ">Cart :</h6>
+        </div>
 
-    <div class="row q-col-gutter-md full-width">
-      <div class="col-xs-12 col-md-7">
-        <CartEdit v-if="edit"
-                  :cart="getCart"
-                  :totalCart="getTotalCart"
-                  :totalPrice="getTotalPrice">
-        </CartEdit>
-        <CartOrderStepper v-else>
-        </CartOrderStepper>
-      </div>
-      <div class="col column">
-        <recapRightPanel v-if="!edit">
-        </recapRightPanel>
-        <CartRightPanel :cart="getCart"
-                        :totalCart="getTotalCart"
-                        :totalPrice="getTotalPrice"
-                        :edit="edit"
-                        @changeLeftPanel="edit = !edit">
-        </CartRightPanel>
+        <div class="row q-col-gutter-md full-width">
+          <div class="col-xs-12 col-md-7">
+            <CartEdit v-if="edit"
+                      :cart="getCart"
+                      :totalCart="getTotalCart"
+                      :totalPrice="getTotalPrice">
+            </CartEdit>
+            <CartOrderStepper v-else>
+            </CartOrderStepper>
+          </div>
+          <div class="col column">
+            <recapRightPanel v-if="!edit">
+            </recapRightPanel>
+            <CartRightPanel :cart="getCart"
+                            :totalCart="getTotalCart"
+                            :totalPrice="getTotalPrice"
+                            :edit="edit"
+                            @changeLeftPanel="edit = !edit">
+            </CartRightPanel>
+          </div>
+        </div>
       </div>
     </div>
   </q-page>

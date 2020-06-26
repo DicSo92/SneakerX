@@ -8,48 +8,48 @@
       <q-separator class="q-my-md" style="min-height: 1px"/>
 
       <div class="row q-col-gutter-sm q-mb-md">
-        <q-input outlined dense
+        <q-input outlined dense color="purple-10"
                  v-model="invoice.firstName"
                  label="Firstname..." class="col"
                  hint="First name*"
                  :rules="[val => !!val || 'Field is required']"
         />
-        <q-input outlined dense
+        <q-input outlined dense color="purple-10"
                  v-model="invoice.lastName"
                  label="Lastname..." class="col"
                  hint="Last name*"
                  :rules="[val => !!val || 'Field is required']"
         />
-        <q-input outlined dense
+        <q-input outlined dense color="purple-10"
                  v-model="invoice.address"
                  label="Address..." class="col-12"
                  hint="Address* (ex: 3 avenue john doe)"
                  :rules="[val => !!val || 'Field is required']"
         />
-        <q-input outlined dense
+        <q-input outlined dense color="purple-10"
                  v-model="invoice.additionalAddress"
                  label="Additional Address" class="col-12"
                  hint="Additional address"
         />
-        <q-input outlined dense
+        <q-input outlined dense color="purple-10"
                  v-model="invoice.postalCode"
                  label="Postal Code" class="col"
                  hint="Postal Code Number*"
                  :rules="[val => !!val || 'Field is required']"
         />
-        <q-input outlined dense
+        <q-input outlined dense color="purple-10"
                  v-model="invoice.city"
                  label="City" class="col"
                  hint="City Name*"
                  :rules="[val => !!val || 'Field is required']"
         />
-        <q-select outlined dense
+        <q-select outlined dense color="purple-10"
                   v-model="invoice.country" :options="countryOptions"
                   label="Country" class="col-12"
                   hint="Country Name*"
                   :rules="[val => !!val || 'Field is required']"
         />
-        <q-input outlined dense
+        <q-input outlined dense color="purple-10"
                  v-model="invoice.phone"
                  label="Phone Number" class="col" type="tel"
                  hint="Telephone number*"
@@ -58,7 +58,7 @@
       </div>
 
       <div class="q-gutter-sm">
-        <q-checkbox dense
+        <q-checkbox dense color="black"
                     v-model="useSameAsBilling"
                     @input="toggleSameAddress"
                     label="Use the billing address" class="col-12"
@@ -66,11 +66,11 @@
       </div>
     </div>
     <q-stepper-navigation>
-      <q-btn color="primary"
+      <q-btn color="purple-10"
              @click="nextStep"
              :disable="!newAddressValidated"
              label="Continue"/>
-      <q-btn flat @click="changeStep(2)" color="primary" label="Back" class="q-ml-sm" />
+      <q-btn flat @click="changeStep(2)" color="black" label="Back" class="q-ml-sm" />
     </q-stepper-navigation>
   </div>
 </template>
