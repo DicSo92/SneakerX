@@ -1,5 +1,5 @@
 <template>
-  <q-tabs class="bg-purple-9 text-white shadow-2">
+  <q-tabs class="bg-purple-9 text-white shadow-2" >
     <q-btn-dropdown auto-close
                     stretch flat
                     label="Brands">

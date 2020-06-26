@@ -221,7 +221,7 @@
                     {name: 'description', label: 'Description', field: 'description', align: 'left', sortable: true},
                     // {name: 'images', label: 'Images', field: 'images', sortable: true},
                     {name: 'price', label: 'Price', field: 'price', sortable: true},
-                    {name: 'brand_id', label: 'Brand Id', field: 'brand_id', align: 'center', sortable: true},
+                    {name: 'brand_id', label: 'Brand', field: 'brand_id', align: 'center', sortable: true},
                     {name: 'colors', label: 'Colors', field: 'colors', align: 'left'},
                     {name: 'sizes', label: 'Sizes', field: 'sizes', align: 'left'},
                     {name: 'refLink', label: 'Ref. Link', field: 'refLink', align: 'left'},
