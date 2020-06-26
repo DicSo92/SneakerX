@@ -4,7 +4,7 @@ import axios from 'axios'
 // Note that if we wouldn't set any config here we do not need
 // a named export, as we could just `import axios from 'axios'`
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:8000',
+  baseURL: process.env.DEV ? 'http://localhost:8000' : 'https://sneakerx-shop.herokuapp.com',
   withCredentials: true,
   headers: {
     'X-Requested-With': 'XMLHttpRequest'
