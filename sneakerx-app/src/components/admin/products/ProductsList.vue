@@ -193,7 +193,8 @@
         name: "ProductsList",
         components: {},
         props: [
-            'brands'
+            'brands',
+            'brandSelected'
         ],
         data() {
             return {
@@ -257,7 +258,9 @@
             },
             getProducts() {
                 this.loading = true
-                this.$axios.get('/api/admin/products')
+                let apiUrl = this.brandSelected === 'All' ? 'products' : `productsBrand/${this.brandSelected}`
+
+                this.$axios.get(`/api/admin/${apiUrl}`)
                     .then(response => {
                         console.log(response)
                         this.products = response.data

@@ -58,6 +58,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('auth:san
     Route::apiResource('users', 'UserController')->only(['index', 'show']);
     Route::apiResource('brands', 'BrandController')->only(['index', 'show']);
     Route::apiResource('products', 'ProductController')->only(['index', 'show']);
+    Route::get('productsBrand/{brandId}', 'ProductController@productsPerBrand')->name('products.perBrand');
+
     Route::apiResource('orders', 'OrderController')->only(['index', 'show']);
     Route::apiResource('roles', 'RoleController')->only(['index']);
     Route::get('activityLog', 'ActivityLogController@index')->name('activityLog.index');
