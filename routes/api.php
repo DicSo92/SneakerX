@@ -55,6 +55,7 @@ Route::namespace('Admin')->prefix('admin')->name('superAdmin.')->middleware('aut
     Route::delete('brands/imageDelete/{id}', 'BrandController@removeImage')->name('brands.imageDelete');
 });
 
+
 Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('auth:sanctum', 'allAdmin')->group(function () {
     Route::apiResource('users', 'UserController')->only(['index', 'show']);
     Route::apiResource('brands', 'BrandController')->only(['index', 'show']);
