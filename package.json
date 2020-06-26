@@ -1,4 +1,10 @@
 {
+    "name": "SneakerX",
+    "description": "Sneaker E-commerce",
+    "version": "1.0.0",
+    "engines": {
+        "node": "13.12.0"
+    },
     "private": true,
     "scripts": {
         "dev": "npm run development",
