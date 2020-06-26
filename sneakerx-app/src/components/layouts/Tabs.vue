@@ -20,6 +20,7 @@
     </q-btn-dropdown>
     <q-route-tab :to="{name: 'catalog', query: {filter: 'soon'}}" exact label="UpComing" />
     <q-route-tab :to="{name: 'catalog', query: {filter: 'latest'}}" exact label="New" />
+    <q-route-tab :to="{name: 'news'}" exact label="News" />
     <q-route-tab :to="{name: 'catalog'}" exact label="Catalog" />
 <!--    <q-route-tab :to="{name: 'news'}" exact label="News" />-->
 <!--    <q-route-tab :to="{name: 'contact'}" exact label="Contact" />-->
