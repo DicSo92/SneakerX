@@ -6,8 +6,8 @@
           v-model="tab"
           dense
           class="text-grey"
-          active-color="primary"
-          indicator-color="primary"
+          active-color="black"
+          indicator-color="purple-9"
           align="justify"
           narrow-indicator
         >

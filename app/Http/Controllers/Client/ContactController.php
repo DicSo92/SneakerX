@@ -9,9 +9,15 @@ use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
+    /**
+     * Contact send mail.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function contact(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'lastname' => 'required',
             'firstname' => 'required',
             'email' => 'required',
@@ -28,6 +34,6 @@ class ContactController extends Controller
 
         Mail::to('luzzi.charly@gmail.com')->send(new ContactMail($mail));
 
-        return response()->json($mail);
+        return response()->json($validatedData);
     }
 }
