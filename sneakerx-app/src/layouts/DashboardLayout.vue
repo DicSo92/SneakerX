@@ -11,7 +11,7 @@
         </q-toolbar-title>
       </q-toolbar>
       <q-toolbar inset class="bg-purple-9">
-        <q-breadcrumbs active-color="white" style="font-size: 16px">
+        <q-breadcrumbs active-color="purple-9" style="font-size: 16px">
           <q-breadcrumbs-el label="Home" icon="home" :to="{name: 'home_admin'}"/>
           <q-breadcrumbs-el v-for="li in links"
                             :key="li.title"
