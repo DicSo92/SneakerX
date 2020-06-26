@@ -42,7 +42,7 @@
       <template v-slot:header="props">
         <q-tr :props="props">
           <q-th auto-width>
-            <q-checkbox v-model="props.selected"/>
+            <q-checkbox v-model="props.selected" color="black"/>
           </q-th>
           <q-th
             v-for="col in props.cols"
@@ -59,7 +59,7 @@
       <template v-slot:body="props">
         <q-tr :props="props" @click="props.expand = !props.expand" class="cursor-pointer">
           <q-td auto-width>
-            <q-checkbox v-model="props.selected"/>
+            <q-checkbox v-model="props.selected" color="black"/>
           </q-td>
           <q-td key="id" :props="props" auto-width>
             {{ props.row.id }} #

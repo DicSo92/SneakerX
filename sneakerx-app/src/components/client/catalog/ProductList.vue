@@ -12,6 +12,7 @@
         />
         <q-pagination v-if="maxPages"
                       v-model="page"
+                      color="black"
                       :max="maxPages"
                       :input="true">
         </q-pagination>
@@ -22,35 +23,13 @@
       mode="out-in"
       enter-active-class="animated fadeIn"
       leave-active-class="animated fadeOut">
-      <div class="row q-col-gutter-md full-width q-mb-md" v-if="!loading">
+      <div class="row q-col-gutter-md justify-start items-start q-mb-md" v-if="!loading">
         <div class="col-3"
              v-for="product in products"
              :key="product.id">
-          <q-card class="column justify-between full-height">
-            <q-img @click="goToProduct(product.slug)"
-                   class="cursor-pointer"
-                   :src="product.image"
-                   style="width: 100%; height: auto"
-                   basic>
-              <div class="absolute-bottom text-h6">
-                {{product.name}}
-              </div>
-            </q-img>
 
-            <q-card-section>
-              {{product.description}}
-            </q-card-section>
+          <CardProduct :product="product"/>
 
-            <q-card-actions style="border-top: 1px solid #eeeeee;">
-              <q-btn flat>
-                {{ product.price / 100 }} €
-              </q-btn>
-              <q-space/>
-              <q-btn outline icon="shopping_cart" color="primary" @click.stop="addToCart(product)">
-                Add Cart
-              </q-btn>
-            </q-card-actions>
-          </q-card>
         </div>
       </div>
     </transition>
@@ -64,20 +43,9 @@
         <div class="col-3"
              v-for="key in nbPerPage"
              :key="key">
-          <q-card>
-            <q-skeleton width="100%" height="200px" square/>
-            <q-card-section>
-              <q-skeleton type="text"/>
-              <q-skeleton type="text"/>
-              <q-skeleton type="text"/>
-              <q-skeleton type="text"/>
-            </q-card-section>
 
-            <q-card-actions align="right" class="q-gutter-md">
-              <q-skeleton type="QBtn"/>
-              <q-skeleton type="QBtn"/>
-            </q-card-actions>
-          </q-card>
+          <CardProductSkeleton/>
+
         </div>
       </div>
     </transition>
@@ -86,6 +54,7 @@
         v-if="!loading"
         v-model="page"
         :max="maxPages"
+        color="black"
         :direction-links="true"
         :boundary-links="true"
         icon-first="skip_previous"
@@ -100,8 +69,15 @@
 </template>
 
 <script>
+    import CardProduct from '../CardProduct.vue'
+    import CardProductSkeleton from '../CardProductSkeleton.vue'
+
     export default {
         name: "ProductList",
+        components: {
+            CardProduct,
+            CardProductSkeleton
+        },
         data() {
             return {
                 products: null,
@@ -128,14 +104,6 @@
         },
         computed: {},
         methods: {
-            goToProduct(slug) {
-                console.log('go to');
-                this.$router.push({name: 'product', params: {slug: slug}})
-            },
-            addToCart(product) {
-                console.log(product)
-                this.$store.dispatch('cart/updateStorageCart', {product, color: product.colors[0], size: product.sizes[0].size, total: 1})
-            },
             getProducts(page, nb) {
                 this.loading = true
                 this.$axios.get(`/api/client/products?page=${page}&nb=${nb}`)

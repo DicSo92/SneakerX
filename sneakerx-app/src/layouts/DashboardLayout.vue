@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
+    <q-header elevated class="bg-grey-10">
       <q-toolbar>
         <q-btn flat dense round
                icon="menu"
@@ -10,7 +10,7 @@
           DashBoard
         </q-toolbar-title>
       </q-toolbar>
-      <q-toolbar inset>
+      <q-toolbar inset class="bg-purple-9">
         <q-breadcrumbs active-color="white" style="font-size: 16px">
           <q-breadcrumbs-el label="Home" icon="home" :to="{name: 'home_admin'}"/>
           <q-breadcrumbs-el v-for="li in links"
