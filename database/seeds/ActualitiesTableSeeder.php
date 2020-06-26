@@ -25,7 +25,7 @@ class ActualitiesTableSeeder extends Seeder
             $faker = Faker\Factory::create();
             $published_date = $actuality->published ? $faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now') : null;
 
-            Cloudder::upload(storage_path('seedImages/news/'.$actuality->image), null, array('folder' => 'SneakerX/Actualities/'));
+            Cloudder::upload(storage_path('seedImages/news/'.$actuality->image), null, array('folder' => env('CLOUDINARY_MAIN_FOLDER').'/Actualities/'));
             $uploadImage = Cloudder::getResult();
 
             Actuality::create([

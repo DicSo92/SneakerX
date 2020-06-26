@@ -24,12 +24,12 @@ class ProductsTableSeeder extends Seeder
             $brandName = Brand::find($product->brand_id)->name;
             $slug = Str::slug($product->name, '-');
 
-            Cloudder::upload(storage_path('seedImages/products/'.$brandName.'/'.$product->image), null, array('folder' => 'SneakerX/Products/'.$brandName.'/'.$slug));
+            Cloudder::upload(storage_path('seedImages/products/'.$brandName.'/'.$product->image), null, array('folder' => env('CLOUDINARY_MAIN_FOLDER').'/Products/'.$brandName.'/'.$slug));
             $uploadImage = Cloudder::getResult();
 
             $imagesTable = array();
             foreach ($product->images as $image) {
-                Cloudder::upload(storage_path('seedImages/products/'.$brandName.'/'.$image), null, array('folder' => 'SneakerX/Products/'.$brandName.'/'.$slug));
+                Cloudder::upload(storage_path('seedImages/products/'.$brandName.'/'.$image), null, array('folder' => env('CLOUDINARY_MAIN_FOLDER').'/Products/'.$brandName.'/'.$slug));
                 $uploadImages = Cloudder::getResult();
                 array_push($imagesTable, $uploadImages['url']);
             }
