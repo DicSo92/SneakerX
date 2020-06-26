@@ -52,6 +52,11 @@
     }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+  .productName {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.6);
+  }
 </style>

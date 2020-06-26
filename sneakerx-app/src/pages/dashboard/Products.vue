@@ -1,24 +1,25 @@
 <template>
   <q-page class="column items-center" padding>
     <q-card class="full-width">
-      <q-card-section class="bg-teal text-white flex full-width">
+      <q-card-section class="bg-grey-10 text-white flex full-width">
         <div class="text-h6">Product / List</div>
 <!--        <div class="text-subtitle2">by John Doe</div>-->
         <q-space/>
         <div class="flex">
           <q-btn class="q-mr-sm"
-                 color="primary"
+                 color="white"
+                 outline
                  icon="edit"
                  label="Edit"
                  disable
           />
           <q-btn class="q-mr-sm"
-                 color="positive"
+                 color="purple-9"
                  icon="add"
                  label="Add"
                  @click="addProduct"
           />
-          <q-btn color="negative"
+          <q-btn color="red-10"
                  icon="delete"
                  label="Delete Selection"
                  disable

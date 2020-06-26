@@ -12,6 +12,7 @@
         />
         <q-pagination v-if="maxPages"
                       v-model="page"
+                      color="black"
                       :max="maxPages"
                       :input="true">
         </q-pagination>
@@ -22,7 +23,7 @@
       mode="out-in"
       enter-active-class="animated fadeIn"
       leave-active-class="animated fadeOut">
-      <div class="row q-col-gutter-md full-width q-mb-md" v-if="!loading">
+      <div class="row q-col-gutter-md justify-start items-start q-mb-md" v-if="!loading">
         <div class="col-3"
              v-for="product in products"
              :key="product.id">
@@ -53,6 +54,7 @@
         v-if="!loading"
         v-model="page"
         :max="maxPages"
+        color="black"
         :direction-links="true"
         :boundary-links="true"
         icon-first="skip_previous"

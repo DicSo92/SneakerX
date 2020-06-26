@@ -1,10 +1,15 @@
 <template>
   <q-page class="flex column justify-start items-center" padding>
-    <div class="row full-width borderBottom q-mb-md">
-      <h6 class="no-margin ">Catalog :</h6>
+    <div class="row justify-center">
+      <div class="col-10">
+        <div class="row full-width borderBottom q-mb-md">
+          <h6 class="no-margin ">Catalog :</h6>
+        </div>
+
+        <ProductList></ProductList>
+      </div>
     </div>
 
-    <ProductList></ProductList>
   </q-page>
 </template>
 
