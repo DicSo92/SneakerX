@@ -37,7 +37,7 @@
 
     </transition>
     <div class="row justify-end q-mt-md">
-      <q-btn outline color="black" label="VIEW ALL" icon-right="chevron_right"/>
+      <q-btn outline color="black" label="VIEW ALL" icon-right="chevron_right" @click="goTo('catalog')"/>
     </div>
   </div>
 </template>
@@ -107,6 +107,9 @@
                     })
                     .catch(error => console.log(error))
             },
+            goTo(route) {
+                this.$router.push({name: route})
+            }
         },
     }
 </script>

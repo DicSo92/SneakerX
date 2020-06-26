@@ -43,9 +43,9 @@
             mode="out-in"
             enter-active-class="animated fadeIn"
             leave-active-class="animated fadeOut">
-            <div class="row justify-start items-start q-col-gutter-lg" v-if="loading">
+            <div class="row justify-start items-start q-col-gutter-lg full-width" v-if="loading">
               <div class="col-lg-4 col-sm-6 col-xs-12" v-for="key in nbPerPage" :key="key">
-                <CardProductSkeleton />
+                <CardActualitySkeleton />
               </div>
             </div>
           </transition>
@@ -75,13 +75,13 @@
 
 <script>
     import CardActuality from '../../components/client/CardActuality.vue'
-    import CardProductSkeleton from '../../components/client/CardProductSkeleton.vue'
+    import CardActualitySkeleton from '../../components/client/CardActualitySkeleton.vue'
 
     export default {
         name: 'News',
         components: {
             CardActuality,
-            CardProductSkeleton
+            CardActualitySkeleton
         },
         data() {
             return {
