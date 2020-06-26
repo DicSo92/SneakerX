@@ -42,7 +42,7 @@
       <template v-slot:header="props">
         <q-tr :props="props">
           <q-th auto-width>
-            <q-checkbox v-model="props.selected"/>
+            <q-checkbox v-model="props.selected" color="black"/>
           </q-th>
           <q-th
             v-for="col in props.cols"
@@ -59,7 +59,7 @@
       <template v-slot:body="props">
         <q-tr :props="props" @click="props.expand = !props.expand" class="cursor-pointer">
           <q-td auto-width>
-            <q-checkbox v-model="props.selected"/>
+            <q-checkbox v-model="props.selected" color="black"/>
           </q-td>
           <q-td key="id" :props="props" auto-width>
             {{ props.row.id }} #
@@ -193,7 +193,8 @@
         name: "ProductsList",
         components: {},
         props: [
-            'brands'
+            'brands',
+            'brandSelected'
         ],
         data() {
             return {
@@ -220,7 +221,7 @@
                     {name: 'description', label: 'Description', field: 'description', align: 'left', sortable: true},
                     // {name: 'images', label: 'Images', field: 'images', sortable: true},
                     {name: 'price', label: 'Price', field: 'price', sortable: true},
-                    {name: 'brand_id', label: 'Brand Id', field: 'brand_id', align: 'center', sortable: true},
+                    {name: 'brand_id', label: 'Brand', field: 'brand_id', align: 'center', sortable: true},
                     {name: 'colors', label: 'Colors', field: 'colors', align: 'left'},
                     {name: 'sizes', label: 'Sizes', field: 'sizes', align: 'left'},
                     {name: 'refLink', label: 'Ref. Link', field: 'refLink', align: 'left'},
@@ -257,7 +258,9 @@
             },
             getProducts() {
                 this.loading = true
-                this.$axios.get('/api/admin/products')
+                let apiUrl = this.brandSelected === 'All' ? 'products' : `productsBrand/${this.brandSelected}`
+
+                this.$axios.get(`/api/admin/${apiUrl}`)
                     .then(response => {
                         console.log(response)
                         this.products = response.data

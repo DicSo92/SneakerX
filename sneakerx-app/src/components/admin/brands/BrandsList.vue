@@ -54,7 +54,7 @@
       <template v-slot:body="props">
         <q-tr :props="props">
           <q-td>
-            <q-checkbox v-model="props.selected"/>
+            <q-checkbox v-model="props.selected" color="black"/>
           </q-td>
           <q-td key="id" :props="props" auto-width>
             {{ props.row.id }} #

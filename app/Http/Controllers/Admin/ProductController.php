@@ -64,4 +64,19 @@ class ProductController extends Controller
     {
         //
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param                          $brandId
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function productsPerBrand(Request $request, $brandId)
+    {
+        $products = Product::where('brand_id', $brandId)->orderBy('created_at', 'DESC')->with('brand')->get();
+
+        return response()->json($products);
+    }
 }

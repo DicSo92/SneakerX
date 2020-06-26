@@ -1,7 +1,7 @@
 <template>
   <q-page class="column items-center" padding>
     <q-card class="full-width">
-      <q-card-section class="bg-teal text-white flex full-width">
+      <q-card-section class="bg-grey-10 text-white flex full-width">
         <div class="text-h6">Logs / List</div>
         <q-space/>
       </q-card-section>

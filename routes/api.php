@@ -54,10 +54,13 @@ Route::namespace('Admin')->prefix('admin')->name('superAdmin.')->middleware('aut
     Route::post('brands/{id}', 'BrandController@updateBrand')->name('brands.update');
     Route::delete('brands/imageDelete/{id}', 'BrandController@removeImage')->name('brands.imageDelete');
 });
+
 Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('auth:sanctum', 'allAdmin')->group(function () {
     Route::apiResource('users', 'UserController')->only(['index', 'show']);
     Route::apiResource('brands', 'BrandController')->only(['index', 'show']);
     Route::apiResource('products', 'ProductController')->only(['index', 'show']);
+    Route::get('productsBrand/{brandId}', 'ProductController@productsPerBrand')->name('products.perBrand');
+
     Route::apiResource('orders', 'OrderController')->only(['index', 'show']);
     Route::apiResource('roles', 'RoleController')->only(['index']);
     Route::get('activityLog', 'ActivityLogController@index')->name('activityLog.index');
@@ -67,6 +70,11 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('auth:san
 Route::namespace('Client')->prefix('client')->name('client.')->group(function () {
     Route::get('products', 'ProductController@index')->name('products.index');
     Route::get('products/{slug}', 'ProductController@show')->name('products.show');
+    Route::get('products/search/{search}', 'ProductController@search')->name('products.search');
+
+    Route::get('productsBrand/{brandId}', 'ProductController@productsPerBrand')->name('products.perBrand');
+
+    Route::get('brands', 'BrandController@index')->name('products.index');
 
     Route::middleware('auth:sanctum')->apiResource('addressBook', 'AddressBookController');
 
@@ -74,4 +82,9 @@ Route::namespace('Client')->prefix('client')->name('client.')->group(function ()
     Route::middleware('auth:sanctum')->post('order', 'OrderController@store')->name('orders.store');
     Route::post('order/no-account', 'OrderController@storeNoAccount')->name('orders.storeNoAccount');
     Route::get('order/{orderId}', 'OrderController@show')->name('orders.show');
+
+    Route::get('news', 'ActualityController@index')->name('actualities.index');
+    Route::get('news/{slug}', 'ActualityController@show')->name('actualities.show');
+
+    Route::post('contact', 'ContactController@contact')->name('contact.contact');
 });

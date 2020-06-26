@@ -30,6 +30,18 @@ const routes = [
         // meta: { requiresVisitor: true }
       },
       {
+        path: 'news',
+        name: 'news',
+        component: () => import('pages/client/News.vue'),
+        // meta: { requiresVisitor: true }
+      },
+      {
+        path: 'contact',
+        name: 'contact',
+        component: () => import('pages/client/Contact.vue'),
+        // meta: { requiresVisitor: true }
+      },
+      {
         path: 'cart',
         name: 'cart',
         component: () => import('pages/client/Cart.vue'),

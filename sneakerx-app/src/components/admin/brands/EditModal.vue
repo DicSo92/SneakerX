@@ -15,13 +15,13 @@
             :rules="[ val => val && val.length > 0 || 'Please type something']"
           />
 
-          <q-editor v-model="description" min-height="5rem" />
+          <q-editor v-model="description" min-height="5rem" toolbar-toggle-color="yellow-9"/>
 
           <div class="row">
             <div class="col">
               <p>Current Banner : <span v-if="!currentBanner" class="text-red-8">Nothing</span></p>
               <div class="flex flex-center relative-position" v-if="currentBanner">
-                <q-btn round :loading="loadingBanner" color="red-8" size='md' icon="delete" class="deleteBtn" @click="removeImage('banner')">
+                <q-btn round :loading="loadingBanner" color="red-9" size='md' icon="delete" class="deleteBtn" @click="removeImage('banner')">
                   <template v-slot:loading>
                     <q-spinner-facebook />
                   </template>
@@ -32,7 +32,7 @@
             <div class="col">
               <p>Current Image : <span v-if="!currentImage" class="text-red-8">Nothing</span></p>
               <div class="flex flex-center relative-position" v-if="currentImage">
-                <q-btn round :loading="loadingImage" color="red-8" size='md' icon="delete" class="deleteBtn" @click="removeImage('image')">
+                <q-btn round :loading="loadingImage" color="red-9" size='md' icon="delete" class="deleteBtn" @click="removeImage('image')">
                   <template v-slot:loading>
                     <q-spinner-facebook />
                   </template>
@@ -45,7 +45,7 @@
             <q-uploader
               label="Change Banner (.jpg,.png,.jpeg,...)"
               accept=".jpg, image/*"
-              hide-upload-btn
+              hide-upload-btn square color="grey-10"
               @added="toggleImagesData($event, true, 'banner')"
               @removed="toggleImagesData($event, false, 'banner')"
 
@@ -53,7 +53,7 @@
             <q-uploader
               label="Change Image (.jpg,.png,.jpeg,...)"
               accept=".jpg, image/*"
-              hide-upload-btn
+              hide-upload-btn square color="grey-10"
               @added="toggleImagesData($event, true, 'image')"
               @removed="toggleImagesData($event, false, 'image')"
             />
@@ -61,13 +61,13 @@
 
 
           <div>
-            <q-btn :loading="loading" color="primary" label="Submit" type="submit" icon-right="send">
+            <q-btn :loading="loading" color="purple-10" label="Submit" type="submit" icon-right="send">
               <template v-slot:loading>
                 <q-spinner-hourglass class="on-left"/>
                 Loading...
               </template>
             </q-btn>
-            <q-btn label="Cancel" @click="showEdit = false" color="primary" flat class="q-ml-sm"/>
+            <q-btn label="Cancel" @click="showEdit = false" color="black" flat class="q-ml-sm"/>
           </div>
         </q-form>
       </q-card-section>

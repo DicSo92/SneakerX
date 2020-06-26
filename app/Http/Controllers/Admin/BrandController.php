@@ -40,12 +40,12 @@ class BrandController extends Controller
 
         $cloundary_upload_banner = null;
         if ($request->hasFile('banner')) {
-            Cloudder::upload($request->file('banner'), null, array("folder" => "SneakerX/Brands/"));
+            Cloudder::upload($request->file('banner'), null, array("folder" => env('CLOUDINARY_MAIN_FOLDER')."/Brands/"));
             $cloundary_upload_banner = Cloudder::getResult();
         }
         $cloundary_upload_image = null;
         if ($request->hasFile('image')) {
-            Cloudder::upload($request->file('image'), null, array("folder" => "SneakerX/Brands/"));
+            Cloudder::upload($request->file('image'), null, array("folder" => env('CLOUDINARY_MAIN_FOLDER')."/Brands/"));
             $cloundary_upload_image = Cloudder::getResult();
         }
 
@@ -118,7 +118,7 @@ class BrandController extends Controller
                 Cloudder::delete($bannerPathId);
             }
 
-            Cloudder::upload($request->file('banner'), null, array("folder" => "SneakerX/Brands/"));
+            Cloudder::upload($request->file('banner'), null, array("folder" => env('CLOUDINARY_MAIN_FOLDER')."/Brands/"));
             $cloundary_upload_banner = Cloudder::getResult();
         }
         $cloundary_upload_image = null;
@@ -130,7 +130,7 @@ class BrandController extends Controller
                 Cloudder::delete($imagePathId);
             }
 
-            Cloudder::upload($request->file('image'), null, array("folder" => "SneakerX/Brands/"));
+            Cloudder::upload($request->file('image'), null, array("folder" => env('CLOUDINARY_MAIN_FOLDER')."/Brands/"));
             $cloundary_upload_image = Cloudder::getResult();
         }
 
@@ -158,7 +158,7 @@ class BrandController extends Controller
     {
         $brand = Brand::findOrFail($id);
 
-        $imagesPath = "SneakerX/Brands/";
+        $imagesPath = env('CLOUDINARY_MAIN_FOLDER')."/Brands/";
         $imagesArrayId = array();
 
         if (!is_null($brand->banner)) {
@@ -185,7 +185,7 @@ class BrandController extends Controller
     {
         $brand = Brand::findOrFail($id);
 
-        $imagesPath = "SneakerX/Brands/";
+        $imagesPath = env('CLOUDINARY_MAIN_FOLDER')."/Brands/";
 
         if (!is_null($brand->banner) AND $request->query('type') === 'banner') {
             $bannerId = pathinfo($brand->banner)['filename'];

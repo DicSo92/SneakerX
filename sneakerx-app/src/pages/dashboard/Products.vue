@@ -1,24 +1,25 @@
 <template>
   <q-page class="column items-center" padding>
     <q-card class="full-width">
-      <q-card-section class="bg-teal text-white flex full-width">
+      <q-card-section class="bg-grey-10 text-white flex full-width">
         <div class="text-h6">Product / List</div>
 <!--        <div class="text-subtitle2">by John Doe</div>-->
         <q-space/>
         <div class="flex">
           <q-btn class="q-mr-sm"
-                 color="primary"
+                 color="white"
+                 outline
                  icon="edit"
                  label="Edit"
                  disable
           />
           <q-btn class="q-mr-sm"
-                 color="positive"
+                 color="purple-9"
                  icon="add"
                  label="Add"
                  @click="addProduct"
           />
-          <q-btn color="negative"
+          <q-btn color="red-10"
                  icon="delete"
                  label="Delete Selection"
                  disable
@@ -28,22 +29,20 @@
 
       <q-separator/>
 
-      <q-tabs v-model="tab" class="text-teal">
-        <q-tab label="All Products" name="one" />
-        <q-tab v-for="brand in brands" :label="brand.name" :key="brand.id" :name="brand.name" />
+      <q-tabs v-model="tab" class="text-purple-9">
+        <q-tab label="All" name="All" />
+        <q-tab v-for="brand in brands" :label="brand.name" :key="brand.id" :name="brand.id" />
       </q-tabs>
 
       <q-separator />
 
       <q-tab-panels v-model="tab" animated>
-        <q-tab-panel name="one">
-          <ProductsList :brands="brands"></ProductsList>
+        <q-tab-panel name="All">
+          <ProductsList :brands="brands" :brandSelected="tab"></ProductsList>
         </q-tab-panel>
 
-        <q-tab-panel v-for="brand in brands" :key="brand.id" :name="brand.name">
-          With so much content to display at once, and often so little screen real-estate,
-          Cards have fast become the design pattern of choice for many companies, including
-          the likes of Google and Twitter.
+        <q-tab-panel v-for="brand in brands" :key="brand.id" :name="brand.id">
+          <ProductsList :brands="brands" :brandSelected="tab"></ProductsList>
         </q-tab-panel>
       </q-tab-panels>
     </q-card>
@@ -65,7 +64,7 @@
         data () {
             return {
                 loadingBrands: false,
-                tab: 'one',
+                tab: 'All',
                 brands: null
             }
         },

@@ -41,7 +41,7 @@
       <template v-slot:header="props">
         <q-tr :props="props">
           <q-th auto-width>
-            <q-checkbox v-model="props.selected"/>
+            <q-checkbox v-model="props.selected" color="black"/>
           </q-th>
           <q-th
             v-for="col in props.cols"
@@ -60,6 +60,7 @@
           <q-td auto-width>
             <q-checkbox v-model="props.selected"
                         :disable="props.row.id === getUserId"
+                        color="black"
             />
           </q-td>
           <q-td key="id" :props="props" auto-width>

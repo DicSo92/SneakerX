@@ -1,5 +1,5 @@
 <template>
-  <q-card>
+  <q-card square>
     <q-card-section>
       <q-list bordered>
         <transition-group type="transition" name="flip-list">
@@ -54,7 +54,7 @@
             <div class="text-h6 text-bold">{{totalPrice}} €</div>
           </div>
         </div>
-        <q-btn color="primary"
+        <q-btn color="black"
                :label="edit ? 'PROCEED TO PAYMENT' : 'EDIT COMMAND'"
                @click="command"/>
       </div>

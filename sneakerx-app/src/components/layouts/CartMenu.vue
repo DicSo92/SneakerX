@@ -5,7 +5,7 @@
     </q-badge>
     <q-tooltip>Shopping Cart</q-tooltip>
 
-    <q-menu :persistent="persistentMenu"
+    <q-menu :persistent="persistentMenu" square
             :content-style="{minWidth: '320px'}"
             @hide="persistentMenu = false">
       <div class="text-h6 q-ma-sm">Shopping Cart</div>
@@ -34,7 +34,7 @@
               <div class="row">
                 <q-select dense :value="getCart[index].total"
                           :options="quantities"
-                          class="col-auto"
+                          class="col-auto" color="purple-9"
                           @input="productQuantityUpdate(product, product.total, $event)"/>
               </div>
             </q-item-section>
@@ -68,7 +68,7 @@
             <div class="text-h6 text-bold">{{getTotalPrice}} €</div>
           </div>
         </div>
-        <q-btn color="primary"
+        <q-btn color="black"
                label="Checkout"
                v-close-popup
                :to="{name: 'cart'}"/>

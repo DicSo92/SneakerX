@@ -13,7 +13,7 @@
         </div>
       </div>
       <div>
-        <q-btn color="primary" outline label="LOGOUT" @click="logout" :loading="logoutLoading"/>
+        <q-btn color="black" outline label="LOGOUT" @click="logout" :loading="logoutLoading"/>
       </div>
     </div>
     <div class="column" v-else>
@@ -24,7 +24,7 @@
         Please <span class="text-bold">log in</span> to your account or create one to have access to your <span class="text-bold">address book</span>, <span class="text-bold">order summary</span>, <span class="text-bold">private coupons</span> and <span class="text-bold">personal support</span> from our staff.
       </div>
       <div class="flex">
-        <q-btn color="primary" outline label="LOGIN / REGISTER" @click="loginRegister"/>
+        <q-btn color="purple-10" outline label="LOGIN / REGISTER" @click="loginRegister"/>
       </div>
       <div class="text-overline text-center text-bold q-mt-sm">
         OR
@@ -35,7 +35,7 @@
       <div class="text-caption q-mb-sm">
         Please type your email address where you want to receive the order confirmation.
       </div>
-      <q-input filled dense
+      <q-input filled dense color="purple-10"
                v-model="email"
                type="email"
                label="Enter your Email Address"
@@ -44,7 +44,7 @@
                hint="Enter a Valid Email"/>
     </div>
     <q-stepper-navigation>
-      <q-btn color="primary"
+      <q-btn color="purple-10"
              @click="changeStep(2)"
              :disable="disableContinue"
              label="Continue"/>

@@ -13,19 +13,19 @@ class BrandsTableSeeder extends Seeder
      */
     public function run()
     {
-        Cloudder::upload(storage_path('seedImages/brands/adidas_banner.png'), null, array("folder" => "SneakerX/Brands/"));
+        Cloudder::upload(storage_path('seedImages/brands/adidas_banner.png'), null, array("folder" => env('CLOUDINARY_MAIN_FOLDER')."/Brands/"));
         $adidas_banner = Cloudder::getResult();
-        Cloudder::upload(storage_path('seedImages/brands/adidas_logo.png'), null, array("folder" => "SneakerX/Brands/"));
+        Cloudder::upload(storage_path('seedImages/brands/adidas_logo.png'), null, array("folder" => env('CLOUDINARY_MAIN_FOLDER')."/Brands/"));
         $adidas_logo = Cloudder::getResult();
 
-        Cloudder::upload(storage_path('seedImages/brands/puma_banner.jpg'), null, array("folder" => "SneakerX/Brands/"));
+        Cloudder::upload(storage_path('seedImages/brands/puma_banner.jpg'), null, array("folder" => env('CLOUDINARY_MAIN_FOLDER')."/Brands/"));
         $puma_banner = Cloudder::getResult();
-        Cloudder::upload(storage_path('seedImages/brands/puma_logo.png'), null, array("folder" => "SneakerX/Brands/"));
+        Cloudder::upload(storage_path('seedImages/brands/puma_logo.png'), null, array("folder" => env('CLOUDINARY_MAIN_FOLDER')."/Brands/"));
         $puma_logo = Cloudder::getResult();
 
-        Cloudder::upload(storage_path('seedImages/brands/reebok_banner.jpg'), null, array("folder" => "SneakerX/Brands/"));
+        Cloudder::upload(storage_path('seedImages/brands/reebok_banner.jpg'), null, array("folder" => env('CLOUDINARY_MAIN_FOLDER')."/Brands/"));
         $reebok_banner = Cloudder::getResult();
-        Cloudder::upload(storage_path('seedImages/brands/reebok_logo.jpg'), null, array("folder" => "SneakerX/Brands/"));
+        Cloudder::upload(storage_path('seedImages/brands/reebok_logo.jpg'), null, array("folder" => env('CLOUDINARY_MAIN_FOLDER')."/Brands/"));
         $reebok_logo = Cloudder::getResult();
 
 

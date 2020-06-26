@@ -9,7 +9,7 @@
           <div class="row">
             <div class="col-3" v-if="image">
               <q-img
-                src="http://res.cloudinary.com/charly-luzzi/image/upload/v1588357094/SneakerX/Products/Adidas/superstar-originals/e5k42tybhaxhnx6tkjrr.jpg"
+                src="http://res.cloudinary.com/charly-luzzi/image/upload/v1589846305/SneakerX/Products/Adidas/superstar-originals/knn2rqqaqdbczodbjvwp.jpg"
                 style="width: 100%; height: auto"
               />
             </div>

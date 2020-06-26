@@ -12,6 +12,7 @@
         />
         <q-pagination v-if="maxPages"
                       v-model="page"
+                      color="black"
                       :max="maxPages"
                       :input="true">
         </q-pagination>
@@ -22,35 +23,13 @@
       mode="out-in"
       enter-active-class="animated fadeIn"
       leave-active-class="animated fadeOut">
-      <div class="row q-col-gutter-md full-width q-mb-md" v-if="!loading">
+      <div class="row q-col-gutter-md justify-start items-start q-mb-md" v-if="!loading">
         <div class="col-3"
              v-for="product in products"
              :key="product.id">
-          <q-card class="column justify-between full-height">
-            <q-img @click="goToProduct(product.slug)"
-                   class="cursor-pointer"
-                   :src="product.image"
-                   style="width: 100%; height: auto"
-                   basic>
-              <div class="absolute-bottom text-h6">
-                {{product.name}}
-              </div>
-            </q-img>
 
-            <q-card-section>
-              {{product.description}}
-            </q-card-section>
+          <CardProduct :product="product"/>
 
-            <q-card-actions style="border-top: 1px solid #eeeeee;">
-              <q-btn flat>
-                {{ product.price / 100 }} €
-              </q-btn>
-              <q-space/>
-              <q-btn outline icon="shopping_cart" color="primary" @click.stop="addToCart(product)">
-                Add Cart
-              </q-btn>
-            </q-card-actions>
-          </q-card>
         </div>
       </div>
     </transition>
@@ -64,20 +43,9 @@
         <div class="col-3"
              v-for="key in nbPerPage"
              :key="key">
-          <q-card>
-            <q-skeleton width="100%" height="200px" square/>
-            <q-card-section>
-              <q-skeleton type="text"/>
-              <q-skeleton type="text"/>
-              <q-skeleton type="text"/>
-              <q-skeleton type="text"/>
-            </q-card-section>
 
-            <q-card-actions align="right" class="q-gutter-md">
-              <q-skeleton type="QBtn"/>
-              <q-skeleton type="QBtn"/>
-            </q-card-actions>
-          </q-card>
+          <CardProductSkeleton/>
+
         </div>
       </div>
     </transition>
@@ -86,6 +54,7 @@
         v-if="!loading"
         v-model="page"
         :max="maxPages"
+        color="black"
         :direction-links="true"
         :boundary-links="true"
         icon-first="skip_previous"
@@ -100,11 +69,19 @@
 </template>
 
 <script>
+    import CardProduct from '../CardProduct.vue'
+    import CardProductSkeleton from '../CardProductSkeleton.vue'
+
     export default {
         name: "ProductList",
+        components: {
+            CardProduct,
+            CardProductSkeleton
+        },
         data() {
             return {
                 products: null,
+                brands: null,
 
                 page: 1,
                 nbPerPage: 8,
@@ -117,6 +94,7 @@
         },
         created() {
             this.getProducts(this.page, this.nbPerPage)
+            this.getBrands()
         },
         watch: {
             nbPerPage(val) {
@@ -124,30 +102,64 @@
             },
             page(val) {
                 this.getProducts(val, this.nbPerPage)
+            },
+            queryParameter(val) {
+                if (!val) {
+                    this.getProducts(1, this.nbPerPage)
+                } else {
+                    let brandId = this.brands.find(brand => brand.name === val).id
+                    console.log(brandId)
+                    this.getProductsPerBrand(1, this.nbPerPage, brandId)
+                }
             }
         },
-        computed: {},
+        computed: {
+            queryParameter() {
+                return this.$route.query.brand
+            }
+        },
         methods: {
-            goToProduct(slug) {
-                console.log('go to');
-                this.$router.push({name: 'product', params: {slug: slug}})
-            },
-            addToCart(product) {
-                console.log(product)
-                this.$store.dispatch('cart/updateStorageCart', {product, color: product.colors[0], size: product.sizes[0].size, total: 1})
-            },
             getProducts(page, nb) {
                 this.loading = true
                 this.$axios.get(`/api/client/products?page=${page}&nb=${nb}`)
                     .then(response => {
                         console.log(response)
-                        this.products = response.data.data
+                        this.page = response.data.current_page
                         this.maxPages = response.data.last_page
                         this.totalProducts = response.data.total
+
+                        this.products = response.data.data
                         this.loading = false
                     })
                     .catch(error => console.log(error))
-            }
+            },
+            getProductsPerBrand(page, nb, brandId) {
+                this.loading = true
+                this.$axios.get(`/api/client/productsBrand/${brandId}?page=${page}&nb=${nb}`)
+                    .then(response => {
+                        console.log(response)
+                        this.page = response.data.current_page
+                        this.maxPages = response.data.last_page
+                        this.totalProducts = response.data.total
+
+                        this.products = response.data.data
+                        this.loading = false
+                    })
+                    .catch(error => console.log(error))
+            },
+            getBrands() {
+                this.loading = true
+                this.$axios.get('/api/admin/brands')
+                    .then(response => {
+                        console.log(response)
+                        this.brands = response.data
+                        this.loading = false
+                    })
+                    .catch(error => {
+                        console.log(error)
+                        this.loading = false
+                    })
+            },
         }
     }
 </script>

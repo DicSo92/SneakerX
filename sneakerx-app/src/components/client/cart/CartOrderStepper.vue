@@ -1,5 +1,7 @@
 <template>
-  <q-stepper v-model="step" vertical color="primary" animated>
+  <q-stepper v-model="step"
+             vertical animated
+             active-color="black" inactive-color="purple-9">
     <q-step :name="1" title="Login or Continue without login" icon="settings" :done="step > 1">
       <IdentityStep :isLoggedIn="isLoggedIn"
                     :userState="userState"
@@ -26,7 +28,7 @@
 
     </q-step>
 
-    <q-step :name="3" title="Delivery Information" icon="assignment" :done="step > 1">
+    <q-step :name="3" title="Delivery Information" icon="assignment" :done="step > 3">
       <DeliveryStep v-if="isLoggedIn"
                     :billingAddressParent="billingAddress"
                     :deliveryAddressParent="deliveryAddress"
@@ -42,7 +44,7 @@
       </DeliveryStepNoAccount>
     </q-step>
 
-    <q-step :name="4" title="Payment Information" icon="add_comment">
+    <q-step :name="4" title="Payment Information" icon="add_comment" :done="step > 4">
       <PaymentStep :billingAddressParent="billingAddress"
                    :deliveryAddressParent="deliveryAddress"
                    :isLoggedIn="isLoggedIn"

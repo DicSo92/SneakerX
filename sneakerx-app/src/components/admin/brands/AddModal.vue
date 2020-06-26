@@ -15,13 +15,13 @@
             :rules="[ val => val && val.length > 0 || 'Please type something']"
           />
 
-          <q-editor v-model="description" min-height="5rem" />
+          <q-editor v-model="description" min-height="5rem" toolbar-toggle-color="yellow-9"/>
 
           <div class="flex justify-between">
             <q-uploader
               label="Banner (Restricted to images)"
               accept=".jpg, image/*"
-              hide-upload-btn
+              hide-upload-btn square color="grey-10"
               @added="toggleImagesData($event, true, 'banner')"
               @removed="toggleImagesData($event, false, 'banner')"
 
@@ -29,7 +29,7 @@
             <q-uploader
               label="Image (Restricted to images)"
               accept=".jpg, image/*"
-              hide-upload-btn
+              hide-upload-btn square color="grey-10"
               @added="toggleImagesData($event, true, 'image')"
               @removed="toggleImagesData($event, false, 'image')"
             />
@@ -37,13 +37,13 @@
 
 
           <div>
-            <q-btn :loading="loading" color="primary" label="Submit" type="submit" icon-right="send">
+            <q-btn :loading="loading" color="purple-10" label="Submit" type="submit" icon-right="send">
               <template v-slot:loading>
                 <q-spinner-hourglass class="on-left" />
                 Loading...
               </template>
             </q-btn>
-            <q-btn label="Cancel" @click="showEdit = false" color="primary" flat class="q-ml-sm"/>
+            <q-btn label="Cancel" @click="showEdit = false" color="black" flat class="q-ml-sm"/>
 
           </div>
         </q-form>
