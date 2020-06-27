@@ -195,13 +195,6 @@
                     .then(response => {
                         console.log('product created')
                         console.log(response);
-
-                        // this.imgIncrTemp = 0
-
-                        // this.images.forEach(imageFile => {
-                        //     this.uploadImage(imageFile, response.data.id)
-                        // })
-
                         this.validResponse()
                     })
                     .catch(error => {
@@ -209,27 +202,6 @@
                         this.loading = false
                     })
             },
-            // uploadImage(image, productId) {
-            //     const config = { headers: {'content-type': 'multipart/form-data'} }
-            //
-            //     let formData = new FormData()
-            //     formData.append('name', this.name)
-            //     formData.append('brandId', this.brandSelected)
-            //     formData.append('productId', productId)
-            //     formData.append('image', image)
-            //
-            //     this.$axios.post('/api/admin/products/uploadImage', formData, config)
-            //         .then(response => {
-            //             console.log(response);
-            //             console.log('image Posted')
-            //             this.imgIncrTemp += 1
-            //
-            //             if (this.imgIncrTemp >= this.images.length) this.validResponse()
-            //         })
-            //         .catch(error => {
-            //             console.log(error);
-            //         })
-            // },
             validResponse() {
                 this.showEdit = false
                 this.name = ''

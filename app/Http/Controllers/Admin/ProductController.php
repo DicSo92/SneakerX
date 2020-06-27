@@ -80,37 +80,6 @@ class ProductController extends Controller
 
         return response()->json($product);
     }
-//    public function uploadImage(Request $request)
-//    {
-//        $request->validate([
-//            'image' => 'required|mimes:jpeg,bmp,jpg,png|between:1, 6000',
-//            'name' => 'required|unique:brands|max:80',
-//            'brandId' => 'required',
-//            'productId' => 'required'
-//        ]);
-//        $product = Product::findOrFail($request->get('productId'));
-//
-//        $brandName = Brand::find($request->get('brandId'))->name;
-//        $slug = Str::slug($request->get('name'), '-');
-//
-//        $imagesTable = is_null($product->images) ? array() : $product->images;
-//
-//        $cloundary_upload_image = null;
-//        if ($request->hasFile('image')) {
-//            Cloudder::upload($request->file('image'), null, array("folder" => env('CLOUDINARY_MAIN_FOLDER')."/Products/".$brandName."/".$slug));
-//            $cloundary_upload_image = Cloudder::getResult();
-//            array_push($imagesTable, $cloundary_upload_image['url']);
-//        }
-//
-//        if ($cloundary_upload_image) {
-//            $product->images = $imagesTable;
-//        }
-//
-//        $product->save();
-//
-//
-//        return response()->json($product);
-//    }
 
     /**
      * Display the specified resource.
