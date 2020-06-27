@@ -7,7 +7,7 @@
       <q-space/>
     </div>
     <q-select
-      filled
+      filled color="purple-10"
       dense
       v-model="sizes"
       multiple

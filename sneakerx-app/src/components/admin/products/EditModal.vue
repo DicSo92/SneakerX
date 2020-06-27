@@ -7,9 +7,15 @@
           class="q-gutter-md"
         >
           <div class="row">
+            <div class="col-3" v-if="!image">
+              <q-img
+                src="http://res.cloudinary.com/charly-luzzi/image/upload/v1589846305/SneakerX/Products/Adidas/superstar-originals/knn2rqqaqdbczodbjvwp.jpg"
+                style="width: 100%; height: auto"
+              />
+            </div>
             <q-uploader
-              square color="grey-10"
-              label="Main Image (Restricted to images)"
+              v-else square color="grey-10"
+              label="Image (Restricted to images)"
               accept=".jpg, image/*"
               hide-upload-btn
               class="col-auto"
@@ -72,8 +78,8 @@
               accept=".jpg, image/*"
               hide-upload-btn
               multiple square color="grey-10"
-              @added="toggleImagesData($event, true, 'images')"
-              @removed="toggleImagesData($event, false, 'images')"
+              @added="toggleImagesData($event, true, 'banner')"
+              @removed="toggleImagesData($event, false, 'banner')"
               class="full-width" style="min-height: 300px"
             />
           </div>
@@ -102,9 +108,6 @@
     import ColorsPicker from "./ColorsPicker.vue";
     import SizesPicker from "./SizesPicker.vue";
 
-    import bus from '../../../utils/bus.js'
-
-
     export default {
         name: "AddModal",
         props: [
@@ -129,8 +132,10 @@
                 directActive: false,
 
                 image: null,
-                imgIncrTemp: 0,
-                images: [],
+                images: null,
+
+                bannerFile: null,
+                imageFile: null,
             }
         },
         mounted() {
@@ -146,30 +151,7 @@
                 if (imageOrImages === 'image') {
                     this.image = added ? files[0] : null
                 } else if (imageOrImages === 'images') {
-                    console.log(files)
-                    if (files.length === 0) {
-                        console.log('Same file (emptyArray)')
-                        return
-                    }
-                    if (added) {
-                        files.forEach(image => {
-                            this.images.push(image)
-                        })
-                    } else {
-                        if (files.length !== 0) {
-                            files.forEach(image => {
-                                let imgIndex = this.images.findIndex(img => img.name === image.name)
-                                if (imgIndex !== -1) {
-                                    this.images.splice(imgIndex, 1)
-                                } else {
-                                    console.log('no index')
-                                }
-                            })
-                        }
-                    }
-                    console.log(this.images)
-
-
+                    this.images = added ? files[0] : null
                 }
             },
             addProduct() {
@@ -178,67 +160,30 @@
 
                 let formData = new FormData()
                 formData.append('name', this.name)
-                formData.append('price', this.price)
                 formData.append('brandId', this.brandSelected)
                 formData.append('description', this.description)
-                formData.append('colors', JSON.stringify(this.colors))
-                formData.append('sizes', JSON.stringify(this.sizes))
+                formData.append('colors', this.colors)
+                formData.append('sizes', this.sizes)
                 formData.append('active', this.directActive)
-                if (this.image) formData.append('image', this.image)
-                if (this.images) {
-                    this.images.forEach(image => {
-                        formData.append('images[]', image)
-                    })
-                }
+                if (this.image) formData.append('banner', this.image)
+                if (this.images) formData.append('image', this.images)
 
                 this.$axios.post('/api/admin/products', formData, config)
                     .then(response => {
-                        console.log('product created')
                         console.log(response);
-
-                        // this.imgIncrTemp = 0
-
-                        // this.images.forEach(imageFile => {
-                        //     this.uploadImage(imageFile, response.data.id)
-                        // })
-
-                        this.validResponse()
+                        this.showEdit = false
+                        this.name = ''
+                        this.description = ''
+                        this.image = null
+                        this.images = null
+                        // bus.$emit('refreshProducts')
+                        this.loading = false
                     })
                     .catch(error => {
                         console.log(error);
                         this.loading = false
                     })
             },
-            // uploadImage(image, productId) {
-            //     const config = { headers: {'content-type': 'multipart/form-data'} }
-            //
-            //     let formData = new FormData()
-            //     formData.append('name', this.name)
-            //     formData.append('brandId', this.brandSelected)
-            //     formData.append('productId', productId)
-            //     formData.append('image', image)
-            //
-            //     this.$axios.post('/api/admin/products/uploadImage', formData, config)
-            //         .then(response => {
-            //             console.log(response);
-            //             console.log('image Posted')
-            //             this.imgIncrTemp += 1
-            //
-            //             if (this.imgIncrTemp >= this.images.length) this.validResponse()
-            //         })
-            //         .catch(error => {
-            //             console.log(error);
-            //         })
-            // },
-            validResponse() {
-                this.showEdit = false
-                this.name = ''
-                this.description = ''
-                this.image = null
-                this.images = []
-                bus.$emit('refreshProducts')
-                this.loading = false
-            }
         },
     }
 </script>

@@ -14,7 +14,7 @@
     <div class="row q-gutter-sm items-start q-mb-sm">
       <q-input filled v-model="inputColor.name" label="Color Name *"
                dense
-               class="col"
+               class="col" color="purple-10"
                hint="Color Name for catalog"
                @keydown.enter.prevent="addColor"
                :rules="[val => validateColorInput.value || validateColorInput.message]"
@@ -30,7 +30,7 @@
           </q-btn>
         </div>
         <q-btn dense no-caps size="sm"
-               icon="save" color="primary"
+               icon="save" color="purple-10"
                class="q-mt-sm"
                @click="addColor" :disabled="inputColor.name.length === 0 || !validateColorInput.value"/>
       </div>

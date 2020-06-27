@@ -51,6 +51,8 @@ Route::namespace('Admin')->prefix('admin')->name('superAdmin.')->middleware('aut
     Route::apiResource('products', 'ProductController');
     Route::apiResource('orders', 'OrderController');
 
+    Route::post('products/uploadImage', 'ProductController@uploadImage')->name('products.uploadImage');
+
     Route::post('brands/{id}', 'BrandController@updateBrand')->name('brands.update');
     Route::delete('brands/imageDelete/{id}', 'BrandController@removeImage')->name('brands.imageDelete');
 });
