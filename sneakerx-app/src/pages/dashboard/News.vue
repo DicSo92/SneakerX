@@ -23,7 +23,7 @@
                  icon="delete"
                  label="Delete Selection"
                  :disable="!selected.length"
-                 @click="deleteActuality"
+                 @click="deleteNews"
           />
         </div>
       </q-card-section>
@@ -72,8 +72,8 @@
             editActuality() {
                 this.$root.$emit('showEditActuality', true, this.selected[0])
             },
-            deleteActuality() {
-                this.$root.$emit('deleteActuality', this.selected[0].id)
+            deleteNews() {
+                this.$root.$emit('deleteActuality', this.selected)
             },
         }
     }

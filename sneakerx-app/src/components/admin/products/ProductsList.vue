@@ -187,7 +187,7 @@
 </template>
 
 <script>
-    import { date, openURL } from 'quasar'
+    import { QSpinnerGears, date, openURL } from 'quasar'
     import bus from '../../../utils/bus.js'
 
 
@@ -249,6 +249,9 @@
             bus.$on('refreshProducts', () => {
                 this.getProducts()
             })
+            this.$root.$on('deleteProducts', () => {
+                this.deleteProducts()
+            })
         },
         watch: {
             selected (val) {
@@ -282,6 +285,37 @@
                         console.log(error)
                         this.loading = false
                     })
+            },
+            deleteProducts() {
+                this.$q.loading.show({
+                    message: `Deleting New(s)...`
+                })
+
+                let arrayOfId = this.selected.map(product => { return product.id; });
+                this.$axios.post(`/api/admin/products/removeProducts`, {arrayOfId: JSON.stringify(arrayOfId)})
+                    .then(response => {
+                        console.log(response)
+                        this.products = response.data
+                        this.hideLoading('Product(s) Deleted')
+                    })
+                    .catch(error => {
+                        console.log(error)
+                        this.hideLoading('An error occurred : ' + error.message)
+                    })
+            },
+            hideLoading(message) {
+                this.$q.loading.show({
+                    spinner: QSpinnerGears,
+                    spinnerColor: 'red',
+                    messageColor: 'black',
+                    backgroundColor: 'yellow',
+                    message: message
+                })
+
+                this.timer = setTimeout(() => {
+                    this.$q.loading.hide()
+                    this.timer = void 0
+                }, 2000)
             },
         }
     }

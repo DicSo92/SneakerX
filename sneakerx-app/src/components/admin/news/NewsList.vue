@@ -149,6 +149,9 @@
             bus.$on('refreshNews', () => {
                 this.getNews()
             })
+            this.$root.$on('deleteActuality', () => {
+                this.deleteNews()
+            })
         },
         watch: {
             selected (val) {
@@ -176,7 +179,37 @@
                         this.loading = false
                     })
             },
+            deleteNews() {
+                this.$q.loading.show({
+                    message: `Deleting New(s)...`
+                })
 
+                let arrayOfId = this.selected.map(actuality => { return actuality.id; });
+                this.$axios.post(`/api/admin/news/removeNews`, {arrayOfId: JSON.stringify(arrayOfId)})
+                    .then(response => {
+                        console.log(response)
+                        this.news = response.data
+                        this.hideLoading('New(s) Deleted')
+                    })
+                    .catch(error => {
+                        console.log(error)
+                        this.hideLoading('An error occurred : ' + error.message)
+                    })
+            },
+            hideLoading(message) {
+                this.$q.loading.show({
+                    spinner: QSpinnerGears,
+                    spinnerColor: 'red',
+                    messageColor: 'black',
+                    backgroundColor: 'yellow',
+                    message: message
+                })
+
+                this.timer = setTimeout(() => {
+                    this.$q.loading.hide()
+                    this.timer = void 0
+                }, 2000)
+            },
         },
     }
 </script>

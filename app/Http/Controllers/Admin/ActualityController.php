@@ -24,7 +24,8 @@ class ActualityController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -42,7 +43,7 @@ class ActualityController extends Controller
 
         $cloundary_upload_image = null;
         if ($request->hasFile('image')) {
-            Cloudder::upload($request->file('image'), null, array("folder" => env('CLOUDINARY_MAIN_FOLDER')."/Actualities/"));
+            Cloudder::upload($request->file('image'), null, array("folder" => env('CLOUDINARY_MAIN_FOLDER') . "/Actualities/"));
             $cloundary_upload_image = Cloudder::getResult();
         }
 
@@ -69,7 +70,8 @@ class ActualityController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Actuality  $actuality
+     * @param \App\Actuality $actuality
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Actuality $actuality, $id)
@@ -90,6 +92,7 @@ class ActualityController extends Controller
     {
 
     }
+
     public function updateActuality(Request $request, $id)
     {
         $actuality = Actuality::findOrFail($id);
@@ -121,11 +124,36 @@ class ActualityController extends Controller
         //
     }
 
+    public function removeNews(Request $request)
+    {
+        $request->validate([
+            'arrayOfId' => 'required',
+        ]);
+
+        $arrayOfId = json_decode($request->get('arrayOfId'));
+
+        foreach ($arrayOfId as $id) {
+            $actuality = Actuality::findOrFail($id);
+
+            $imagesPath = env('CLOUDINARY_MAIN_FOLDER') . "/Actualities/";
+
+            if (!is_null($actuality->image)) {
+                $imageId = pathinfo($actuality->image)['filename'];
+                $cloudImage = $imagesPath . $imageId;
+                Cloudder::destroyImage($cloudImage);
+                Cloudder::delete($cloudImage);
+            }
+            $actuality->delete();
+        }
+
+        return response()->json(Actuality::all());
+    }
+
     public function removeImage(Request $request, $id)
     {
         $actuality = Actuality::findOrFail($id);
 
-        $imagesPath = env('CLOUDINARY_MAIN_FOLDER')."/Actualities/";
+        $imagesPath = env('CLOUDINARY_MAIN_FOLDER') . "/Actualities/";
 
         $imageId = pathinfo($actuality->image)['filename'];
         $imagePathId = $imagesPath . $imageId;
@@ -148,7 +176,7 @@ class ActualityController extends Controller
 
         $cloundary_upload_image = null;
         if ($request->hasFile('image')) {
-            Cloudder::upload($request->file('image'), null, array("folder" => env('CLOUDINARY_MAIN_FOLDER')."/Actualities/"));
+            Cloudder::upload($request->file('image'), null, array("folder" => env('CLOUDINARY_MAIN_FOLDER') . "/Actualities/"));
             $cloundary_upload_image = Cloudder::getResult();
         }
 

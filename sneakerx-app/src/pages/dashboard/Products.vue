@@ -23,7 +23,8 @@
           <q-btn color="red-10"
                  icon="delete"
                  label="Delete Selection"
-                 disable
+                 @click="deleteProducts"
+                 :disable="!selectedProduct.length"
           />
         </div>
       </q-card-section>
@@ -90,6 +91,9 @@
             },
             editProduct() {
                 this.$root.$emit('showEditProduct', true, this.selectedProduct[0])
+            },
+            deleteProducts() {
+                this.$root.$emit('deleteProducts')
             },
             getBrands() {
                 this.loadingBrands = true

@@ -205,7 +205,7 @@ class ProductController extends Controller
             'imagesArray' => 'required'
         ]);
 
-        $imagesPath = env('CLOUDINARY_MAIN_FOLDER')."/Brands/";
+        $imagesPath = env('CLOUDINARY_MAIN_FOLDER')."/Products/";
 
         $imageId = pathinfo($request->get('imgUrl'))['filename'];
         $imagePathId = $imagesPath . $imageId;
@@ -243,5 +243,39 @@ class ProductController extends Controller
         $product->save();
 
         return response()->json($product);
+    }
+
+    public function removeProducts(Request $request)
+    {
+        $request->validate([
+            'arrayOfId' => 'required',
+        ]);
+
+        $arrayOfId = json_decode($request->get('arrayOfId'));
+
+        foreach ($arrayOfId as $id) {
+            $product = Product::findOrFail($id);
+
+            $imagesPath = env('CLOUDINARY_MAIN_FOLDER') . "/Products/".$product->brand->name."/".$product->slug;
+
+            $imagesArrayId = array();
+            if (!is_null($product->image)) {
+                $imageId = pathinfo($product->image)['filename'];
+                array_push($imagesArrayId, $imagesPath . $imageId);
+            }
+            if (!is_null($product->images)) {
+                foreach ($product->images as $image) {
+                    $imageId = pathinfo($image)['filename'];
+                    array_push($imagesArrayId, $imagesPath . $imageId);
+                }
+            }
+
+            if (!empty($imagesArrayId)) {
+                Cloudder::destroyImages($imagesArrayId);
+            }
+            $product->delete();
+        }
+
+        return response()->json(Product::all());
     }
 }
