@@ -188,6 +188,8 @@
 
 <script>
     import { date, openURL } from 'quasar'
+    import bus from '../../../utils/bus.js'
+
 
     export default {
         name: "ProductsList",
@@ -243,6 +245,15 @@
         },
         mounted() {
             this.showTable = true
+
+            bus.$on('refreshProducts', () => {
+                this.getProducts()
+            })
+        },
+        watch: {
+            selected (val) {
+                this.$emit('selectedChange', val)
+            },
         },
         computed: {},
         methods: {

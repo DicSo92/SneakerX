@@ -3,19 +3,13 @@
     <q-card style="width: 1100px; max-width: 90vw;">
       <q-card-section>
         <q-form
-          @submit="addBrand"
+          @submit="addProduct"
           class="q-gutter-md"
         >
           <div class="row">
-            <div class="col-3" v-if="image">
-              <q-img
-                src="http://res.cloudinary.com/charly-luzzi/image/upload/v1589846305/SneakerX/Products/Adidas/superstar-originals/knn2rqqaqdbczodbjvwp.jpg"
-                style="width: 100%; height: auto"
-              />
-            </div>
             <q-uploader
-              v-else
-              label="Image (Restricted to images)"
+              square color="grey-10"
+              label="Main Image (Restricted to images)"
               accept=".jpg, image/*"
               hide-upload-btn
               class="col-auto"
@@ -25,12 +19,12 @@
             <div class="col q-px-md column ">
               <div class="row items-start q-gutter-md">
                 <q-input filled v-model="name" label="Brand Name *"
-                         class="col-8"
+                         class="col-6"
                          hint="Main Name"
-                         lazy-rules
+                         lazy-rules color="purple-10"
                          :rules="[ val => val && val.length > 0 || 'Please type something']"
                 />
-                <q-select color="teal-4" class="col"
+                <q-select color="purple-10" class="col"
                           filled
                           v-model="brandSelected"
                           :options="brands"
@@ -44,6 +38,16 @@
                     <q-icon name="local_offer"/>
                   </template>
                 </q-select>
+                <q-input filled bottom-slots v-model="price" label="Price"
+                         hint="Product Price"
+                         class="col-2"
+                         mask="#.##"
+                         fill-mask="0"
+                         reverse-fill-mask>
+                  <template v-slot:append>
+                    <q-icon name="euro_symbol" />
+                  </template>
+                </q-input>
               </div>
 
               <div class="row q-mt-md">
@@ -60,30 +64,30 @@
             </div>
           </div>
 
-          <q-editor v-model="description" min-height="8rem"/>
+          <q-editor v-model="description" min-height="8rem" toolbar-toggle-color="yellow-9"/>
 
           <div class="flex justify-between">
             <q-uploader
               label="Images List (Restricted to images)"
               accept=".jpg, image/*"
               hide-upload-btn
-              multiple
-              @added="toggleImagesData($event, true, 'banner')"
-              @removed="toggleImagesData($event, false, 'banner')"
+              multiple square color="grey-10"
+              @added="toggleImagesData($event, true, 'images')"
+              @removed="toggleImagesData($event, false, 'images')"
               class="full-width" style="min-height: 300px"
             />
           </div>
 
           <div class="column">
-            <q-toggle v-model="directActive" label="Check to instantly publish product on catalog. (Not recommended)"/>
+            <q-toggle v-model="directActive" label="Check to instantly publish product on catalog. (Not recommended)" color="purple-9"/>
             <div>
-              <q-btn :loading="loading" color="primary" label="Submit" type="submit" icon-right="send">
+              <q-btn :loading="loading" color="purple-10" label="Submit" type="submit" icon-right="send">
                 <template v-slot:loading>
                   <q-spinner-hourglass class="on-left"/>
                   Loading...
                 </template>
               </q-btn>
-              <q-btn label="Cancel" @click="showEdit = false" color="primary" flat class="q-ml-sm"/>
+              <q-btn label="Cancel" @click="showEdit = false" color="black" flat class="q-ml-sm"/>
             </div>
 
           </div>
@@ -97,6 +101,9 @@
     import draggable from "vuedraggable";
     import ColorsPicker from "./ColorsPicker.vue";
     import SizesPicker from "./SizesPicker.vue";
+
+    import bus from '../../../utils/bus.js'
+
 
     export default {
         name: "AddModal",
@@ -113,16 +120,17 @@
                 showEdit: false,
                 loading: false,
 
-                image: true,
                 name: '',
+                price: null,
                 description: '',
                 brandSelected: null,
                 colors: [],
                 sizes: [],
                 directActive: false,
 
-                bannerFile: null,
-                imageFile: null,
+                image: null,
+                imgIncrTemp: 0,
+                images: [],
             }
         },
         mounted() {
@@ -134,15 +142,72 @@
         computed: {
         },
         methods: {
-            addBrand() {
-                console.log('Fake Submit');
-            },
-            toggleImagesData(files, added, bannerOrImage) {
-                if (bannerOrImage === 'banner') {
-                    this.bannerFile = added ? files[0] : null
-                } else if (bannerOrImage === 'image') {
-                    this.imageFile = added ? files[0] : null
+            toggleImagesData(files, added, imageOrImages) {
+                if (imageOrImages === 'image') {
+                    this.image = added ? files[0] : null
+                } else if (imageOrImages === 'images') {
+                    console.log(files)
+                    if (files.length === 0) {
+                        console.log('Same file (emptyArray)')
+                        return
+                    }
+                    if (added) {
+                        files.forEach(image => {
+                            this.images.push(image)
+                        })
+                    } else {
+                        if (files.length !== 0) {
+                            files.forEach(image => {
+                                let imgIndex = this.images.findIndex(img => img.name === image.name)
+                                if (imgIndex !== -1) {
+                                    this.images.splice(imgIndex, 1)
+                                } else {
+                                    console.log('no index')
+                                }
+                            })
+                        }
+                    }
+                    console.log(this.images)
                 }
+            },
+            addProduct() {
+                this.loading = true
+                const config = { headers: {'content-type': 'multipart/form-data'} }
+
+                let formData = new FormData()
+                formData.append('name', this.name)
+                formData.append('price', this.price)
+                formData.append('brandId', this.brandSelected)
+                formData.append('description', this.description)
+                formData.append('colors', JSON.stringify(this.colors))
+                formData.append('sizes', JSON.stringify(this.sizes))
+                formData.append('active', this.directActive)
+                if (this.image) formData.append('image', this.image)
+                if (this.images) {
+                    this.images.forEach(image => {
+                        formData.append('images[]', image)
+                    })
+                }
+
+                this.$axios.post('/api/admin/products', formData, config)
+                    .then(response => {
+                        console.log('product created')
+                        console.log(response);
+                        this.validResponse()
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        this.loading = false
+                    })
+            },
+            validResponse() {
+                this.showEdit = false
+                this.name = ''
+                this.description = ''
+                this.image = null
+                this.images = []
+                bus.$emit('refreshProducts')
+                this.loading = false
             }
         },
     }
