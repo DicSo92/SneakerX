@@ -37,6 +37,7 @@ class ProductController extends Controller
             'colors' => 'required',
             'sizes' => 'required',
             'price' => 'required',
+            'active' => 'required',
             'image' => 'mimes:jpeg,bmp,jpg,png|between:1, 6000',
         ]);
 
@@ -66,6 +67,7 @@ class ProductController extends Controller
         $product->colors = json_decode($request->get('colors'));
         $product->sizes = json_decode($request->get('sizes'));
         $product->price = $request->get('price');
+        $product->active = json_decode($request->get('active'));
         $product->refLink = 'test';
         $product->brand_id =  $request->get('brandId');
 
@@ -116,6 +118,7 @@ class ProductController extends Controller
         if ($request->get('description')) $product->description = $request->get('description');
         if ($request->get('colors')) $product->colors = json_decode($request->get('colors'));
         if ($request->get('sizes')) $product->sizes = json_decode($request->get('sizes'));
+        if ($request->get('active')) $product->active = json_decode($request->get('active'));
         if ($request->get('price')) $product->price = $request->get('price');
         if ($request->get('brandId')) $product->brand_id =  $request->get('brandId');
 

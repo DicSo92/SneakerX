@@ -308,7 +308,8 @@
                     price: this.price,
                     colors: JSON.stringify(this.colors),
                     sizes: JSON.stringify(this.sizes),
-                    brandId: this.brandSelected
+                    brandId: this.brandSelected,
+                    active: JSON.stringify(this.directActive)
                 })
                     .then(response => {
                         console.log(response);
