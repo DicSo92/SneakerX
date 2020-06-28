@@ -23,7 +23,7 @@
               square color="grey-10" v-else
               label="Main Image (Restricted to images)"
               accept=".jpg, image/*"
-              hide-upload-btn
+              hide-upload-btn :disable="imageToUploadLoading"
               class="col-auto"
               @added="toggleImagesData($event, true, 'image')"
               @removed="toggleImagesData($event, false, 'image')"
@@ -81,9 +81,9 @@
           <div class="row q-col-gutter-lg q-pa-md">
             <div class="col-8">
               <div class="q-col-gutter-md row items-start">
-                <div class="col-3 relative-position" v-for="image in currentImages">
-                  <q-btn round :loading="loadingImage" dense color="red-9" size='md' icon="delete" class="deleteBtnImages"
-                         @click="removeFromImages(image)">
+                <div class="col-3 relative-position" v-for="(image, index) in currentImages">
+                  <q-btn round :loading="loadingImages === index" dense color="red-9" size='md' icon="delete" class="deleteBtnImages"
+                         @click="removeFromImages(image, index)">
                     <template v-slot:loading>
                       <q-spinner-facebook/>
                     </template>
@@ -168,6 +168,7 @@
                 loadingImage: false,
                 loadingImages: false,
 
+                imageToUploadLoading: false,
             }
         },
         mounted() {
@@ -240,8 +241,8 @@
                         this.loadingImage = false
                     })
             },
-            removeFromImages(imgUrl) {
-                this.loadingImages = true
+            removeFromImages(imgUrl, index) {
+                this.loadingImages = index
 
                 let newImages = this.currentImages.filter(url => url !== imgUrl)
 
@@ -259,6 +260,8 @@
                     })
             },
             addImage(image) {
+                this.imageToUploadLoading = true
+
                 const config = { headers: {'content-type': 'multipart/form-data'} }
 
                 let formData = new FormData()
@@ -267,6 +270,7 @@
                     .then(response => {
                         console.log(response);
                         this.currentImage = response.data.image
+                        this.imageToUploadLoading = false
                     })
                     .catch(error => {
                         console.log(error);
