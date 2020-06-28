@@ -37,6 +37,7 @@ class ProductController extends Controller
             'colors' => 'required',
             'sizes' => 'required',
             'price' => 'required',
+            'active' => 'required',
             'image' => 'mimes:jpeg,bmp,jpg,png|between:1, 6000',
         ]);
 
@@ -66,6 +67,7 @@ class ProductController extends Controller
         $product->colors = json_decode($request->get('colors'));
         $product->sizes = json_decode($request->get('sizes'));
         $product->price = $request->get('price');
+        $product->active = json_decode($request->get('active'));
         $product->refLink = 'test';
         $product->brand_id =  $request->get('brandId');
 
@@ -109,13 +111,14 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
 
         $request->validate([
-            'name' => 'unique:products|min:1|max:100',
+            'name' => 'min:1|max:100',
         ]);
 
         if ($request->get('name')) $product->name = $request->get('name');
         if ($request->get('description')) $product->description = $request->get('description');
         if ($request->get('colors')) $product->colors = json_decode($request->get('colors'));
         if ($request->get('sizes')) $product->sizes = json_decode($request->get('sizes'));
+        if ($request->get('active')) $product->active = json_decode($request->get('active'));
         if ($request->get('price')) $product->price = $request->get('price');
         if ($request->get('brandId')) $product->brand_id =  $request->get('brandId');
 
@@ -202,7 +205,7 @@ class ProductController extends Controller
             'imagesArray' => 'required'
         ]);
 
-        $imagesPath = env('CLOUDINARY_MAIN_FOLDER')."/Brands/";
+        $imagesPath = env('CLOUDINARY_MAIN_FOLDER')."/Products/";
 
         $imageId = pathinfo($request->get('imgUrl'))['filename'];
         $imagePathId = $imagesPath . $imageId;
@@ -240,5 +243,39 @@ class ProductController extends Controller
         $product->save();
 
         return response()->json($product);
+    }
+
+    public function removeProducts(Request $request)
+    {
+        $request->validate([
+            'arrayOfId' => 'required',
+        ]);
+
+        $arrayOfId = json_decode($request->get('arrayOfId'));
+
+        foreach ($arrayOfId as $id) {
+            $product = Product::findOrFail($id);
+
+            $imagesPath = env('CLOUDINARY_MAIN_FOLDER') . "/Products/".$product->brand->name."/".$product->slug;
+
+            $imagesArrayId = array();
+            if (!is_null($product->image)) {
+                $imageId = pathinfo($product->image)['filename'];
+                array_push($imagesArrayId, $imagesPath . $imageId);
+            }
+            if (!is_null($product->images)) {
+                foreach ($product->images as $image) {
+                    $imageId = pathinfo($image)['filename'];
+                    array_push($imagesArrayId, $imagesPath . $imageId);
+                }
+            }
+
+            if (!empty($imagesArrayId)) {
+                Cloudder::destroyImages($imagesArrayId);
+            }
+            $product->delete();
+        }
+
+        return response()->json(Product::all());
     }
 }

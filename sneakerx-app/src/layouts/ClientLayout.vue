@@ -3,23 +3,24 @@
     <q-header elevated class="bg-grey-10">
       <q-toolbar>
         <q-toolbar-title class="cursor-pointer" @click="goToHome">
-          <q-avatar square  class="q-mr-sm">
+          <q-avatar square class="q-mr-sm">
             <img src="statics/IconSX-8.png">
           </q-avatar>
           SneakerX
         </q-toolbar-title>
 
-        <q-input dark dense standout v-model="search" input-class="text-right" style="flex-grow: 1">
+        <q-input dark dense standout v-model="search" input-class="text-right" style="flex-grow: 1"
+                 @keyup.enter="goToSearch" ref="searchbar">
           <template v-slot:append>
-            <q-icon v-if="search === ''" name="search" />
-            <q-icon v-else name="clear" class="cursor-pointer" @click="search = ''" />
+            <q-icon v-if="search === ''" name="search"/>
+            <q-icon v-else name="clear" class="cursor-pointer" @click="search = ''"/>
           </template>
         </q-input>
 
         <CartMenu></CartMenu>
 
         <AccountMenu v-if="isLoggedIn"></AccountMenu>
-        <q-btn v-else flat no-wrap label="Login / Register" :to="{name: 'auth'}" icon="person" />
+        <q-btn v-else flat no-wrap label="Login / Register" :to="{name: 'auth'}" icon="person"/>
       </q-toolbar>
 
       <Tabs></Tabs>
@@ -50,8 +51,7 @@
             AccountMenu,
             Tabs
         },
-        watch: {
-        },
+        watch: {},
         computed: {
             isLoggedIn() {
                 return this.$store.state.auth.isLoggedIn
@@ -88,6 +88,12 @@
         methods: {
             goToHome() {
                 this.$router.push({name: 'home'})
+            },
+            goToSearch() {
+                console.log(this.search)
+                this.$router.push({name: 'search', query: {search: this.search}})
+                this.search = ''
+                this.$refs.searchbar.blur()
             }
         },
     }
