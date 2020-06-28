@@ -1,8 +1,8 @@
 <template>
-  <q-card class="my-card" square flat>
-    <img :src="actuality.image">
+  <q-card class="my-card" square flat @click="goToActuality(actuality.slug)">
+    <img :src="actuality.image" class="cursor-pointer">
 
-    <q-card-section>
+    <q-card-section class="cursor-pointer">
       <div class="row items-center">
         <div class="bg-black text-overline q-px-md q-mr-sm text-white">
           {{ actuality.subtitle }}
@@ -35,6 +35,12 @@
                 }
             },
         },
+        methods: {
+            goToActuality(slug) {
+                console.log('go to');
+                this.$router.push({name: 'actuality', params: {slug: slug}})
+            },
+        }
     }
 </script>
 

@@ -181,7 +181,7 @@
                 formData.append('description', this.description)
                 formData.append('colors', JSON.stringify(this.colors))
                 formData.append('sizes', JSON.stringify(this.sizes))
-                formData.append('active', this.directActive)
+                formData.append('active', JSON.stringify(this.directActive))
                 if (this.image) formData.append('image', this.image)
                 if (this.images) {
                     this.images.forEach(image => {

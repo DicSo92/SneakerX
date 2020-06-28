@@ -36,6 +36,17 @@ const routes = [
         // meta: { requiresVisitor: true }
       },
       {
+        path: '/news/:slug',
+        name: 'actuality',
+        props: true,
+        component: () => import('pages/client/Actuality.vue'),
+      },
+      {
+        path: '/search',
+        name: 'search',
+        component: () => import('pages/client/Search.vue'),
+      },
+      {
         path: 'contact',
         name: 'contact',
         component: () => import('pages/client/Contact.vue'),

@@ -53,9 +53,14 @@ class ProductController extends Controller
             return response()->json(["error" => true, "message" => "No query Search"], 400);
         }
 
-        $nb = $request->query('nb');
+        if ($request->query('nb')) {
+            $nb = $request->query('nb');
+            $searchProducts = Product::where('name', 'like', '%' . $search . '%')->with('brand')->paginate($nb);
+        }
+        else {
+            $searchProducts = Product::where('name', 'like', '%' . $search . '%')->with('brand')->get();
+        }
 
-        $searchProducts = Product::where('name', 'like', '%' . $search . '%')->with('brand')->paginate($nb);
         return response()->json($searchProducts);
     }
 
