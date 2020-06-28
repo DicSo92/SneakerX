@@ -3,39 +3,39 @@
     <div class="row justify-center full-width">
       <div class="col-10">
         <div class="row full-width borderBottom q-mb-md">
-          <h6 class="no-margin ">Product :</h6>
+          <h6 class="no-margin ">Actuality :</h6>
         </div>
 
-        <ProductShow v-if="product" :product="product"></ProductShow>
+        <ActualityShow :actuality="actuality"/>
       </div>
     </div>
   </q-page>
 </template>
 
 <script>
-    import ProductShow from '../../components/client/product/ProductShow.vue'
+    import ActualityShow from '../../components/client/actuality/ActualityShow.vue'
 
     export default {
-        name: "Product",
+        name: "Actuality",
         components: {
-            ProductShow
+            ActualityShow
         },
         data() {
             return {
-                product: null,
+                actuality: null,
                 loading: false
             }
         },
         created() {
-            this.getProduct(this.$route.params.slug)
+            this.getActuality(this.$route.params.slug)
         },
         methods: {
-            getProduct(slug) {
+            getActuality(slug) {
                 this.loading = true
-                this.$axios.get(`/api/client/products/${slug}`)
+                this.$axios.get(`/api/client/news/${slug}`)
                     .then(response => {
                         console.log(response)
-                        this.product = response.data
+                        this.actuality = response.data
                         this.loading = false
                     })
                     .catch(error => {
@@ -46,8 +46,6 @@
     }
 </script>
 
-<style scoped lang="scss">
-  .borderBottom {
-    border-bottom: 1px #eeeeee solid;
-  }
+<style scoped>
+
 </style>
