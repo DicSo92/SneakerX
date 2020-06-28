@@ -50,6 +50,7 @@ Route::namespace('Admin')->prefix('admin')->name('superAdmin.')->middleware('aut
     Route::apiResource('brands', 'BrandController');
     Route::apiResource('products', 'ProductController');
     Route::apiResource('orders', 'OrderController');
+    Route::apiResource('news', 'ActualityController');
 
     Route::post('brands/{id}', 'BrandController@updateBrand')->name('brands.update');
     Route::delete('brands/imageDelete/{id}', 'BrandController@removeImage')->name('brands.imageDelete');
@@ -66,6 +67,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('auth:san
     Route::apiResource('users', 'UserController')->only(['index', 'show']);
     Route::apiResource('brands', 'BrandController')->only(['index', 'show']);
     Route::apiResource('products', 'ProductController')->only(['index', 'show']);
+    Route::apiResource('news', 'ActualityController')->only(['index', 'show']);
     Route::get('productsBrand/{brandId}', 'ProductController@productsPerBrand')->name('products.perBrand');
 
     Route::apiResource('orders', 'OrderController')->only(['index', 'show']);
