@@ -11,13 +11,15 @@
 
     <div class="text-h4 title text-bold q-mt-sm">{{ actuality.title }}</div>
 
-    <div class="row justify-center">
-      <img :src="actuality.image" class="full-width q-py-lg">
+    <div class="row q-col-gutter-lg  q-py-lg">
+      <div class="row justify-center col-6">
+        <img :src="actuality.image" class="full-width">
+      </div>
+      <div class="content text-body1 col-6">
+        {{actuality.content}}
+      </div>
     </div>
 
-    <div class="content text-body1">
-      {{actuality.content}}
-    </div>
   </div>
 </template>
 

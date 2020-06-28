@@ -2,9 +2,9 @@
   <q-page class="flex column justify-start items-center" padding>
     <div class="row justify-center full-width">
       <div class="col-10">
-        <div class="row q-pb-lg">
-          <q-img :src="product.brand.banner" class=""></q-img>
-        </div>
+<!--        <div class="row q-pb-lg">-->
+<!--          <q-img :src="product.brand.banner" class=""></q-img>-->
+<!--        </div>-->
 
         <div class="row full-width borderBottom q-mb-md">
           <h6 class="no-margin ">Product :</h6>

@@ -43,7 +43,56 @@
           </div>
         </div>
       </div>
+
       <router-view/>
+
+      <div class="row flex-center bg-grey-10 q-pa-lg">
+        <div class="col-10">
+          <div class="row">
+            <div class="col">
+              <div class="text-overline text-grey-5">
+                Main Links :
+              </div>
+              <ul class="text-white">
+                <li>Home</li>
+                <li>Contact</li>
+                <li>Catalog</li>
+                <li>News</li>
+              </ul>
+            </div>
+            <div class="col">
+              <div class="text-overline text-grey-5">
+                Brands :
+              </div>
+              <ul class="text-white">
+                <li>Adidas</li>
+                <li>Puma</li>
+                <li>Reebok</li>
+              </ul>
+            </div>
+            <div class="col">
+              <div class="text-overline text-grey-5">
+                Addresses :
+              </div>
+              <ul class="text-white">
+                <li>60 quai de Jemmapes, 75010 Paris</li>
+                <li>contact@ecole-webstart.com</li>
+                <li>Tél: 01 42 41 97 76</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row flex-center bg-black q-pa-sm">
+        <div class="text-grey-5">
+          Made with
+          <span>
+            <q-icon name="favorite" color="red-9"></q-icon>
+          </span>
+          by
+          <a href="https://charlyluzzi.com" target="_blank" id="myName" class="text-grey-3 text-bold">@CharlyLuzzi</a>
+        </div>
+      </div>
     </q-page-container>
   </q-layout>
 </template>
@@ -147,7 +196,11 @@
 </script>
 
 <style scoped lang="scss">
-    .bottom-line {
-        border-bottom: solid 1px #dedede;
-    }
+  .bottom-line {
+    border-bottom: solid 1px #dedede;
+  }
+
+  #myName {
+    text-decoration: none;
+  }
 </style>

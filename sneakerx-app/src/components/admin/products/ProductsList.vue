@@ -85,7 +85,7 @@
           </q-td>
 
           <q-td key="brand_id" :props="props" auto-width>
-            <q-btn outline rounded size="sm" color="primary" :label="getBrandName(props.row.brand_id)" >
+            <q-btn outline rounded size="sm" color="purple-10" :label="getBrandName(props.row.brand_id)" >
               <q-badge floating transparent color="amber">
                 {{ props.row.brand_id }}
               </q-badge>
@@ -165,16 +165,16 @@
                     </div>
                   </div>
                   <div class="flex">
-                    <q-btn flat rounded color="primary" label="Preview" />
-                    <q-btn outline rounded color="primary" label="Official Page" @click="openExternalLink(props.row.refLink)"/>
+                    <q-btn flat rounded color="black" label="Preview" />
+                    <q-btn outline rounded color="purple-9" label="Official Page" @click="openExternalLink(props.row.refLink)"/>
                   </div>
                 </div>
               </div>
 
               <div class="expandBtnContainer relative-position" style="flex-grow: 3;">
                 <div class="flex absolute-top-right no-wrap">
-                  <q-btn round size="sm" color="primary" icon="edit" class="q-mr-sm"/>
-                  <q-btn round size="sm" color="negative" icon="delete" class="q-mr-sm"/>
+                  <q-btn round size="sm" color="purple-10" icon="edit" class="q-mr-sm"/>
+                  <q-btn round size="sm" color="red-9" icon="delete" class="q-mr-sm"/>
                 </div>
               </div>
             </div>
