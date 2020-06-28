@@ -43,6 +43,7 @@ class ProductsTableSeeder extends Seeder
                 'colors' => $product->colors,
                 'sizes' => $product->sizes,
                 'price' => $product->price,
+                'active' => 1,
                 'refLink' => $product->refLink,
                 'brand_id' => $product->brand_id,
             ]);
