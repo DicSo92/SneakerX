@@ -1,5 +1,5 @@
 <template>
-  <div class="row q-col-gutter-md full-width">
+  <div class="row q-col-gutter-md full-width q-pb-lg">
 <!--    <div class="col-7 flex flex-center">-->
 <!--      <div class="full-width full-height flex flex-center bg-grey-2">-->
 <!--        <img-->
@@ -35,7 +35,7 @@
             :offset="[18, 18]"
           >
             <q-btn
-              push round dense color="white" text-color="primary"
+              push round dense color="white" text-color="purple-10"
               :icon="fullscreen ? 'fullscreen_exit' : 'fullscreen'"
               @click="fullscreen = !fullscreen"
             />
@@ -50,10 +50,10 @@
           <div class="flex justify-between items-center">
             <div class="flex">
               <img
-                src="https://res.cloudinary.com/charly-luzzi/image/upload/v1588357088/SneakerX/Brands/dnrcuzv7etmjjqck5wbn.png"
+                :src="product.brand.image"
                 class="brandImage">
-              <div class="row no-wrap items-center">
-                <q-rating size="18px" v-model="stars" :max="5" color="primary"/>
+              <div class="row no-wrap items-center q-ml-sm">
+                <q-rating size="18px" v-model="stars" :max="5" color="purple-9"/>
                 <span class="text-caption text-grey q-ml-sm">4.2 (551)</span>
               </div>
             </div>
@@ -68,7 +68,7 @@
           <div class="">
             <div class="text-h6">{{product.name}}</div>
             <div class="text-overline">
-              {{product.brand}}
+              {{product.brand.name}}
             </div>
             <div class="text-body2">
               {{product.description}}
@@ -93,14 +93,14 @@
                       option-value="size"
                       option-label="size"
                       map-options
-                      emit-value
+                      emit-value color="purple-9"
                       :option-disable="opt => !opt.available"
                       label="Choose a Size" class="col"/>
-            <q-select square outlined v-model="quantity" :options="quantities" class="col-auto q-ml-sm"/>
+            <q-select square outlined v-model="quantity" :options="quantities" class="col-auto q-ml-sm" color="purple-9"/>
           </div>
           <div class="row">
-            <q-btn color="red" icon="shopping_cart" icon-right="send" label="Order" align="between" class="col" @click="addToCart"/>
-            <q-btn outline round color="primary" icon="favorite" class="col-auto q-ml-sm"/>
+            <q-btn color="black" icon="shopping_cart" icon-right="send" label="Order" align="between" class="col" @click="addToCart"/>
+            <q-btn outline round color="purple-9" icon="favorite" class="col-auto q-ml-sm"/>
           </div>
         </q-card-section>
       </q-card>

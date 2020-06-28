@@ -105,8 +105,12 @@
             },
             queryParameter(val) {
                 if (!val) {
+                    this.$emit('changeBrandBanner', null)
                     this.getProducts(1, this.nbPerPage)
                 } else {
+                    let brandBanner = this.brands.find(brand => brand.name === val).banner
+                    this.$emit('changeBrandBanner', brandBanner)
+
                     let brandId = this.brands.find(brand => brand.name === val).id
                     console.log(brandId)
                     this.getProductsPerBrand(1, this.nbPerPage, brandId)

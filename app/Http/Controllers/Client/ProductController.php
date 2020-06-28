@@ -37,7 +37,7 @@ class ProductController extends Controller
      */
     public function show(Product $product, $slug)
     {
-        $product = Product::where('slug', $slug)->firstorfail();
+        $product = Product::where('slug', $slug)->with('brand')->firstorfail();
         return response()->json($product);
     }
 

@@ -2,11 +2,17 @@
   <q-page class="flex column justify-start items-center" padding>
     <div class="row justify-center full-width">
       <div class="col-10">
+        <div class="row q-pb-lg">
+          <q-img :src="product.brand.banner" class=""></q-img>
+        </div>
+
         <div class="row full-width borderBottom q-mb-md">
           <h6 class="no-margin ">Product :</h6>
         </div>
 
         <ProductShow v-if="product" :product="product"></ProductShow>
+
+        <NewProducts/>
       </div>
     </div>
   </q-page>
@@ -14,11 +20,14 @@
 
 <script>
     import ProductShow from '../../components/client/product/ProductShow.vue'
+    import NewProducts from '../../components/client/home/NewProducts.vue'
+
 
     export default {
         name: "Product",
         components: {
-            ProductShow
+            ProductShow,
+            NewProducts
         },
         data() {
             return {
