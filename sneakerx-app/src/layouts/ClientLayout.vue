@@ -27,6 +27,22 @@
     </q-header>
 
     <q-page-container>
+      <div class="row justify-center">
+        <div class="col-10 q-px-md">
+          <div class="bottom-line q-py-md">
+            <q-breadcrumbs style="font-size: 16px">
+              <q-breadcrumbs-el label="Home" icon="home" :to="{name: 'home'}"/>
+              <q-breadcrumbs-el v-for="li in links"
+                                :key="li.title"
+                                :label="li.title"
+                                :icon="li.icon"
+                                :to="{name: li.link}"
+                                v-if="currentRoute === li.link && li.link !== 'home'"
+              />
+            </q-breadcrumbs>
+          </div>
+        </div>
+      </div>
       <router-view/>
     </q-page-container>
   </q-layout>
@@ -53,6 +69,9 @@
         },
         watch: {},
         computed: {
+            currentRoute() {
+                return this.$route.name
+            },
             isLoggedIn() {
                 return this.$store.state.auth.isLoggedIn
             },
@@ -62,27 +81,55 @@
             links() {
                 const home = {
                     title: 'Home',
-                    caption: 'Home',
                     icon: 'home',
                     link: 'home'
                 }
                 const auth = {
                     title: 'Login / Register',
-                    caption: 'login.register',
                     icon: 'code',
                     link: 'auth'
                 }
                 const catalog = {
                     title: 'Catalog',
-                    caption: 'products.catalog',
-                    icon: 'dashboard',
+                    icon: 'widgets',
                     link: 'catalog'
                 }
-                if (this.isLoggedIn) {
-                    return [home, catalog]
-                } else {
-                    return [home, catalog, auth]
+                const product = {
+                    title: 'Product',
+                    icon: 'dashboard',
+                    link: 'catalog/:slug'
                 }
+                const news = {
+                    title: 'News',
+                    icon: 'fiber_new',
+                    link: 'news'
+                }
+                const actuality = {
+                    title: 'Actuality',
+                    icon: 'fiber_new',
+                    link: 'news/:slug'
+                }
+                const search = {
+                    title: 'Search',
+                    icon: 'search',
+                    link: 'search'
+                }
+                const contact = {
+                    title: 'Contact',
+                    icon: 'mail',
+                    link: 'contact'
+                }
+                const cart = {
+                    title: 'Cart',
+                    icon: 'shopping_cart',
+                    link: 'cart'
+                }
+                const orderConfirmation = {
+                    title: 'Order Confirmation',
+                    icon: 'shopping_cart',
+                    link: 'orderConfirmation/:orderId'
+                }
+                return [home, auth, catalog, product, news, actuality, search, contact, cart, orderConfirmation]
             }
         },
         methods: {
@@ -99,6 +146,8 @@
     }
 </script>
 
-<style lang="scss">
-
+<style scoped lang="scss">
+    .bottom-line {
+        border-bottom: solid 1px #dedede;
+    }
 </style>
