@@ -24,7 +24,7 @@ class CreateActualitiesTable extends Migration
             $table->boolean('published')->default(false);
             $table->timestamp('published_date')->nullable()->default(null);
             $table->foreignId('user_id')->constrained();
-            $table->text('refLink');
+            $table->text('refLink')->nullable()->default(null);
             $table->timestamps();
         });
     }

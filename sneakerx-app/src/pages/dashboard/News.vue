@@ -34,21 +34,21 @@
         <NewsList @selectedChange="changeSelect"></NewsList>
       </q-card-section>
     </q-card>
-<!--    <AddModal></AddModal>-->
+    <AddModal></AddModal>
 <!--    <EditModal></EditModal>-->
   </q-page>
 </template>
 
 <script>
     import NewsList from 'components/admin/news/NewsList.vue'
-    // import AddModal from 'components/admin/brands/AddModal.vue'
+    import AddModal from 'components/admin/news/AddModal.vue'
     // import EditModal from 'components/admin/brands/EditModal.vue'
 
     export default {
         name: "News",
         components: {
             NewsList,
-            // AddModal,
+            AddModal,
             // EditModal
         },
         data() {
