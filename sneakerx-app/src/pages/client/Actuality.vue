@@ -6,7 +6,7 @@
           <h6 class="no-margin ">Actuality :</h6>
         </div>
 
-        <ActualityShow :actuality="actuality"/>
+        <ActualityShow v-if="actuality" :actuality="actuality"/>
       </div>
     </div>
   </q-page>

@@ -35,7 +35,7 @@
         methods: {
             getBrands() {
                 this.loading = true
-                this.$axios.get('/api/admin/brands')
+                this.$axios.get('/api/client/brands')
                     .then(response => {
                         console.log(response)
                         this.brands = response.data
