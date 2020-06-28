@@ -35,21 +35,21 @@
       </q-card-section>
     </q-card>
     <AddModal></AddModal>
-<!--    <EditModal></EditModal>-->
+    <EditModal></EditModal>
   </q-page>
 </template>
 
 <script>
     import NewsList from 'components/admin/news/NewsList.vue'
     import AddModal from 'components/admin/news/AddModal.vue'
-    // import EditModal from 'components/admin/brands/EditModal.vue'
+    import EditModal from 'components/admin/news/EditModal.vue'
 
     export default {
         name: "News",
         components: {
             NewsList,
             AddModal,
-            // EditModal
+            EditModal
         },
         data() {
             return {

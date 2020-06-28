@@ -138,7 +138,7 @@
                     {name: 'refLink', label: 'Ref. Link', field: 'refLink', align: 'left'},
                     {name: 'created_at', label: 'Created At', field: 'created_at', sortable: true},
                     {name: 'updated_at', label: 'Updated At', field: 'updated_at', sortable: true},
-                    {name: 'published', label: 'Published', field: 'published', sortable: true},
+                    {name: 'published', label: 'Published', field: 'published', align: 'center', sortable: true},
                 ],
             }
         },

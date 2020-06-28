@@ -235,6 +235,7 @@
                         console.log(response);
                         this.loadingImage = false
                         this.currentImage = null
+                        bus.$emit('refreshProducts')
                     })
                     .catch(error => {
                         console.log(error);
@@ -253,6 +254,7 @@
                         console.log(response);
                         this.loadingImages = false
                         this.currentImages = response.data.images
+                        bus.$emit('refreshProducts')
                     })
                     .catch(error => {
                         console.log(error);
@@ -271,6 +273,7 @@
                         console.log(response);
                         this.currentImage = response.data.image
                         this.imageToUploadLoading = false
+                        bus.$emit('refreshProducts')
                     })
                     .catch(error => {
                         console.log(error);
@@ -289,6 +292,7 @@
                         this.currentImages = response.data.images
                         this.$refs.multipleUploader.reset()
                         this.imagesToUpload = null
+                        bus.$emit('refreshProducts')
                     })
                     .catch(error => {
                         console.log(error);

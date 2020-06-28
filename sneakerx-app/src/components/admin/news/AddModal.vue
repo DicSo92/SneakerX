@@ -90,7 +90,7 @@
                 formData.append('title', this.title)
                 formData.append('subtitle', this.subtitle)
                 formData.append('content', this.content)
-                formData.append('published', this.published)
+                formData.append('published', JSON.stringify(this.published))
                 if (this.refLink && this.refLink.length > 0) formData.append('refLink', this.refLink)
                 if (this.imageFile) formData.append('image', this.imageFile)
 

@@ -51,6 +51,10 @@ Route::namespace('Admin')->prefix('admin')->name('superAdmin.')->middleware('aut
     Route::apiResource('products', 'ProductController');
     Route::apiResource('orders', 'OrderController');
     Route::apiResource('news', 'ActualityController');
+    Route::delete('news/imageDelete/{id}', 'ActualityController@removeImage')->name('news.imageDelete');
+    Route::post('news/addImage/{id}', 'ActualityController@addImage')->name('news.addImage');
+    Route::post('news/updateActuality/{id}', 'ActualityController@updateActuality')->name('news.updateActuality');
+
 
     Route::post('brands/{id}', 'BrandController@updateBrand')->name('brands.update');
     Route::delete('brands/imageDelete/{id}', 'BrandController@removeImage')->name('brands.imageDelete');

@@ -109,7 +109,7 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
 
         $request->validate([
-            'name' => 'unique:products|min:1|max:100',
+            'name' => 'min:1|max:100',
         ]);
 
         if ($request->get('name')) $product->name = $request->get('name');
