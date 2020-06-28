@@ -168,8 +168,6 @@
                         }
                     }
                     console.log(this.images)
-
-
                 }
             },
             addProduct() {

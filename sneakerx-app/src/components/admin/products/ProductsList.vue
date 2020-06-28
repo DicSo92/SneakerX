@@ -250,6 +250,11 @@
                 this.getProducts()
             })
         },
+        watch: {
+            selected (val) {
+                this.$emit('selectedChange', val)
+            },
+        },
         computed: {},
         methods: {
             cFormatDate(Date) {

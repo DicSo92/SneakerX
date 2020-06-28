@@ -53,6 +53,12 @@ Route::namespace('Admin')->prefix('admin')->name('superAdmin.')->middleware('aut
 
     Route::post('brands/{id}', 'BrandController@updateBrand')->name('brands.update');
     Route::delete('brands/imageDelete/{id}', 'BrandController@removeImage')->name('brands.imageDelete');
+
+    Route::delete('products/imageDelete/{id}', 'ProductController@removeImage')->name('products.imageDelete');
+    Route::delete('products/imagesDelete/{id}', 'ProductController@removeImageFromImages')->name('products.imagesDelete');
+    Route::post('products/addMainImage/{id}', 'ProductController@addImage')->name('products.addImage');
+    Route::post('products/addSecondImages/{id}', 'ProductController@addImages')->name('products.addSecondImages');
+    Route::post('products/updateProduct/{id}', 'ProductController@updateProduct')->name('products.updateProduct');
 });
 
 

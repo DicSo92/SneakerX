@@ -3,19 +3,25 @@
     <q-card style="width: 1100px; max-width: 90vw;">
       <q-card-section>
         <q-form
-          @submit="addProduct"
+          @submit="editProduct"
           class="q-gutter-md"
         >
           <div class="row">
-            <div class="col-3" v-if="!image">
+            <div class="col-3 flex justify-center items-start relative-position" v-if="currentImage">
+              <q-btn round :loading="loadingImage" color="red-9" size='md' icon="delete" class="deleteBtn"
+                     @click="removeFromImage">
+                <template v-slot:loading>
+                  <q-spinner-facebook/>
+                </template>
+              </q-btn>
               <q-img
-                src="http://res.cloudinary.com/charly-luzzi/image/upload/v1589846305/SneakerX/Products/Adidas/superstar-originals/knn2rqqaqdbczodbjvwp.jpg"
+                :src="currentImage"
                 style="width: 100%; height: auto"
               />
             </div>
             <q-uploader
-              v-else square color="grey-10"
-              label="Image (Restricted to images)"
+              square color="grey-10" v-else
+              label="Main Image (Restricted to images)"
               accept=".jpg, image/*"
               hide-upload-btn
               class="col-auto"
@@ -51,7 +57,7 @@
                          fill-mask="0"
                          reverse-fill-mask>
                   <template v-slot:append>
-                    <q-icon name="euro_symbol" />
+                    <q-icon name="euro_symbol"/>
                   </template>
                 </q-input>
               </div>
@@ -72,20 +78,36 @@
 
           <q-editor v-model="description" min-height="8rem" toolbar-toggle-color="yellow-9"/>
 
-          <div class="flex justify-between">
-            <q-uploader
-              label="Images List (Restricted to images)"
-              accept=".jpg, image/*"
-              hide-upload-btn
-              multiple square color="grey-10"
-              @added="toggleImagesData($event, true, 'banner')"
-              @removed="toggleImagesData($event, false, 'banner')"
-              class="full-width" style="min-height: 300px"
-            />
+          <div class="row q-col-gutter-lg q-pa-md">
+            <div class="col-8">
+              <div class="q-col-gutter-md row items-start">
+                <div class="col-3 relative-position" v-for="image in currentImages">
+                  <q-btn round :loading="loadingImage" dense color="red-9" size='md' icon="delete" class="deleteBtnImages"
+                         @click="removeFromImages(image)">
+                    <template v-slot:loading>
+                      <q-spinner-facebook/>
+                    </template>
+                  </q-btn>
+                  <q-img :src="image"/>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <q-uploader ref="multipleUploader"
+                label="Images List (Restricted to images)"
+                accept=".jpg, image/*"
+                hide-upload-btn
+                multiple square color="grey-10"
+                @added="toggleImagesData($event, true, 'images')"
+                @removed="toggleImagesData($event, false, 'images')"
+              />
+            </div>
+
           </div>
 
           <div class="column">
-            <q-toggle v-model="directActive" label="Check to instantly publish product on catalog. (Not recommended)" color="purple-9"/>
+            <q-toggle v-model="directActive" label="Check to instantly publish product on catalog. (Not recommended)"
+                      color="purple-9"/>
             <div>
               <q-btn :loading="loading" color="purple-10" label="Submit" type="submit" icon-right="send">
                 <template v-slot:loading>
@@ -108,8 +130,11 @@
     import ColorsPicker from "./ColorsPicker.vue";
     import SizesPicker from "./SizesPicker.vue";
 
+    import bus from '../../../utils/bus.js'
+
+
     export default {
-        name: "AddModal",
+        name: "EditModal",
         props: [
             'brands'
         ],
@@ -121,6 +146,8 @@
         data() {
             return {
                 showEdit: false,
+                productToEdit: null,
+
                 loading: false,
 
                 name: '',
@@ -131,59 +158,158 @@
                 sizes: [],
                 directActive: false,
 
-                image: null,
-                images: null,
+                currentImages: [],
+                currentImage: null,
 
-                bannerFile: null,
-                imageFile: null,
+                imageToUpload: null,
+                imgIncrTemp: 0,
+                imagesToUpload: [],
+
+                loadingImage: false,
+                loadingImages: false,
+
             }
         },
         mounted() {
-            this.$root.$on('showAddProduct', show => {
+            this.$root.$on('showEditProduct', (show, product) => {
+                this.productToEdit = product
+                this.brandSelected = product.brand_id
+                this.name = product.name
+                this.description = product.description
+                this.price = product.price
+                this.colors = product.colors
+                this.sizes = product.sizes
+                this.directActive = product.active === 1
+
+                this.currentImage = product.image
+                this.currentImages = product.images
+
+                this.imageToUpload = null
+                this.imagesToUpload = null
+
                 this.showEdit = !!show
             })
         },
-        watch: {},
+        watch: {
+            imageToUpload(val) {
+                if (val) {
+                    this.addImage(val)
+                }
+            },
+            imagesToUpload(val) {
+                if (val) {
+                    this.addImages(val)
+                }
+            }
+        },
         computed: {
         },
         methods: {
             toggleImagesData(files, added, imageOrImages) {
                 if (imageOrImages === 'image') {
-                    this.image = added ? files[0] : null
+                    this.imageToUpload = added ? files[0] : null
                 } else if (imageOrImages === 'images') {
-                    this.images = added ? files[0] : null
+                    console.log(files)
+                    if (added) {
+                        this.imagesToUpload = files
+                    }
+                    console.log(this.imagesToUpload)
                 }
             },
-            addProduct() {
-                this.loading = true
-                const config = { headers: {'content-type': 'multipart/form-data'} }
 
-                let formData = new FormData()
-                formData.append('name', this.name)
-                formData.append('brandId', this.brandSelected)
-                formData.append('description', this.description)
-                formData.append('colors', this.colors)
-                formData.append('sizes', this.sizes)
-                formData.append('active', this.directActive)
-                if (this.image) formData.append('banner', this.image)
-                if (this.images) formData.append('image', this.images)
+            validResponse() {
+                this.showEdit = false
+                this.name = ''
+                this.description = ''
+                this.currentImage = null
+                this.currentImages = []
+                bus.$emit('refreshProducts')
+                this.loading = false
+            },
 
-                this.$axios.post('/api/admin/products', formData, config)
+            removeFromImage() {
+                this.loadingImage = true
+                this.$axios.delete(`/api/admin/products/imageDelete/${this.productToEdit.id}`)
                     .then(response => {
                         console.log(response);
-                        this.showEdit = false
-                        this.name = ''
-                        this.description = ''
-                        this.image = null
-                        this.images = null
-                        // bus.$emit('refreshProducts')
-                        this.loading = false
+                        this.loadingImage = false
+                        this.currentImage = null
                     })
                     .catch(error => {
                         console.log(error);
-                        this.loading = false
+                        this.loadingImage = false
                     })
             },
+            removeFromImages(imgUrl) {
+                this.loadingImages = true
+
+                let newImages = this.currentImages.filter(url => url !== imgUrl)
+
+                console.log(newImages)
+
+                this.$axios.delete(`/api/admin/products/imagesDelete/${this.productToEdit.id}`, {data:{imgUrl: imgUrl, imagesArray: JSON.stringify(newImages)}})
+                    .then(response => {
+                        console.log(response);
+                        this.loadingImages = false
+                        this.currentImages = response.data.images
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        this.loadingImages = false
+                    })
+            },
+            addImage(image) {
+                const config = { headers: {'content-type': 'multipart/form-data'} }
+
+                let formData = new FormData()
+                formData.append('image', image)
+                this.$axios.post(`/api/admin/products/addMainImage/${this.productToEdit.id}`, formData, config)
+                    .then(response => {
+                        console.log(response);
+                        this.currentImage = response.data.image
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
+            },
+            addImages(images) {
+                const config = { headers: {'content-type': 'multipart/form-data'} }
+
+                let formData = new FormData()
+                images.forEach(image => {
+                    formData.append('images[]', image)
+                })
+                this.$axios.post(`/api/admin/products/addSecondImages/${this.productToEdit.id}`, formData, config)
+                    .then(response => {
+                        console.log(response);
+                        this.currentImages = response.data.images
+                        this.$refs.multipleUploader.reset()
+                        this.imagesToUpload = null
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
+            },
+
+            editProduct() {
+                this.loading = true
+
+                this.$axios.post(`/api/admin/products/updateProduct/${this.productToEdit.id}`, {
+                    name: this.name,
+                    description: this.description,
+                    price: this.price,
+                    colors: JSON.stringify(this.colors),
+                    sizes: JSON.stringify(this.sizes),
+                    brandId: this.brandSelected
+                })
+                    .then(response => {
+                        console.log(response);
+                        this.validResponse()
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
+            }
         },
     }
 </script>
@@ -191,5 +317,18 @@
 <style scoped lang="scss">
   .listSizesContainer {
     border: solid 1px #eeeeee;
+  }
+
+  .deleteBtn {
+    position: absolute;
+    z-index: 10;
+    top: -2%;
+    right: -2%;
+  }
+  .deleteBtnImages {
+    position: absolute;
+    z-index: 10;
+    top: 4%;
+    right: -4%;
   }
 </style>

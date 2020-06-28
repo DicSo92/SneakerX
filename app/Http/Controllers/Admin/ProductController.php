@@ -50,7 +50,7 @@ class ProductController extends Controller
         }
 
         $imagesArray = array();
-        $cloundary_upload_images = null;
+        $cloundary_upload = null;
         foreach($request->images as $image) {
             Cloudder::upload($image->getRealPath(), null, array("folder" => env('CLOUDINARY_MAIN_FOLDER')."/Products/".$brandName."/".$slug));
             $cloundary_upload = Cloudder::getResult();
@@ -100,9 +100,28 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, $id)
     {
-        //
+
+    }
+    public function updateProduct(Request $request, $id)
+    {
+        $product = Product::findOrFail($id);
+
+        $request->validate([
+            'name' => 'unique:products|min:1|max:100',
+        ]);
+
+        if ($request->get('name')) $product->name = $request->get('name');
+        if ($request->get('description')) $product->description = $request->get('description');
+        if ($request->get('colors')) $product->colors = json_decode($request->get('colors'));
+        if ($request->get('sizes')) $product->sizes = json_decode($request->get('sizes'));
+        if ($request->get('price')) $product->price = $request->get('price');
+        if ($request->get('brandId')) $product->brand_id =  $request->get('brandId');
+
+        $product->save();
+
+        return response()->json($product);
     }
 
     /**
@@ -129,5 +148,97 @@ class ProductController extends Controller
         $products = Product::where('brand_id', $brandId)->orderBy('created_at', 'DESC')->with('brand')->get();
 
         return response()->json($products);
+    }
+
+    public function removeImage(Request $request, $id)
+    {
+        $product = Product::findOrFail($id);
+
+        $imagesPath = env('CLOUDINARY_MAIN_FOLDER')."/Brands/";
+
+        $imageId = pathinfo($product->image)['filename'];
+        $imagePathId = $imagesPath . $imageId;
+        Cloudder::destroyImage($imagePathId);
+        Cloudder::delete($imagePathId);
+        $product->image = null;
+
+        $product->save();
+
+        return response()->json($product);
+    }
+
+    public function addImage(Request $request, $id)
+    {
+        $product = Product::findOrFail($id);
+
+        $request->validate([
+            'image' => 'mimes:jpeg,bmp,jpg,png|between:1, 6000',
+        ]);
+
+        $brandName = $product->brand->name;
+        $slug = $product->slug;
+
+        $cloundary_upload_image = null;
+        if ($request->hasFile('image')) {
+            Cloudder::upload($request->file('image'), null, array("folder" => env('CLOUDINARY_MAIN_FOLDER')."/Products/".$brandName."/".$slug));
+            $cloundary_upload_image = Cloudder::getResult();
+        }
+
+        if ($cloundary_upload_image) {
+            $product->image = $cloundary_upload_image['url'];
+        }
+
+        $product->save();
+
+        return response()->json($product);
+    }
+
+    public function removeImageFromImages(Request $request, $id)
+    {
+        $product = Product::findOrFail($id);
+
+        $request->validate([
+            'imgUrl' => 'required',
+            'imagesArray' => 'required'
+        ]);
+
+        $imagesPath = env('CLOUDINARY_MAIN_FOLDER')."/Brands/";
+
+        $imageId = pathinfo($request->get('imgUrl'))['filename'];
+        $imagePathId = $imagesPath . $imageId;
+        Cloudder::destroyImage($imagePathId);
+        Cloudder::delete($imagePathId);
+
+        $product->images = json_decode($request->get('imagesArray'));
+
+        $product->save();
+
+        return response()->json($product);
+    }
+
+    public function addImages(Request $request, $id)
+    {
+        $product = Product::findOrFail($id);
+
+        $request->validate([
+            'images' => 'required',
+        ]);
+
+        $brandName = $product->brand->name;
+        $slug = $product->slug;
+
+        $imagesArray = $product->images;
+        $cloundary_upload = null;
+        foreach($request->images as $image) {
+            Cloudder::upload($image->getRealPath(), null, array("folder" => env('CLOUDINARY_MAIN_FOLDER')."/Products/".$brandName."/".$slug));
+            $cloundary_upload = Cloudder::getResult();
+            array_push($imagesArray, $cloundary_upload['url']);
+        }
+
+        $product->images = $imagesArray;
+
+        $product->save();
+
+        return response()->json($product);
     }
 }

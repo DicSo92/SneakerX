@@ -11,7 +11,8 @@
                  outline
                  icon="edit"
                  label="Edit"
-                 disable
+                 :disable="selectedProduct.length !== 1"
+                 @click="editProduct"
           />
           <q-btn class="q-mr-sm"
                  color="purple-9"
@@ -38,34 +39,38 @@
 
       <q-tab-panels v-model="tab" animated>
         <q-tab-panel name="All">
-          <ProductsList :brands="brands" :brandSelected="tab"></ProductsList>
+          <ProductsList :brands="brands" :brandSelected="tab" @selectedChange="changeSelect"></ProductsList>
         </q-tab-panel>
 
         <q-tab-panel v-for="brand in brands" :key="brand.id" :name="brand.id">
-          <ProductsList :brands="brands" :brandSelected="tab"></ProductsList>
+          <ProductsList :brands="brands" :brandSelected="tab" @selectedChange="changeSelect"></ProductsList>
         </q-tab-panel>
       </q-tab-panels>
     </q-card>
     <AddModal :brands="brands"></AddModal>
+    <EditModal :brands="brands"></EditModal>
   </q-page>
 </template>
 
 <script>
     import ProductsList from 'components/admin/products/ProductsList.vue'
     import AddModal from 'components/admin/products/AddModal.vue'
+    import EditModal from 'components/admin/products/EditModal.vue'
 
 
     export default {
         name: "Products",
         components: {
             ProductsList,
-            AddModal
+            AddModal,
+            EditModal
         },
         data () {
             return {
                 loadingBrands: false,
                 tab: 'All',
-                brands: null
+                brands: null,
+                selectedProduct: []
             }
         },
         created() {
@@ -76,8 +81,15 @@
         computed: {
         },
         methods: {
+            changeSelect(selected) {
+                console.log('selected2')
+                this.selectedProduct = selected
+            },
             addProduct() {
                 this.$root.$emit('showAddProduct', true)
+            },
+            editProduct() {
+                this.$root.$emit('showEditProduct', true, this.selectedProduct[0])
             },
             getBrands() {
                 this.loadingBrands = true
